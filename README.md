@@ -30,38 +30,35 @@ Diseño modular para añadir futuras funcionalidades (ej: nuevos tipos de datos,
 # 3) Requerimientos funcionalidades más relevantes.
 
 Sistema de implementación de estructura de datos.
-	RF 1.1: TAD de dataframe de 2 dimensiones con n filas y m columnas.
-RF 1.2: TAD para una fila.
-RF 1.3: TAD para una columna.
-RF 1.4: Implementar etiquetas(labels) para poder indexar filas y columnas.
- 	RF 1.5 Carga de archivos csv.
-	RF 1.6 Lectura del archivo csv.
-	RF 1.7 Modificación del archivo csv.
-	RF 1.8 Creación de datasets.
 
-Operación sobre la estructura de datos(métodos que se nos ocurran)
-RF 2.1: Método head(visualizar n primeros datos).
-RF 2.2: Método para visualizar n fila o m columnas.
-RF 2.3: Modificación de celda nxm.
-RF 2.4: Realización de copia profunda.
-RF 2.5: Filtrado de datos.
-RF 2.6: Acceso a los datos por indexación.
-RF 2.7: Método de tipo de dato.
-RF 2.8: Eliminación de fila o columna.
-RF 2.9: Método de ordenamiento(ascendente o descendente).
-RF 2.10: Método para unir tablas.
+- RF 1.1: TAD de dataframe de 2 dimensiones con n filas y m columnas.
+- RF 1.2: TAD para una fila.
+- RF 1.3: TAD para una columna.
+- RF 1.4: Implementar etiquetas(labels) para poder indexar filas y columnas.
+	- RF 1.5 Carga de archivos csv.
+	- RF 1.6 Lectura del archivo csv.
+	- RF 1.7 Modificación del archivo csv.
+	- RF 1.8 Creación de datasets.
+
+Operación sobre la estructura de datos
+- RF 2.1: Método head(visualizar n primeros datos).
+- RF 2.2: Método para visualizar n fila o m columnas.
+- RF 2.3: Modificación de celda nxm.
+- RF 2.4: Realización de copia profunda.
+- RF 2.5: Filtrado de datos.
+- RF 2.6: Acceso a los datos por indexación.
+- RF 2.7: Método de tipo de dato.
+- RF 2.8: Eliminación de fila o columna.
+- RF 2.9: Método de ordenamiento(ascendente o descendente).
+- RF 2.10: Método para unir tablas.
 
 Sistema de visualización de datos en consola.
-RF 3.1: Cantidad de elementos que se visualizan por consola.
-RF 3.2: Mensajes de error.
+- RF 3.1: Cantidad de elementos que se visualizan por consola.
+- RF 3.2: Mensajes de error.
 
 # 4) Requerimientos no funcionales.
 
-Tiempo de respuesta para cada operación.(en ms)
-Optimización y Escalabilidad. 
-RF 4.1: Implementacion de algoritmos de busqueda mas eficientes
-RF 4.2: Capacidad de crear nuevos métodos a partir de las clases preexistentes
-Estabilidad
-RF 4.3: Capacidad de generar Excepciones y rellenar con NA en caso de datos faltantes.
-Compatibilidad y Tecnología 
-RF 4.4: Ser usado en java 8 o superior
+_Los requerimentos no funcionales definen como debe comportarse el sistema en cuanto a Optimización y Escalabilidad. 
+
+- RNF 1: Ser usado en java 8 o superior
+- RNF 2: El procesamiento de archivos de hasta 1.000 filas debe completarse en menos de 1 segundo.
