@@ -1,5 +1,7 @@
 package jandas;
 
-public class Columna {
+public class Columna<T> {
+
+
 
 }
