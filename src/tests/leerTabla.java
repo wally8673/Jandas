@@ -1,5 +1,8 @@
 package tests;
 
+import jandas.Celda;
+import jandas.Dataframe;
+
 public class leerTabla {
 
     public static void main(String[] args) {
@@ -28,9 +31,14 @@ public class leerTabla {
         // Columna 4
 
         Celda<Float> c13 = new Celda<>();
-        Celda<Float> c14 = new Celda<>(0.002);
-        Celda<Float> c15 = new Celda<>(1234.2345);
-        Celda<Float> c16 = new Celda<>(12.0);
+        Celda<Float> c14 = new Celda<>(0.002f);
+        Celda<Float> c15 = new Celda<>(1234.2345f);
+        Celda<Float> c16 = new Celda<>(12.0f);
+
+        Dataframe df = new Dataframe();
+
+
+
 
     }
 }
