@@ -25,4 +25,9 @@ public class Fila {
         return salida;
     }
 
+    public List<Etiqueta> getEtiquetasColumnas() {return etiquetaColumnas;}
+
+    public Etiqueta getEtiquetaFila() {return etiquetaFila;}
+
+    public List<Celda<?>> getCeldasFila() {return celdas;}
 }

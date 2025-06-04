@@ -1,15 +1,15 @@
 package jandas.Etiquetas;
 
-public class EtiquetaInt {
+public class EtiquetaInt extends Etiqueta {
 
     private int etiqueta;
 
-    public EtiquetaInt(int etiqueta){
-        this.etiqueta = etiqueta;
-    }
+    public EtiquetaInt(int etiqueta){this.etiqueta = etiqueta;}
 
-    public Integer getValor(int etiqueta){
-        return etiqueta;
-    }
+    @Override
+    public Integer getValor(){return etiqueta;}
+
+    @Override
+    public String toString(){return String.valueOf(etiqueta);}
 
 }

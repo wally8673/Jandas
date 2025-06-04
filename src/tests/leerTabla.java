@@ -1,7 +1,11 @@
 package tests;
 
 import jandas.Celda;
+import jandas.Columna;
 import jandas.Dataframe;
+import jandas.Etiquetas.EtiquetaString;
+
+import java.util.Arrays;
 
 public class leerTabla {
 
@@ -35,10 +39,54 @@ public class leerTabla {
         Celda<Float> c15 = new Celda<>(1234.2345f);
         Celda<Float> c16 = new Celda<>(12.0f);
 
+        // Fila 5
+
+        Celda<String> c17 = new Celda<>("e");
+        Celda<Integer> c18 = new Celda<>(12);
+        Celda<Boolean> c19 = new Celda<>(true);
+        Celda<Float> c20 = new Celda<>(0.001f);
+
+
         Dataframe df = new Dataframe();
 
+        // agrego columnas
+
+        // Metodo 1
+
+        df.agregarColumna(
+                new EtiquetaString("Letras"),
+                String.class,
+                Arrays.asList("a","b","c","d")
+        );
 
 
+        // Metodo 2
+
+        df.agregarColumnaCeldas(
+                new EtiquetaString("Numeros"),
+                Integer.class,
+                Arrays.asList(c5,c6,c7,c8)
+        );
+
+        // Metodo 3
+
+        Columna<Boolean> columna3 = new Columna<>(
+                new EtiquetaString("Booleanos"),
+                Boolean.class
+        );
+
+        columna3.agregarCeldas(Arrays.asList(c9,c10,c11,c12));
+
+        df.agregarColumna(columna3);
+
+        // Agrego filas
+
+        df.agregarFila(
+                new EtiquetaString("Fila 5"),
+                Arrays.asList(c17,c18,c19)
+        );
+
+        df.visualizar(3,4);
 
     }
 }
