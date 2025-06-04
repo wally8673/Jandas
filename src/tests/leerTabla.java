@@ -86,7 +86,7 @@ public class leerTabla {
                 Arrays.asList(c17,c18,c19)
         );
 
-        df.visualizar(3,4);
+        df.visualizar(3,3);
 
     }
 }
