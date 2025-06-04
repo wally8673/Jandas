@@ -18,7 +18,23 @@ public class Columna<T> {
         this.celdas = new ArrayList<>();
     }
 
+    public void agregarCeldas(List<Celda<T>> nuevasCeldas){
+        celdas.addAll(nuevasCeldas);
+    }
+
+    public void agregarCelda(Celda<T> nuevaCelda){
+        celdas.add(nuevaCelda);
+    }
+
+    public void agregarValor(T valor){
+        celdas.add(new Celda<>(valor));
+    }
+
+    public Class<T> getTipo() {return tipo;}
+
     public List<Celda<T>> getCeldas() {return celdas;}
 
     public Etiqueta getEtiqueta() {return etiqueta;}
+
+    public int size() {return celdas.size();}
 }
