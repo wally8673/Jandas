@@ -4,13 +4,18 @@ public class Celda<T> {
     private T valor;
     private boolean esNA;
 
+
+    public Celda() {
+        this.valor = null;
+        this.esNA = true;
+    }
+
     public Celda(T valor) {
         if (valor == null) {
             this.esNA = true;
             this.valor = null;
-        } else if (!(valor instanceof Number) && !(valor instanceof Boolean) && !(valor instanceof String)) {
-            throw new IllegalArgumentException("Valor inválido para celda. Solo se permiten números, booleanos o cadenas.");
-        } else {
+        }
+        else {
             this.valor = valor;
             this.esNA = false;
         }

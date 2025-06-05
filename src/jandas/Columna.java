@@ -5,12 +5,29 @@ import java.util.List;
 
 public class Columna<T> {
     private Etiqueta nombre;
-    private List<Celda<T>> celdas = new ArrayList<>();
+    private TipoDato tipoDato = TipoDato.DESCONOCIDO;;
+    private List<Celda<T>> celdas;
 
 
-    public Columna(Etiqueta nombre, List<Celda<T>> celdas){
+    public Columna(Etiqueta nombre, List<Celda<T>> celdasIniciales) {
         this.nombre = nombre;
-        this.celdas = celdas;
+        this.celdas = new ArrayList<>();
+
+        for (Celda<T> celda : celdasIniciales) {
+            this.agregarCelda(celda);
+        }
+    }
+
+    public void agregarCelda(Celda<T> celda) {
+        if (!celda.esNA()) {
+            TipoDato nuevoTipo = determinarTipoDato(celda.getValor());
+            if (tipoDato == TipoDato.DESCONOCIDO) {
+                tipoDato = nuevoTipo;
+            } else if (tipoDato != nuevoTipo) {
+                throw new IllegalArgumentException("Tipo de celda no coincide con el tipo de la columna.");
+            }
+        }
+        celdas.add(celda);
     }
 
     public Etiqueta getNombre(){
@@ -18,22 +35,22 @@ public class Columna<T> {
     }
 
     public List<Celda<T>> getCeldas(){
-        return celdas;
+        return new ArrayList<>(celdas);
     }
 
-    public String obtenerTipoDato() {
-        for (Celda<T> celda : celdas) {
-            if (!celda.esNA()) {
-                Object valor = celda.getValor();
-                if (valor instanceof Integer || valor instanceof Double || valor instanceof Number) {
-                    return "Numérico";
-                } else if (valor instanceof Boolean) {
-                    return "Booleano";
-                } else if (valor instanceof String) {
-                    return "Cadena";
-                }
-            }
+    private TipoDato determinarTipoDato(Object valor) {
+        if (valor instanceof Integer || valor instanceof Double || valor instanceof Float || valor instanceof Number) {
+            return TipoDato.NUMERICO;
+        } else if (valor instanceof Boolean) {
+            return TipoDato.BOOLEANO;
+        } else if (valor instanceof String) {
+            return TipoDato.CADENA;
+        } else {
+            return TipoDato.DESCONOCIDO;
         }
-        return "Desconocido";
+    }
+    public String obtenerTipoDato() {
+        return tipoDato.name();
     }
 }
+
