@@ -2,8 +2,9 @@ package tests;
 
 import jandas.core.data.DataFrame;
 import jandas.core.data.DataFrameGenerico;
+import jandas.core.etiquetas.EtiquetaInt;
 import jandas.core.etiquetas.EtiquetaString;
-import jandas.visualizacion.DisplayConfiguration;
+import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
 
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class VisualizacionDemo {
                 String.class,
                 Arrays.asList("Juan", "María", "Pedro", "Ana", "Luis"));
         
-        df.agregarColumna(new EtiquetaString("Edad"),
+        df.agregarColumna(new EtiquetaInt(1),
                 Integer.class,
                 Arrays.asList(25, 30, 22, 28, 35));
         
@@ -52,12 +53,12 @@ public class VisualizacionDemo {
         System.out.println("\n");
         
         // Visualize with custom configuration object
-        DisplayConfiguration config = new DisplayConfiguration();
+        VConfig config = new VConfig();
         config.setMaxFilas(4);
         config.setMaxColumnas(3);
         config.setMaxLargoCadena(10);
-        config.setNaRepresentation("N/A");
-        config.setShowRowNumbers(false);
+        config.setNa("N/A");
+        config.setMostrarEtiquetaFila(false);
         
         VConsola visualizadorPersonalizado = new VConsola(config);
         System.out.println("Visualización con objeto de configuración personalizado:");

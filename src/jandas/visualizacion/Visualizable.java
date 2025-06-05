@@ -3,23 +3,23 @@ package jandas.visualizacion;
 import jandas.core.data.DataFrame;
 
 /**
- * Interface for visualization strategies in the Jandas library.
- * Implementations of this interface provide different ways to visualize DataFrame objects.
+ * Interfaz para visualizar en la libreria Jandas.
+ * Las implementaciones de esta interfaz provee diferentes formas de visualizar objetos DataFrame
  */
 public interface Visualizable {
 
     /**
-     * Visualizes a DataFrame with specified constraints.
+     * Visualiza el dataframe con parametros personalizados
      *
-     * @param dataFrame The DataFrame to visualize
-     * @param maxFilas Maximum number of rows to display
-     * @param maxColumnas Maximum number of columns to display
-     * @param maxLargoCadena Maximum length of string values in cells
+     * @param dataFrame El dataframe que visualiza
+     * @param maxFilas Numero maximo de filas a mostrar
+     * @param maxColumnas Numero maximo de columnas a mostrar
+     * @param maxLargoCadena valor maximo de caracteres en cada celda
      */
     void visualizar(DataFrame dataFrame, int maxFilas, int maxColumnas, int maxLargoCadena);
 
     /**
-     * Visualizes a DataFrame with default constraints.
+     * Visualiza el dataframe con parametros default
      *
      * @param dataFrame The DataFrame to visualize
      */

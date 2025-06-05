@@ -222,6 +222,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="and what happend with my agregarColumna method from dataframeGenerico?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101592974" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="corregime toda la clase columnagenerica que me quedo un desastre te pido porfavor@&lt;file_name&gt;">
           <value>
             <GhostTextMetaData>
@@ -253,6 +265,44 @@
               <option name="timestamps">
                 <list>
                   <option value="1749080951330" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="esto es extensible? por ejemplo, si quiero usar mas metodos que visualizacion por consola como hago">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749099138348" />
+                  <option value="1749099132490" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101344124" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how work the builder package?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101287862" />
+                  <option value="1749101224530" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -325,6 +375,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1749083128180" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me podes explicar la carpeta visualizacion?@&lt;file_name&gt; @Visualizable.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749100739356" />
                 </list>
               </option>
             </GhostTextMetaData>
