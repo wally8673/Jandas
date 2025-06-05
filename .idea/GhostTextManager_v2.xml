@@ -125,6 +125,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="ahi te pase el enunciado, el archivo es Enunciado.md">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749085955312" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="ahora necesito implementar el metodo agregarcolumna, esta esta compuesta de una lista de columna que a su vez esta compuesta de una lista de celdas@&lt;file_name&gt;">
           <value>
             <GhostTextMetaData>
@@ -133,6 +145,54 @@
                 <list>
                   <option value="1748998153275" />
                   <option value="1748998028515" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and keep in mind, in the future i need to add groupby, sorting, agreggation, concatenation, filtering, sumarizing and stadistic methods">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749087698368" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="en columna se puede hacer ese control con la clase excepciones? o esta mejor asi">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749080951330" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088211086" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core. keep in mind the code i current have">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088283592" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -157,6 +217,30 @@
               <option name="timestamps">
                 <list>
                   <option value="1748996096794" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me interesaria que desarrollaras mas la opcion 3">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749083128180" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me refiero mas que nada al constructor, no seria mejor llamar a excepciones en vez de a objects? pregunto desde la ignorancia, ayudame">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749081096220" />
                 </list>
               </option>
             </GhostTextMetaData>

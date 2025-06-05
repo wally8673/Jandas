@@ -56,7 +56,7 @@ public class leerTabla {
         df.agregarColumna(
                 new EtiquetaString("Letras"),
                 String.class,
-                Arrays.asList("a","b","c","d")
+                Arrays.asList("a","b","1","d")
         );
 
 
@@ -86,7 +86,7 @@ public class leerTabla {
                 Arrays.asList(c17,c18,c19)
         );
 
-        df.visualizar(3,3);
+        df.visualizar(5,3);
 
     }
 }

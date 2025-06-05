@@ -47,4 +47,12 @@ public class Excepciones extends RuntimeException {
             "Tipo incompatible. Se esperaba %s, pero se recibió %s",
             esperado.getSimpleName(), actual.getSimpleName()));
     }
+
+    public static Excepciones etiquetaNula() {
+        return new Excepciones("La etiqueta de la columna no puede ser null");
+    }
+
+    public static Excepciones tipoNulo() {
+        return new Excepciones("El tipo de la columna no puede ser null");
+    }
 }
