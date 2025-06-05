@@ -1,4 +1,4 @@
-package jandas.core.data;
+package jandas.base.data;
 
 public class CeldaGenerica<T> implements Celda<T> {
     private T valor;

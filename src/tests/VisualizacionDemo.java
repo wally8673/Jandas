@@ -1,13 +1,17 @@
 package tests;
 
-import jandas.core.data.DataFrame;
-import jandas.core.data.DataFrameGenerico;
-import jandas.core.etiquetas.EtiquetaInt;
-import jandas.core.etiquetas.EtiquetaString;
+import jandas.base.data.Celda;
+import jandas.base.data.CeldaGenerica;
+import jandas.base.data.DataFrame;
+import jandas.base.data.DataFrameGenerico;
+import jandas.base.etiquetas.Etiqueta;
+import jandas.base.etiquetas.EtiquetaInt;
+import jandas.base.etiquetas.EtiquetaString;
 import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Demo class showing how to use the visualization package.
@@ -36,6 +40,14 @@ public class VisualizacionDemo {
         df.agregarColumna(new EtiquetaString("Activo"),
                 Boolean.class,
                 Arrays.asList(true, false, true, true, false));
+
+        Celda<String> c1 = new CeldaGenerica<>("ramon gutierrez");
+        Celda<Integer> c2 = new CeldaGenerica<>(4);
+        Celda<Double> c3 = new CeldaGenerica<>(1.5);
+        Celda<Boolean> c4 = new CeldaGenerica<>(true);
+
+        df.agregarFila(new EtiquetaString("fila 6"),
+                Arrays.asList(c1,c2,c3,c4));
         
         // Creo visualizador de consola
         VConsola visualizador = new VConsola();
@@ -63,5 +75,25 @@ public class VisualizacionDemo {
         VConsola visualizadorPersonalizado = new VConsola(config);
         System.out.println("Visualización con objeto de configuración personalizado:");
         visualizadorPersonalizado.visualizarConConfig(df, config);
+
+        DataFrame m = new DataFrameGenerico();
+
+        Object[][] matriz = {
+                {"Juan", 25, "Argentina"},
+                {"Ana", 30, "Chile"},
+                {"Luis", 28, "Uruguay"}
+        };
+
+        List<Etiqueta> etiquetas = List.of(
+                new EtiquetaString("Nombre"),
+                new EtiquetaString("Edad"),
+                new EtiquetaString("País")
+        );
+
+        m.cargarDesdeMatriz(matriz, etiquetas);
+
     }
+
+
+
 }

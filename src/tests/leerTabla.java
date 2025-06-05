@@ -1,9 +1,9 @@
 package tests;
 
-import jandas.core.data.CeldaGenerica;
-import jandas.core.data.ColumnaGenerica;
-import jandas.core.data.DataFrameGenerico;
-import jandas.core.etiquetas.EtiquetaString;
+import jandas.base.data.CeldaGenerica;
+import jandas.base.data.ColumnaGenerica;
+import jandas.base.data.DataFrameGenerico;
+import jandas.base.etiquetas.EtiquetaString;
 
 import java.util.Arrays;
 

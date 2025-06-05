@@ -1,8 +1,8 @@
 package jandas.visualizacion;
 
-import jandas.core.data.DataFrame;
-import jandas.core.data.Fila;
-import jandas.core.etiquetas.Etiqueta;
+import jandas.base.data.DataFrame;
+import jandas.base.data.Fila;
+import jandas.base.etiquetas.Etiqueta;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package jandas.core.data;
+package jandas.base.data;
 
 import jandas.exception.JandasException;
-import jandas.core.etiquetas.Etiqueta;
-import jandas.core.etiquetas.EtiquetaInt;
+import jandas.base.etiquetas.Etiqueta;
+import jandas.base.etiquetas.EtiquetaInt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +103,37 @@ public class DataFrameGenerico implements DataFrame {
         }
 
         etiquetasFilas.add(etiquetaFila);
+    }
+
+    public void cargarDesdeMatriz(Object[][] datos, List<Etiqueta> etiquetasColumnas) {
+        if (datos.length == 0) {
+            throw new JandasException("La matriz está vacía.");
+        }
+
+        int cantidadFilas = datos.length;
+        int cantidadColumnas = datos[0].length;
+
+        // Validar que todas las filas tengan igual cantidad de columnas
+        for (int i = 1; i < datos.length; i++) {
+            if (datos[i].length != cantidadColumnas) {
+                throw new JandasException("Todas las filas deben tener la misma cantidad de columnas.");
+            }
+        }
+
+        // Validar etiquetas
+        if (etiquetasColumnas.size() != cantidadColumnas) {
+            throw new JandasException("La cantidad de etiquetas de columnas no coincide con la cantidad de columnas.");
+        }
+
+        // Crear columnas vacías
+        for (int j = 0; j < cantidadColumnas; j++) {
+            List<Object> valoresColumna = new ArrayList<>();
+            for (int i = 0; i < cantidadFilas; i++) {
+                valoresColumna.add(datos[i][j]);
+            }
+            // El tipo es Object porque no conocemos el tipo específico
+            this.agregarColumna(etiquetasColumnas.get(j), Object.class, valoresColumna);
+        }
     }
 
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {

@@ -1,6 +1,6 @@
-package jandas.core.data;
+package jandas.base.data;
 
-import jandas.core.etiquetas.Etiqueta;
+import jandas.base.etiquetas.Etiqueta;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ public interface DataFrame {
     <T> void agregarColumnaCeldas(Etiqueta etiquetaColumna, Class<T> tipo, List<Celda<T>> celdas);
     <T> void agregarColumna(ColumnaGenerica<T> columna);
     void agregarFila(Etiqueta etiquetaFila, List<Celda<?>> celdas);
+    void cargarDesdeMatriz(Object[][] matriz, List<Etiqueta> etiquetas);
+
 
     Fila getFila(Etiqueta etiquetaFila);
     Columna<?> getColumna(Etiqueta etiqueta);

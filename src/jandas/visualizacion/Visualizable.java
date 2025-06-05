@@ -1,6 +1,6 @@
 package jandas.visualizacion;
 
-import jandas.core.data.DataFrame;
+import jandas.base.data.DataFrame;
 
 /**
  * Interfaz para visualizar en la libreria Jandas.

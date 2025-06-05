@@ -1,4 +1,4 @@
-package jandas.core.data;
+package jandas.base.data;
 
 public interface Celda<T> {
 

@@ -125,6 +125,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Pero como quedaria mi dataframeGenerico? tengo que migrar cosas? no entinedo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107435247" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Por que en visualizar, los parametros de Imprimir fila me dan error, en especial getFila">
           <value>
             <GhostTextMetaData>
@@ -283,6 +295,56 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me      @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107739683" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107962999" />
+                  <option value="1749107819183" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @&lt;file_name&gt; @ColumnaBuilder.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108002557" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108065574" />
+                  <option value="1749107907216" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="how it works the builder package that you told me?@&lt;file_name&gt;">
           <value>
             <GhostTextMetaData>
@@ -290,6 +352,33 @@
               <option name="timestamps">
                 <list>
                   <option value="1749101344124" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works type package, keeping in mind my @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108229517" />
+                  <option value="1749108190658" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works type package, keeping in mind my asdsa @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="3.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108343209" />
+                  <option value="1749108324557" />
+                  <option value="1749108277780" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -404,6 +493,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="mi carpeta donde tengo celda, columna, datafram, etc se llama core, existe otra forma de  llamarlo? en español, lo mismo con los constructores">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749106928572" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="nice i like it, how it be my visualizer package with my code">
           <value>
             <GhostTextMetaData>
@@ -483,6 +584,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1748997895890" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="you recommend me for solid migrate all my builder methods in dataframegeneric to builders?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107518666" />
                 </list>
               </option>
             </GhostTextMetaData>
