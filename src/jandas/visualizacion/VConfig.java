@@ -1,8 +1,8 @@
 package jandas.visualizacion;
 
 /**
- * Configuration class for DataFrame visualization.
- * Contains settings that control how DataFrames are displayed.
+ * Clase para configurar la visualización de DataFrames.
+ * Contiene configuraciones que controlan cómo se muestran los DataFrames.
  */
 public class VConfig {
     private int maxFilas;
@@ -14,7 +14,7 @@ public class VConfig {
     private boolean mostrarEtiquetaFila;
     
     /**
-     * Creates a new DisplayConfiguration with default settings.
+     * crea una nueva configuración de visualización con configuraciones predeterminadas.
      */
     public VConfig() {
         this.maxFilas = 10;
@@ -27,11 +27,11 @@ public class VConfig {
     }
     
     /**
-     * Creates a new DisplayConfiguration with custom settings.
+     * crea una nueva configuración de visualización con configuraciones personalizadas.
      * 
-     * @param maxFilas Maximum number of rows to display
-     * @param maxColumnas Maximum number of columns to display
-     * @param maxLargoCadena Maximum length of string values in cells
+     * @param maxFilas Número máximo de filas a mostrar
+     * @param maxColumnas Número máximo de columnas a mostrar
+     * @param maxLargoCadena Longitud máxima de los valores de cadena en las celdas
      */
     public VConfig(int maxFilas, int maxColumnas, int maxLargoCadena) {
         this();
