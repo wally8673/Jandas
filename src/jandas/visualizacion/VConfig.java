@@ -4,26 +4,26 @@ package jandas.visualizacion;
  * Configuration class for DataFrame visualization.
  * Contains settings that control how DataFrames are displayed.
  */
-public class DisplayConfiguration {
+public class VConfig {
     private int maxFilas;
     private int maxColumnas;
     private int maxLargoCadena;
-    private String naRepresentation;
-    private String cellSeparator;
-    private String headerSeparator;
-    private boolean showRowNumbers;
+    private String na;
+    private String separadorCelda;
+    private String separadorHeader;
+    private boolean mostrarEtiquetaFila;
     
     /**
      * Creates a new DisplayConfiguration with default settings.
      */
-    public DisplayConfiguration() {
+    public VConfig() {
         this.maxFilas = 10;
         this.maxColumnas = 10;
         this.maxLargoCadena = 20;
-        this.naRepresentation = "NA";
-        this.cellSeparator = " | ";
-        this.headerSeparator = "-";
-        this.showRowNumbers = true;
+        this.na = "NA";
+        this.separadorCelda = " | ";
+        this.separadorHeader = "-";
+        this.mostrarEtiquetaFila = true;
     }
     
     /**
@@ -33,7 +33,7 @@ public class DisplayConfiguration {
      * @param maxColumnas Maximum number of columns to display
      * @param maxLargoCadena Maximum length of string values in cells
      */
-    public DisplayConfiguration(int maxFilas, int maxColumnas, int maxLargoCadena) {
+    public VConfig(int maxFilas, int maxColumnas, int maxLargoCadena) {
         this();
         this.maxFilas = maxFilas;
         this.maxColumnas = maxColumnas;
@@ -66,35 +66,35 @@ public class DisplayConfiguration {
         this.maxLargoCadena = maxLargoCadena;
     }
     
-    public String getNaRepresentation() {
-        return naRepresentation;
+    public String getNa() {
+        return na;
     }
     
-    public void setNaRepresentation(String naRepresentation) {
-        this.naRepresentation = naRepresentation;
+    public void setNa(String na) {
+        this.na = na;
     }
     
-    public String getCellSeparator() {
-        return cellSeparator;
+    public String getSeparadorCelda() {
+        return separadorCelda;
     }
     
-    public void setCellSeparator(String cellSeparator) {
-        this.cellSeparator = cellSeparator;
+    public void setSeparadorCelda(String separadorCelda) {
+        this.separadorCelda = separadorCelda;
     }
     
-    public String getHeaderSeparator() {
-        return headerSeparator;
+    public String getSeparadorHeader() {
+        return separadorHeader;
     }
     
-    public void setHeaderSeparator(String headerSeparator) {
-        this.headerSeparator = headerSeparator;
+    public void setSeparadorHeader(String separadorHeader) {
+        this.separadorHeader = separadorHeader;
     }
     
-    public boolean isShowRowNumbers() {
-        return showRowNumbers;
+    public boolean isMostrarEtiquetaFila() {
+        return mostrarEtiquetaFila;
     }
     
-    public void setShowRowNumbers(boolean showRowNumbers) {
-        this.showRowNumbers = showRowNumbers;
+    public void setMostrarEtiquetaFila(boolean mostrarEtiquetaFila) {
+        this.mostrarEtiquetaFila = mostrarEtiquetaFila;
     }
 }

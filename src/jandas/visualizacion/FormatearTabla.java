@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class for formatting DataFrames as text tables.
- * Provides methods to create formatted strings for console display.
+ * Clase para darle formato a un DataFrame como una tabla de texto.
+ * Proporciona métodos para crear cadenas formateadas para la visualización en la consola.
  */
-public class TableFormatter {
+public class FormatearTabla {
     
     /**
-     * Formats a cell value according to display configuration.
+     * Da formato a una celda según la configuración de visualización.
      * 
-     * @param valor The cell value as string
-     * @param maxLargoCadena Maximum length for the string
-     * @return Formatted cell value
+     * @param valor El valor de la celda como cadena
+     * @param maxLargoCadena Longitud máxima para la cadena
+     * @return Valor de la celda formateado
      */
     public static String formatearCelda(String valor, int maxLargoCadena) {
         if (valor == null) {
@@ -35,17 +35,17 @@ public class TableFormatter {
     }
     
     /**
-     * Creates a separator line for the table.
+     * Crea una línea de separación para la tabla.
      * 
-     * @param anchos List of column widths
-     * @param config Display configuration
-     * @return Separator line string
+     * @param anchos Lista de anchos de columnas
+     * @param config Configuración de visualización
+     * @return Cadena de línea de separación
      */
-    public static String crearLineaSeparadora(List<Integer> anchos, DisplayConfiguration config) {
+    public static String crearLineaSeparadora(List<Integer> anchos, VConfig config) {
         StringBuilder separador = new StringBuilder();
-        String sep = config.getHeaderSeparator();
+        String sep = config.getSeparadorHeader();
         
-        if (config.isShowRowNumbers()) {
+        if (config.isMostrarEtiquetaFila()) {
             separador.append("+").append(sep.repeat(6)).append("+");
         } else {
             separador.append("+");
@@ -59,12 +59,12 @@ public class TableFormatter {
     }
     
     /**
-     * Calculates the width needed for each column.
+     * Calcula la anchura necesaria para cada columna.
      * 
-     * @param dataFrame The DataFrame
-     * @param maxColumnas Maximum number of columns to consider
-     * @param maxLargoCadena Maximum length for cell values
-     * @return List of column widths
+     * @param dataFrame El DataFrame
+     * @param maxColumnas Número máximo de columnas a considerar
+     * @param maxLargoCadena Longitud máxima para los valores de las celdas
+     * @return Lista de anchuras de columnas
      */
     public static List<Integer> calcularAnchos(DataFrame dataFrame, int maxColumnas, int maxLargoCadena) {
         List<Integer> anchos = new ArrayList<>();
@@ -90,19 +90,19 @@ public class TableFormatter {
     }
     
     /**
-     * Formats a header row for the table.
+     * Formatea una fila de encabezado para la tabla.
      * 
-     * @param dataFrame The DataFrame
-     * @param anchos List of column widths
-     * @param config Display configuration
-     * @return Formatted header row string
+     * @param dataFrame El DataFrame
+     * @param anchos Lista de anchuras de columnas
+     * @param config Configuración de visualización
+     * @return Cadena de fila de encabezado formateada
      */
-    public static String formatearEncabezado(DataFrame dataFrame, List<Integer> anchos, DisplayConfiguration config) {
+    public static String formatearEncabezado(DataFrame dataFrame, List<Integer> anchos, VConfig config) {
         StringBuilder encabezado = new StringBuilder();
         List<Etiqueta> etiquetasColumnas = dataFrame.getEtiquetasColumnas();
         int numColumnas = Math.min(etiquetasColumnas.size(), config.getMaxColumnas());
         
-        if (config.isShowRowNumbers()) {
+        if (config.isMostrarEtiquetaFila()) {
             encabezado.append("| Idx  |");
         } else {
             encabezado.append("|");
@@ -118,20 +118,20 @@ public class TableFormatter {
     }
     
     /**
-     * Formats a data row for the table.
+     * Formatea una fila de datos para la tabla.
      * 
-     * @param fila The row to format
-     * @param indice Row index
-     * @param anchos List of column widths
-     * @param config Display configuration
-     * @return Formatted data row string
+     * @param fila La fila a formatear
+     * @param indice Índice de la fila
+     * @param anchos Lista de anchuras de columnas
+     * @param config Configuración de visualización
+     * @return Cadena de fila de datos formateada
      */
-    public static String formatearFila(Fila fila, int indice, List<Integer> anchos, DisplayConfiguration config) {
+    public static String formatearFila(Fila fila, int indice, List<Integer> anchos, VConfig config) {
         StringBuilder filaStr = new StringBuilder();
         List<Celda<?>> celdas = fila.getCeldasFila();
         int numColumnas = Math.min(celdas.size(), config.getMaxColumnas());
         
-        if (config.isShowRowNumbers()) {
+        if (config.isMostrarEtiquetaFila()) {
             filaStr.append("| ").append(String.format("%-4s", indice)).append(" |");
         } else {
             filaStr.append("|");
@@ -139,7 +139,7 @@ public class TableFormatter {
         
         for (int i = 0; i < numColumnas; i++) {
             Celda<?> celda = celdas.get(i);
-            String valor = celda.esNA() ? config.getNaRepresentation() : celda.toString();
+            String valor = celda.esNA() ? config.getNa() : celda.toString();
             valor = formatearCelda(valor, config.getMaxLargoCadena());
             int ancho = anchos.get(i);
             filaStr.append(" ").append(String.format("%-" + ancho + "s", valor)).append(" |");

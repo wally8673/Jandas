@@ -7,43 +7,43 @@ import jandas.core.etiquetas.Etiqueta;
 import java.util.List;
 
 /**
- * Console visualization implementation for DataFrames.
- * Displays DataFrames as formatted text tables in the console.
+ * Implementacion de la visualizacion por consola del dataframe.
+ * Muestra los datos en forma de tablas formateadas en la consola.
  */
 public class VConsola implements Visualizable {
 
-    private DisplayConfiguration config;
+    private VConfig config;
 
     /**
-     * Creates a new console visualizer with default configuration.
+     * Crea una nueva visualizacion por consola con configuracion por defecto.
      */
     public VConsola() {
-        this.config = new DisplayConfiguration();
+        this.config = new VConfig();
     }
 
     /**
-     * Creates a new console visualizer with custom configuration.
+     * Crea una nueva visualizacion por consola con la configuracion proporcionada.
      *
-     * @param config The display configuration to use
+     * @param config La configuracion de visualizacion a utilizar
      */
-    public VConsola(DisplayConfiguration config) {
+    public VConsola(VConfig config) {
         this.config = config;
     }
 
     @Override
     public void visualizar(DataFrame dataFrame, int maxFilas, int maxColumnas, int maxLargoCadena) {
-        // Create a temporary configuration with the provided parameters
-        DisplayConfiguration tempConfig = new DisplayConfiguration(maxFilas, maxColumnas, maxLargoCadena);
+        // Crea una configuracion temporal con los parametros proporcionados
+        VConfig tempConfig = new VConfig(maxFilas, maxColumnas, maxLargoCadena);
         visualizarConConfig(dataFrame, tempConfig);
     }
 
     /**
-     * Visualizes a DataFrame using the specified configuration.
+     * Visualiza el dataframe utilizando la configuracion especificada.
      *
-     * @param dataFrame The DataFrame to visualize
-     * @param config The display configuration to use
+     * @param dataFrame El DataFrame a visualizar
+     * @param config La configuracion de visualizacion a utilizar
      */
-    public void visualizarConConfig(DataFrame dataFrame, DisplayConfiguration config) {
+    public void visualizarConConfig(DataFrame dataFrame, VConfig config) {
         if (dataFrame == null) {
             System.out.println("DataFrame es null");
             return;
@@ -58,14 +58,14 @@ public class VConsola implements Visualizable {
         System.out.println("DataFrame: " + dataFrame.cantFilas() + " filas × " + dataFrame.cantColumnas() + " columnas");
 
         // Calculate column widths
-        List<Integer> anchos = TableFormatter.calcularAnchos(dataFrame, config.getMaxColumnas(), config.getMaxLargoCadena());
+        List<Integer> anchos = FormatearTabla.calcularAnchos(dataFrame, config.getMaxColumnas(), config.getMaxLargoCadena());
 
         // Create separator line
-        String separador = TableFormatter.crearLineaSeparadora(anchos, config);
+        String separador = FormatearTabla.crearLineaSeparadora(anchos, config);
 
         // Print header
         System.out.println(separador);
-        System.out.println(TableFormatter.formatearEncabezado(dataFrame, anchos, config));
+        System.out.println(FormatearTabla.formatearEncabezado(dataFrame, anchos, config));
         System.out.println(separador);
 
         // Print rows
@@ -75,34 +75,34 @@ public class VConsola implements Visualizable {
         for (int i = 0; i < numFilas; i++) {
             Etiqueta etiquetaFila = etiquetasFilas.get(i);
             Fila fila = dataFrame.getFila(etiquetaFila);
-            System.out.println(TableFormatter.formatearFila(fila, i, anchos, config));
+            System.out.println(FormatearTabla.formatearFila(fila, i, anchos, config));
         }
 
         System.out.println(separador);
 
-        // Show truncation message if necessary
+        // Si muestra menos filas o columnas que las originales, avisar por pantalla
         if (dataFrame.cantFilas() > config.getMaxFilas() || dataFrame.cantColumnas() > config.getMaxColumnas()) {
-            System.out.println("Nota: Tabla truncada. Mostrando " +
+            System.out.println("Nota: Tabla acotada. Mostrando " +
                 Math.min(dataFrame.cantFilas(), config.getMaxFilas()) + " de " + dataFrame.cantFilas() + " filas y " +
                 Math.min(dataFrame.cantColumnas(), config.getMaxColumnas()) + " de " + dataFrame.cantColumnas() + " columnas.");
         }
     }
 
     /**
-     * Gets the current display configuration.
+     * Obtiene la configuracion actual de visualizacion.
      *
-     * @return The current display configuration
+     * @return La configuracion actual de visualizacion
      */
-    public DisplayConfiguration getConfig() {
+    public VConfig getConfig() {
         return config;
     }
 
     /**
-     * Sets a new display configuration.
+     * Se establece una nueva configuracion de visualizacion.
      *
-     * @param config The new display configuration
+     * @param config La nueva configuracion de visualizacion
      */
-    public void setConfig(DisplayConfiguration config) {
+    public void setConfig(VConfig config) {
         this.config = config;
     }
 }
