@@ -1,6 +1,6 @@
-package jandas.Etiquetas;
+package jandas.core.etiquetas;
 
-public class EtiquetaInt extends Etiqueta {
+public class EtiquetaInt implements Etiqueta {
 
     private int etiqueta;
 

@@ -1,16 +1,16 @@
-package jandas;
+package jandas.core.data;
 
-import jandas.Etiquetas.Etiqueta;
+import jandas.core.etiquetas.Etiqueta;
 
 import java.util.List;
 
-public class Fila {
+public class FilaGenerica implements Fila {
 
     private Etiqueta etiquetaFila;
     private List<Celda<?>> celdas;
     private List<Etiqueta> etiquetaColumnas;
 
-    public Fila(Etiqueta etiquetaFila, List<Celda<?>> celdas, List<Etiqueta> etiquetaColumnas) {
+    public FilaGenerica(Etiqueta etiquetaFila, List<Celda<?>> celdas, List<Etiqueta> etiquetaColumnas) {
         this.etiquetaFila = etiquetaFila;
         this.celdas = celdas;
         this.etiquetaColumnas = etiquetaColumnas;
