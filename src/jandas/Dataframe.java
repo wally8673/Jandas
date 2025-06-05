@@ -67,7 +67,7 @@ public class Dataframe implements Visualizable {
         }
     }
 
-    //Metodo 3: Agregar columna con celdas ya creadas
+    //Metodo 3: Agregar columna con clase columna
 
     public <T> void agregarColumna(Columna<T> columna) {
         if (!columnas.isEmpty() && columna.size() != cantFilas()) {
@@ -178,6 +178,12 @@ public class Dataframe implements Visualizable {
         this.etiquetasFilas = new ArrayList<>(nuevasEtiquetas);
     }
 
+
+    public List<Columna<?>> getColumnas() {return new ArrayList<>(columnas);} //copia defensiva
+    public Columna<?> getColumna(Etiqueta etiqueta) {
+        int index = getIndex(etiqueta, etiquetasColumnas);
+        return columnas.get(index);
+    }
     public int cantColumnas(){return columnas.size();}
     public int cantFilas(){return etiquetasFilas.size();}
     public List<Etiqueta> getEtiquetasColumnas(){return etiquetasColumnas;}
