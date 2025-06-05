@@ -1,4 +1,4 @@
-package jandas.core.etiquetas;
+package jandas.base.etiquetas;
 
 public interface Etiqueta {
 

@@ -1,6 +1,6 @@
-package jandas.core.data;
+package jandas.base.data;
 
-import jandas.core.etiquetas.Etiqueta;
+import jandas.base.etiquetas.Etiqueta;
 import jandas.exception.JandasException;
 
 import java.util.ArrayList;
