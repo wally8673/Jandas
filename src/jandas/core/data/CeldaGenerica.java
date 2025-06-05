@@ -1,20 +1,22 @@
-package jandas;
+package jandas.core.data;
 
-public class Celda<T> {
+public class CeldaGenerica<T> implements Celda<T> {
     private T valor;
 
-    public Celda(T valor) {this.valor = valor;}
+    public CeldaGenerica(T valor) {this.valor = valor;}
 
-    public Celda() {this.valor = null;}
+    public CeldaGenerica() {this.valor = null;}
 
     //metodos
 
+    @Override
     public boolean esNA(){
         return valor == null;
     }
-
+    @Override
     public T getValor(){return valor;}
 
+    @Override
     public void setValor(T valor){this.valor = valor;}
 
     @Override
@@ -30,7 +32,7 @@ public class Celda<T> {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        Celda<?> other = (Celda<?>) obj;
+        CeldaGenerica<?> other = (CeldaGenerica<?>) obj;
         return valor != null ? valor.equals(other.valor) : other.valor == null;
     }
 

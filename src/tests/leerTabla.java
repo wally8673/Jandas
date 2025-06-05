@@ -1,9 +1,9 @@
 package tests;
 
-import jandas.Celda;
-import jandas.Columna;
-import jandas.Dataframe;
-import jandas.Etiquetas.EtiquetaString;
+import jandas.core.data.CeldaGenerica;
+import jandas.core.data.ColumnaGenerica;
+import jandas.core.data.DataFrameGenerico;
+import jandas.core.etiquetas.EtiquetaString;
 
 import java.util.Arrays;
 
@@ -13,41 +13,41 @@ public class leerTabla {
 
         //Columna 1
 
-        Celda<String> c1 = new Celda<>("a");
-        Celda<String> c2 = new Celda<>("b");
-        Celda<String> c3 = new Celda<>("c");
-        Celda<String> c4 = new Celda<>("d");
+        CeldaGenerica<String> c1 = new CeldaGenerica<>("a");
+        CeldaGenerica<String> c2 = new CeldaGenerica<>("b");
+        CeldaGenerica<String> c3 = new CeldaGenerica<>("c");
+        CeldaGenerica<String> c4 = new CeldaGenerica<>("d");
 
         // Columna 2 (manejo de NAs)
 
-        Celda<Integer> c5 = new Celda<>(1);
-        Celda<Integer> c6 = new Celda<>(2);
-        Celda<Integer> c7 = new Celda<>();
-        Celda<Integer> c8 = new Celda<>(2);
+        CeldaGenerica<Integer> c5 = new CeldaGenerica<>(1);
+        CeldaGenerica<Integer> c6 = new CeldaGenerica<>(2);
+        CeldaGenerica<Integer> c7 = new CeldaGenerica<>();
+        CeldaGenerica<Integer> c8 = new CeldaGenerica<>(2);
 
         // Columna 3
 
-        Celda<Boolean> c9 = new Celda<>(true);
-        Celda<Boolean> c10 = new Celda<>(false);
-        Celda<Boolean> c11 = new Celda<>(true);
-        Celda<Boolean> c12 = new Celda<>();
+        CeldaGenerica<Boolean> c9 = new CeldaGenerica<>(true);
+        CeldaGenerica<Boolean> c10 = new CeldaGenerica<>(false);
+        CeldaGenerica<Boolean> c11 = new CeldaGenerica<>(true);
+        CeldaGenerica<Boolean> c12 = new CeldaGenerica<>();
 
         // Columna 4
 
-        Celda<Float> c13 = new Celda<>();
-        Celda<Float> c14 = new Celda<>(0.002f);
-        Celda<Float> c15 = new Celda<>(1234.2345f);
-        Celda<Float> c16 = new Celda<>(12.0f);
+        CeldaGenerica<Float> c13 = new CeldaGenerica<>();
+        CeldaGenerica<Float> c14 = new CeldaGenerica<>(0.002f);
+        CeldaGenerica<Float> c15 = new CeldaGenerica<>(1234.2345f);
+        CeldaGenerica<Float> c16 = new CeldaGenerica<>(12.0f);
 
         // Fila 5
 
-        Celda<String> c17 = new Celda<>("e");
-        Celda<Integer> c18 = new Celda<>(12);
-        Celda<Boolean> c19 = new Celda<>(true);
-        Celda<Float> c20 = new Celda<>(0.001f);
+        CeldaGenerica<String> c17 = new CeldaGenerica<>("e");
+        CeldaGenerica<Integer> c18 = new CeldaGenerica<>(12);
+        CeldaGenerica<Boolean> c19 = new CeldaGenerica<>(true);
+        CeldaGenerica<Float> c20 = new CeldaGenerica<>(0.001f);
 
 
-        Dataframe df = new Dataframe();
+        DataFrameGenerico df = new DataFrameGenerico();
 
         // agrego columnas
 
@@ -70,7 +70,7 @@ public class leerTabla {
 
         // Metodo 3
 
-        Columna<Boolean> columna3 = new Columna<>(
+        ColumnaGenerica<Boolean> columna3 = new ColumnaGenerica<>(
                 new EtiquetaString("Booleanos"),
                 Boolean.class
         );
@@ -86,7 +86,7 @@ public class leerTabla {
                 Arrays.asList(c17,c18,c19)
         );
 
-        df.visualizar(5,3);
+        //df.visualizar(5,3);
 
     }
 }

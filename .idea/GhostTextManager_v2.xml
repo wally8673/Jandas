@@ -77,6 +77,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="For following code:&#10;```&#10;            Columna&lt;?&gt; columna = columnas.get(i);&#10;            columna.agregarCelda(celdas.get(i));&#10;        }&#10;```&#10;We have the error: 'agregarCelda(jandas.core.data.Celda&lt;capture&lt;?&gt;&gt;)' in 'jandas.core.data.Columna' cannot be applied to '(jandas.core.data.Celda&lt;capture&lt;?&gt;&gt;)'&#10;Fix this.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749098001237" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Hay un tema, tengo mis valores declarados en clase Celda, por lo tanto en mi main no anda aunque en el tuyo si">
           <value>
             <GhostTextMetaData>
@@ -84,6 +96,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1749002965701" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Justificame el uso de interfaces, o sea, que gano yo utilizando interfaces si ya tengo las clases Fila por ejemplo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749092584590" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -113,6 +137,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="You recommend me to create an package cell or just everything in data package like you do">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749089183750" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="agregar filas me aparece mal">
           <value>
             <GhostTextMetaData>
@@ -132,6 +168,30 @@
               <option name="timestamps">
                 <list>
                   <option value="1749085955312" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahora como sigo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749094007879" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahora como sigo@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749094064082" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -157,6 +217,30 @@
               <option name="timestamps">
                 <list>
                   <option value="1749087698368" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="corregime toda la clase columnagenerica que me quedo un desastre te pido porfavor@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749095270891" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="de que me sirve que celda sea una interfaZ y que exista una celdaGenerica y abstracta">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088578502" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -193,6 +277,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1749088283592" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core. keep in mind the code i current have and tell me how to migrate">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088468803" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -241,6 +337,66 @@
               <option name="timestamps">
                 <list>
                   <option value="1749081096220" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="nice i like it, how it be my visualizer package with my code">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749097572034" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="no entineod la parte 1. Extensibilidad (Open/Closed Principle)&#10;Puedes crear tipos especializados de celdas sin modificar código existente:&#10;NumericCell con validaciones matemáticas específicas&#10;DateCell con manejo de fechas&#10;BooleanCell con lógica booleana optimizada. No entiendo porque en que parte quedaria DateCell por ejemplo, en teoria ya maneja esta info o no?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088804063" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que paso con abstractCelda por ejemploo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088922896" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="theres something i dont understand with this organizaction, when i call Cell for example, i call Cell or GenericCell?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749091204547" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="what happened with abstractCell, i have to create it? and if i want to do an DateCell where i put it in my package organization">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749089061666" />
                 </list>
               </option>
             </GhostTextMetaData>
