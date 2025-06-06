@@ -19,7 +19,9 @@ public class Etiqueta<T>{
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Etiqueta<?> otro = (Etiqueta<?>) obj;
-        return valor.equals(otro.valor);
+        return valor.equals
+
+                (otro.valor);
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Columna<T> {
     private Etiqueta nombre;
-    private TipoDato tipoDato = TipoDato.DESCONOCIDO;;
+    private TipoDato tipoDato = TipoDato.DESCONOCIDO;
     private List<Celda<T>> celdas;
 
 
@@ -21,6 +21,10 @@ public class Columna<T> {
     public void agregarCelda(Celda<T> celda) {
         if (!celda.esNA()) {
             TipoDato nuevoTipo = determinarTipoDato(celda.getValor());
+            if (nuevoTipo == TipoDato.DESCONOCIDO) {
+                throw new IllegalArgumentException("Tipo de dato no permitido: " + celda.getValor().getClass().getSimpleName());
+            }
+
             if (tipoDato == TipoDato.DESCONOCIDO) {
                 tipoDato = nuevoTipo;
             } else if (tipoDato != nuevoTipo) {

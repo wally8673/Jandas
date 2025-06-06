@@ -9,12 +9,17 @@ public class Dataframe {
 
 
     public Dataframe(List<Columna<?>> columnas, List<Etiqueta<?>> etiquetasFilas) {
-        this.columnas = new ArrayList<>(columnas);
-        this.etiquetasFilas =new ArrayList<>(etiquetasFilas);
 
         if (columnas == null || columnas.isEmpty()) {
             throw new IllegalArgumentException("El dataframe debe tener al menos una columna.");
         }
+
+        if (etiquetasFilas == null) {
+            throw new IllegalArgumentException("Las etiquetas de fila no pueden ser null.");
+        }
+
+        this.columnas = new ArrayList<>(columnas);
+        this.etiquetasFilas =new ArrayList<>(etiquetasFilas);
 
         int filasEsperadas = columnas.get(0).getCeldas().size();
         for (Columna<?> col : columnas) {
@@ -22,10 +27,10 @@ public class Dataframe {
                 throw new IllegalArgumentException("Todas las columnas deben tener la misma cantidad de celdas.");
             }
         }
-
         if (etiquetasFilas.size() != filasEsperadas) {
             throw new IllegalArgumentException("La cantidad de etiquetas de filas no coincide con la cantidad de filas.");
         }
+
 
     }
     public Dataframe(List<Columna<?>> columnas) {
@@ -50,6 +55,9 @@ public class Dataframe {
     public List<Object> etiquetasColum() {
         List<Object> nombres = new ArrayList<>();
         for (Columna<?> col : columnas) {
+            if (col == null || col.getNombre() == null || col.getCeldas() == null) {
+                throw new IllegalArgumentException("Las columnas no pueden contener valores nulos.");
+            }
             nombres.add(col.getNombre().getValor());
         }
         return nombres;
@@ -83,6 +91,10 @@ public class Dataframe {
 
     public List<Object> datosFilas(Etiqueta<?> fila) {
         int etiquetaidx = etiquetasFilas.indexOf(fila);
+
+        if (etiquetaidx == -1) {
+            throw new IllegalArgumentException("Fila no encontrada: " + fila.getValor());
+        }
         List<Object> filacom = new ArrayList<>();
         for (Columna<?> col : columnas) {
             filacom.add(col.getCeldas().get(etiquetaidx).getValor());
