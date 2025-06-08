@@ -2,7 +2,7 @@ package tests;
 
 import jandas.base.data.CeldaGenerica;
 import jandas.base.data.ColumnaGenerica;
-import jandas.base.data.DataFrameGenerico;
+import jandas.base.data.TablaGenerica;
 import jandas.base.etiquetas.EtiquetaString;
 
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class leerTabla {
         CeldaGenerica<Float> c20 = new CeldaGenerica<>(0.001f);
 
 
-        DataFrameGenerico df = new DataFrameGenerico();
+        TablaGenerica df = new TablaGenerica();
 
         // agrego columnas
 

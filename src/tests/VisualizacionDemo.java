@@ -2,11 +2,13 @@ package tests;
 
 import jandas.base.data.Celda;
 import jandas.base.data.CeldaGenerica;
-import jandas.base.data.DataFrame;
-import jandas.base.data.DataFrameGenerico;
+import jandas.base.data.Tabla;
+import jandas.base.data.TablaGenerica;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
+import jandas.io.csv.CsvConfig;
+import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
 
@@ -20,7 +22,7 @@ public class VisualizacionDemo {
     
     public static void main(String[] args) {
         // Creo dataframe
-        DataFrame df = new DataFrameGenerico();
+        Tabla df = new TablaGenerica();
         
         // Agrego columnas usando los 3 metodos
 
@@ -76,7 +78,7 @@ public class VisualizacionDemo {
         System.out.println("Visualización con objeto de configuración personalizado:");
         visualizadorPersonalizado.visualizarConConfig(df, config);
 
-        DataFrame m = new DataFrameGenerico();
+        Tabla m = new TablaGenerica();
 
         Object[][] matriz = {
                 {"Juan", 25, "Argentina"},
@@ -92,7 +94,28 @@ public class VisualizacionDemo {
 
         m.cargarDesdeMatriz(matriz, etiquetas);
 
+        LeerCsv lectorCsv = new LeerCsv();
+
+        // Read the CSV file
+        Tabla peliculas = lectorCsv.leer("data/flights_september.csv");
+        visualizador.visualizar(peliculas);
+
+        // Create custom CSV configuration
+        CsvConfig config2 = new CsvConfig(",", false); // comma separator, has headers
+
+        // Create CSV reader with custom config
+        LeerCsv lectorCsvCustom = new LeerCsv(config2);
+
+        // Read the CSV file
+        Tabla tabla = lectorCsvCustom.leer("data/flights_september.csv");
+
+        visualizador.visualizar(tabla);
+
+
+
     }
+
+
 
 
 

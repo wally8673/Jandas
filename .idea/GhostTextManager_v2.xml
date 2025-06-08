@@ -3,6 +3,21 @@
   <component name="GhostTextManager">
     <option name="inputs">
       <map>
+        <entry key="@&lt;file_name&gt;  can yo code me an csvreader">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="4.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749411278841" />
+                  <option value="1749411153416" />
+                  <option value="1749411108882" />
+                  <option value="1749411063333" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="@&lt;file_name&gt;  como implementar getIndex sin usar la clase Tabla, quiero hacer un proyecto propio y debo llegar a algo parecido a la clase Tabla por mis medios">
           <value>
             <GhostTextMetaData>
@@ -173,6 +188,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="a friend did this, give me your opinion and whats better, yours or his code">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749412988247" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="agregar filas me aparece mal">
           <value>
             <GhostTextMetaData>
@@ -234,6 +261,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="and dataReader dataConfig?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417921745" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="and keep in mind, in the future i need to add groupby, sorting, agreggation, concatenation, filtering, sumarizing and stadistic methods">
           <value>
             <GhostTextMetaData>
@@ -253,6 +292,67 @@
               <option name="timestamps">
                 <list>
                   <option value="1749101592974" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you code me the csv reader? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749411374580" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como el el flujo de metere un archivo  y lo lea en tablesaw? no analices mi codigo solo quiero entender lo que hace esa libreria https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415790100" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como el el flujo de metere un archivo de csv y lo lea en tablesaw? no analices mi codigo solo quiero entender lo que hace esa libreria https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415542967" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como funciona este archivo @DataReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416792368" />
+                  <option value="1749416716340" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como hago ahora por ejemplo para leer este archivo en el main@movies.csv">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749418494425" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -302,6 +402,31 @@
                 <list>
                   <option value="1749099138348" />
                   <option value="1749099132490" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it work csvreader for example?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749412572562" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works for example my DataConfig?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749419099839" />
+                  <option value="1749418873447" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -369,6 +494,19 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="how it works this reader from a csv? https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415452878" />
+                  <option value="1749415395709" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="how it works type package, keeping in mind my @DataFrameGenerico.java::DataFrameGenerico">
           <value>
             <GhostTextMetaData>
@@ -396,6 +534,19 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="how it would work something like that in my code? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417709156" />
+                  <option value="1749417631225" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="how work the builder package?">
           <value>
             <GhostTextMetaData>
@@ -404,6 +555,78 @@
                 <list>
                   <option value="1749101287862" />
                   <option value="1749101224530" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how works bufferedreader? explain me like i never heard about that, how it would be the code withput that">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749413667420" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how works bufferedreader? explain me like if i was mental retarded">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749413566914" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="i see that tablesaw uses FileReader abstract class, dataoptions class, datareader interface and csv reader and csvoptions class . thats nice, how it would be in my code?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414148802" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="i see that tablesaw uses FileReader abstract class, dataoptions class, datareader interface and csv reader class. thats nice?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414068736" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="if i pass you a github repository can you analyze it?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415274102" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="if i pass you a github repository can you analyze it?https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415329121" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -541,6 +764,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="now do all the code with that architecture @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417763592" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="que paso con abstractCelda por ejemploo">
           <value>
             <GhostTextMetaData>
@@ -548,6 +783,42 @@
               <option name="timestamps">
                 <list>
                   <option value="1749088922896" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @CsvReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416616907" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @DataReader.java::DataReader">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416642345" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @io\DataReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416687746" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -577,6 +848,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="why generic o?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417457559" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="y ahora como lo haria si quiero en mi main armar mi columna por ejemplo y luego insertarlo en mis df">
           <value>
             <GhostTextMetaData>
@@ -596,6 +879,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1748997895890" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="you know how it works tablesaw io?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414761780" />
                 </list>
               </option>
             </GhostTextMetaData>

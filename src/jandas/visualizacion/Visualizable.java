@@ -1,6 +1,6 @@
 package jandas.visualizacion;
 
-import jandas.base.data.DataFrame;
+import jandas.base.data.Tabla;
 
 /**
  * Interfaz para visualizar en la libreria Jandas.
@@ -11,19 +11,19 @@ public interface Visualizable {
     /**
      * Visualiza el dataframe con parametros personalizados
      *
-     * @param dataFrame El dataframe que visualiza
+     * @param tabla El dataframe que visualiza
      * @param maxFilas Numero maximo de filas a mostrar
      * @param maxColumnas Numero maximo de columnas a mostrar
      * @param maxLargoCadena valor maximo de caracteres en cada celda
      */
-    void visualizar(DataFrame dataFrame, int maxFilas, int maxColumnas, int maxLargoCadena);
+    void visualizar(Tabla tabla, int maxFilas, int maxColumnas, int maxLargoCadena);
 
     /**
      * Visualiza el dataframe con parametros default
      *
-     * @param dataFrame The DataFrame to visualize
+     * @param tabla The DataFrame to visualize
      */
-    default void visualizar(DataFrame dataFrame) {
-        visualizar(dataFrame, 10, 10, 20);
+    default void visualizar(Tabla tabla) {
+        visualizar(tabla, 10, 10, 20);
     }
 }
