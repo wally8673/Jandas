@@ -1,19 +1,19 @@
 package jandas.io.csv;
 
-import jandas.io.DataConfig;
+import jandas.io.LeerConfig;
 
-public class CsvConfig extends DataConfig {
+public class LeerCsvConfig extends LeerConfig{
     private String separador;
     private boolean tieneEncabezado;
     private String valorNulo;
     
-    public CsvConfig() {
+    public LeerCsvConfig() {
         this.separador = ",";
         this.tieneEncabezado = true;
         this.valorNulo = "NA";
     }
     
-    public CsvConfig(String separador, boolean tieneEncabezado) {
+    public LeerCsvConfig(String separador, boolean tieneEncabezado) {
         this.separador = separador;
         this.tieneEncabezado = tieneEncabezado;
         this.valorNulo = "NA";
