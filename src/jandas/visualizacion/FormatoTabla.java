@@ -2,7 +2,7 @@ package jandas.visualizacion;
 
 import jandas.base.data.Celda;
 import jandas.base.data.Columna;
-import jandas.base.data.DataFrame;
+import jandas.base.data.Tabla;
 import jandas.base.data.Fila;
 import jandas.base.etiquetas.Etiqueta;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * Clase para darle formato a un DataFrame como una tabla de texto.
  * Proporciona métodos para crear cadenas formateadas para la visualización en la consola.
  */
-public class FormatearTabla {
+public class FormatoTabla {
     
     /**
      * Da formato a una celda según la configuración de visualización.
@@ -61,22 +61,22 @@ public class FormatearTabla {
     /**
      * Calcula la anchura necesaria para cada columna.
      * 
-     * @param dataFrame El DataFrame
+     * @param tabla El DataFrame
      * @param maxColumnas Número máximo de columnas a considerar
      * @param maxLargoCadena Longitud máxima para los valores de las celdas
      * @return Lista de anchuras de columnas
      */
-    public static List<Integer> calcularAnchos(DataFrame dataFrame, int maxColumnas, int maxLargoCadena) {
+    public static List<Integer> calcularAnchos(Tabla tabla, int maxColumnas, int maxLargoCadena) {
         List<Integer> anchos = new ArrayList<>();
-        List<Etiqueta> etiquetasColumnas = dataFrame.getEtiquetasColumnas();
+        List<Etiqueta> etiquetasColumnas = tabla.getEtiquetasColumnas();
         int numColumnas = Math.min(etiquetasColumnas.size(), maxColumnas);
         
         for (int i = 0; i < numColumnas; i++) {
             Etiqueta etiqueta = etiquetasColumnas.get(i);
             int ancho = etiqueta.toString().length();
             
-            Columna<?> columna = dataFrame.getColumna(etiqueta);
-            for (int j = 0; j < Math.min(columna.size(), dataFrame.cantFilas()); j++) {
+            Columna<?> columna = tabla.getColumna(etiqueta);
+            for (int j = 0; j < Math.min(columna.size(), tabla.cantFilas()); j++) {
                 Celda<?> celda = columna.getCelda(j);
                 String valorStr = celda.toString();
                 int largoValor = Math.min(valorStr.length(), maxLargoCadena);
@@ -92,14 +92,14 @@ public class FormatearTabla {
     /**
      * Formatea una fila de encabezado para la tabla.
      * 
-     * @param dataFrame El DataFrame
+     * @param tabla El DataFrame
      * @param anchos Lista de anchuras de columnas
      * @param config Configuración de visualización
      * @return Cadena de fila de encabezado formateada
      */
-    public static String formatearEncabezado(DataFrame dataFrame, List<Integer> anchos, VConfig config) {
+    public static String formatearEncabezado(Tabla tabla, List<Integer> anchos, VConfig config) {
         StringBuilder encabezado = new StringBuilder();
-        List<Etiqueta> etiquetasColumnas = dataFrame.getEtiquetasColumnas();
+        List<Etiqueta> etiquetasColumnas = tabla.getEtiquetasColumnas();
         int numColumnas = Math.min(etiquetasColumnas.size(), config.getMaxColumnas());
         
         if (config.isMostrarEtiquetaFila()) {

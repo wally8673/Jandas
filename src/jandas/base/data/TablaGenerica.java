@@ -1,6 +1,6 @@
 package jandas.base.data;
 
-import jandas.exception.JandasException;
+import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 
@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DataFrameGenerico implements DataFrame {
+public class TablaGenerica implements Tabla {
 
     private List<ColumnaGenerica<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
     private List<Etiqueta> etiquetasColumnas;
 
-    public DataFrameGenerico() {
+    public TablaGenerica() {
         this.columnas = new ArrayList<>();
         this.etiquetasFilas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
@@ -200,7 +200,7 @@ public class DataFrameGenerico implements DataFrame {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        DataFrameGenerico other = (DataFrameGenerico) obj;
+        TablaGenerica other = (TablaGenerica) obj;
         return Objects.equals(columnas, other.columnas) &&
                Objects.equals(etiquetasFilas, other.etiquetasFilas) &&
                Objects.equals(etiquetasColumnas, other.etiquetasColumnas);

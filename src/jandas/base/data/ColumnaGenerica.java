@@ -1,7 +1,7 @@
 package jandas.base.data;
 
 import jandas.base.etiquetas.Etiqueta;
-import jandas.exception.JandasException;
+import jandas.excepciones.JandasException;
 
 import java.util.ArrayList;
 import java.util.List;

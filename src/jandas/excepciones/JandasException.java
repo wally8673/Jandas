@@ -1,4 +1,4 @@
-package jandas.exception;
+package jandas.excepciones;
 
 public class JandasException extends RuntimeException {
     public JandasException(String message) {

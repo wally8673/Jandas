@@ -4,7 +4,7 @@ import jandas.base.etiquetas.Etiqueta;
 
 import java.util.List;
 
-public interface DataFrame {
+public interface Tabla {
 
     <T> void agregarColumna(Etiqueta etiquetaColumna, Class<T> tipo, List<T> valores);
     <T> void agregarColumnaCeldas(Etiqueta etiquetaColumna, Class<T> tipo, List<Celda<T>> celdas);
