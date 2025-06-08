@@ -1,33 +1,46 @@
 package jandas;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
-public class CSVWriter {
-    private final String delimitador;
-    private final boolean incluirEncabezado;
+public class CsvWriter implements EscritorArchivos {
+    private final char delimitador;
+    private final boolean escribirEncabezado;
 
-    public CSVWriter(String delimitador, boolean incluirEncabezado) {
+    public CsvWriter(char delimitador, boolean escribirEncabezado) {
         this.delimitador = delimitador;
-        this.incluirEncabezado = incluirEncabezado;
+        this.escribirEncabezado = escribirEncabezado;
     }
 
-    public void escribirCSV(String rutaArchivo, Dataframe dataframe) throws IOException {
+    @Override
+    public void escribir(Dataframe df, String rutaArchivo) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo))) {
-            if (incluirEncabezado) {
-                bw.write(String.join(delimitador, dataframe.etiquetasColum()));
+            if (escribirEncabezado) {
+                List<Object> nombres = df.etiquetasColum();
+                for (int i = 0; i < nombres.size(); i++) {
+                    bw.write(nombres.get(i).toString());
+                    if (i < nombres.size() - 1) {
+                        bw.write(delimitador);
+                    }
+                }
                 bw.newLine();
             }
 
-            for (Etiqueta<?> etiquetaFila : dataframe.etiquetasFila()) {
-                List<Object> datosFila = dataframe.datosFilas(etiquetaFila);
-                List<String> valores = new ArrayList<>();
-                for (Object valor : datosFila) {
-                    valores.add(valor != null ? valor.toString() : "NA");
+            for (int i = 0; i < df.cantFilas(); i++) {
+                for (int j = 0; j < df.cantColumnas(); j++) {
+                    Columna<?> col = df.getColumnas().get(j);
+                    Celda<?> celda = col.getCeldas().get(i);
+                    Object valor = celda.getValor();
+                    bw.write(valor != null ? valor.toString() : "NA");
+                    if (j < df.cantColumnas() - 1) {
+                        bw.write(delimitador);
+                    }
                 }
-                bw.write(String.join(delimitador, valores));
                 bw.newLine();
             }
         }
     }
 }
+

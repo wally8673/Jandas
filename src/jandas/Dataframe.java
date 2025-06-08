@@ -114,4 +114,8 @@ public class Dataframe {
         }
         throw new IllegalArgumentException("Columna no encontrada: " + columna.getValor());
     }
+
+    public List<Columna<?>> getColumnas() {
+        return columnas;
+    }
 }
