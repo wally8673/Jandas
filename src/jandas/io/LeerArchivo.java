@@ -1,10 +1,28 @@
 package jandas.io;
 
 import jandas.base.data.Tabla;
+import jandas.excepciones.JandasException;
 
-public interface LeerArchivo<O extends DataConfig> {
+/**
+ * Generic interface for reading data from various sources.
+ * @param <O> Configuration type that extends DataConfig
+ */
+public interface LeerArchivo<O extends LeerConfig> {
 
-    Tabla leer(String rutaArchivo);
+	/**
+	 * Reads data from a file path using default configuration.
+	 */
+	Tabla leer(String rutaArchivo) throws JandasException;
 
-    Tabla leer(O config);
+	/**
+	 * Reads data using specific configuration.
+	 */
+	Tabla leer(O config) throws JandasException;
+
+	/**
+	 * Reads data from a file path with specific configuration.
+	 */
+	default Tabla leer(String rutaArchivo, O config) throws JandasException {
+		return leer(rutaArchivo);
+	}
 }

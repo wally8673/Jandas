@@ -13,15 +13,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeerCsv implements LeerArchivo<CsvConfig> {
+public class LeerCsv implements LeerArchivo<LeerCsvConfig> {
 
-    private CsvConfig config;
+    private LeerCsvConfig config;
 
     public LeerCsv() {
-        this.config = new CsvConfig();
+        this.config = new LeerCsvConfig();
     }
 
-    public LeerCsv(CsvConfig config) {
+    public LeerCsv(LeerCsvConfig config) {
         this.config = config;
     }
 
@@ -48,7 +48,7 @@ public class LeerCsv implements LeerArchivo<CsvConfig> {
     }
 
     @Override
-    public Tabla leer(CsvConfig config) {
+    public Tabla leer(LeerCsvConfig config) {
         this.config = config;
         throw new UnsupportedOperationException("Use leer(String rutaArchivo) para leer desde archivo");
     }

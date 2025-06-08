@@ -7,7 +7,7 @@ import jandas.base.data.TablaGenerica;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
-import jandas.io.csv.CsvConfig;
+import jandas.io.csv.LeerCsvConfig;
 import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
@@ -101,7 +101,7 @@ public class VisualizacionDemo {
         visualizador.visualizar(peliculas);
 
         // Create custom CSV configuration
-        CsvConfig config2 = new CsvConfig(",", false); // comma separator, has headers
+        LeerCsvConfig config2 = new LeerCsvConfig(",", false); // comma separator, has headers
 
         // Create CSV reader with custom config
         LeerCsv lectorCsvCustom = new LeerCsv(config2);
