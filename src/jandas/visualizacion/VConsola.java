@@ -54,21 +54,21 @@ public class VConsola implements Visualizable {
             return;
         }
 
-        // Print DataFrame information
+        // Imprime informacion del DataFrame
         System.out.println("DataFrame: " + tabla.cantFilas() + " filas × " + tabla.cantColumnas() + " columnas");
 
-        // Calculate column widths
+        // Calcula ancho de columnas
         List<Integer> anchos = FormatoTabla.calcularAnchos(tabla, config.getMaxColumnas(), config.getMaxLargoCadena());
 
-        // Create separator line
+        // crea separador de encabezado
         String separador = FormatoTabla.crearLineaSeparadora(anchos, config);
 
-        // Print header
+        // imprime encabezado
         System.out.println(separador);
         System.out.println(FormatoTabla.formatearEncabezado(tabla, anchos, config));
         System.out.println(separador);
 
-        // Print rows
+        // imprime filas
         List<Etiqueta> etiquetasFilas = tabla.getEtiquetasFilas();
         int numFilas = Math.min(etiquetasFilas.size(), config.getMaxFilas());
 

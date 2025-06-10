@@ -1,9 +1,8 @@
 package jandas.io;
 
 import jandas.base.data.Tabla;
-import jandas.excepciones.JandasException;
 
-public interface EscribirArchivo  < O extends EscribirConfig> {
+public interface EscribirArchivo  < O> {
 
     void escribir(Tabla tabla, String rutaArchivo);
 
