@@ -1,22 +1,26 @@
 package jandas.io.csv;
 
-import jandas.io.LeerConfig;
-
-public class LeerCsvConfig extends LeerConfig{
+public class CsvConfig {
     private String separador;
     private boolean tieneEncabezado;
     private String valorNulo;
     
-    public LeerCsvConfig() {
+    public CsvConfig() {
         this.separador = ",";
         this.tieneEncabezado = true;
         this.valorNulo = "NA";
     }
-    
-    public LeerCsvConfig(String separador, boolean tieneEncabezado) {
+
+    public CsvConfig(String separador, boolean tieneEncabezado) {
         this.separador = separador;
         this.tieneEncabezado = tieneEncabezado;
         this.valorNulo = "NA";
+    }
+    
+    public CsvConfig(String separador, boolean tieneEncabezado, String valorNulo) {
+        this.separador = separador;
+        this.tieneEncabezado = tieneEncabezado;
+        this.valorNulo = valorNulo;
     }
 
     // Getters and setters
@@ -29,13 +33,4 @@ public class LeerCsvConfig extends LeerConfig{
     public String getValorNulo() { return valorNulo; }
     public void setValorNulo(String valorNulo) { this.valorNulo = valorNulo; }
 
-    @Override
-    public boolean isValid() {
-        return false;
-    }
-
-    @Override
-    public String getDescription() {
-        return "";
-    }
 }
