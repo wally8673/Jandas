@@ -285,6 +285,31 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="and now the implementation in @EscribirCsv.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749421936387" />
+                  <option value="1749420074135" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and now you can do all that with my lecture flow?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749419973443" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="and what happend with my agregarColumna method from dataframeGenerico?">
           <value>
             <GhostTextMetaData>
@@ -855,6 +880,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1749417457559" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="why its the purpouse of EscribirConfig">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749567115863" />
                 </list>
               </option>
             </GhostTextMetaData>

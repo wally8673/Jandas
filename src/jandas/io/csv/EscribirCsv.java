@@ -3,13 +3,14 @@ package jandas.io.csv;
 import jandas.base.data.Tabla;
 import jandas.io.EscribirArchivo;
 
-import java.io.FileWriter;
-import java.io.IOException;
+public class EscribirCsv implements EscribirArchivo<CsvConfig> {
+    @Override
+    public void escribir(Tabla tabla, String rutaArchivo) {
 
-public class EscribirCsv implements EscribirArchivo<LeerCsvConfig> {
+    }
 
+    @Override
+    public void escribir(Tabla tabla, CsvConfig config, String rutaArchivo) {
 
-
-
-
+    }
 }

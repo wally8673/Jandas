@@ -7,7 +7,7 @@ import jandas.base.data.TablaGenerica;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
-import jandas.io.csv.LeerCsvConfig;
+import jandas.io.csv.CsvConfig;
 import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
@@ -94,29 +94,21 @@ public class VisualizacionDemo {
 
         m.cargarDesdeMatriz(matriz, etiquetas);
 
+
+        // iniciañoizo lector CSV
         LeerCsv lectorCsv = new LeerCsv();
 
-        // Read the CSV file
-        Tabla peliculas = lectorCsv.leer("data/flights_september.csv");
+        // Lee archivo csv default
+        Tabla peliculas = lectorCsv.leer("df/flights_september.csv");
         visualizador.visualizar(peliculas);
 
-        // Create custom CSV configuration
-        LeerCsvConfig config2 = new LeerCsvConfig(",", false); // comma separator, has headers
+        // leer csv con config custom
+        Tabla df2 = lectorCsv.leer("df/flights_september.csv", new CsvConfig(",", false));
+        visualizador.visualizar(df2);
 
-        // Create CSV reader with custom config
-        LeerCsv lectorCsvCustom = new LeerCsv(config2);
-
-        // Read the CSV file
-        Tabla tabla = lectorCsvCustom.leer("data/flights_september.csv");
-
-        visualizador.visualizar(tabla);
-
-
-
+        Tabla df3 = (new LeerCsv()).leer("df/flights_september.csv", new CsvConfig(",", true));
+        visualizador.visualizar(df3);
     }
-
-
-
 
 
 }
