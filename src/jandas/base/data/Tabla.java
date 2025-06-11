@@ -150,13 +150,7 @@ public class Tabla {
                     }
                 }
             }
-            // Crear directamente sin usar agregarColumna()
-            Columna<Integer> nuevaColumna = new Columna<>(etiqueta, Integer.class);
-            for (Integer valor : valoresInt) {
-                nuevaColumna.agregarCelda(new Celda<>(valor));
-            }
-            columnas.add(nuevaColumna);
-            etiquetasColumnas.add(etiqueta);
+            agregarColumna(etiqueta, Integer.class, valoresInt);
 
         } else if (tipo == Double.class) {
             List<Double> valoresDouble = new ArrayList<>();
@@ -177,12 +171,7 @@ public class Tabla {
                     }
                 }
             }
-            Columna<Double> nuevaColumna = new Columna<>(etiqueta, Double.class);
-            for (Double valor : valoresDouble) {
-                nuevaColumna.agregarCelda(new Celda<>(valor));
-            }
-            columnas.add(nuevaColumna);
-            etiquetasColumnas.add(etiqueta);
+            agregarColumna(etiqueta, Double.class, valoresDouble);
 
         } else if (tipo == Boolean.class) {
             List<Boolean> valoresBoolean = new ArrayList<>();
@@ -195,12 +184,7 @@ public class Tabla {
                     valoresBoolean.add(Boolean.valueOf(valor.toString()));
                 }
             }
-            Columna<Boolean> nuevaColumna = new Columna<>(etiqueta, Boolean.class);
-            for (Boolean valor : valoresBoolean) {
-                nuevaColumna.agregarCelda(new Celda<>(valor));
-            }
-            columnas.add(nuevaColumna);
-            etiquetasColumnas.add(etiqueta);
+            agregarColumna(etiqueta, Boolean.class, valoresBoolean);
 
         } else {
             // String por defecto
@@ -212,8 +196,7 @@ public class Tabla {
             for (String valor : valoresString) {
                 nuevaColumna.agregarCelda(new Celda<>(valor));
             }
-            columnas.add(nuevaColumna);
-            etiquetasColumnas.add(etiqueta);
+            agregarColumna(etiqueta, String.class, valoresString);
         }
 
         // Generar etiquetas de filas solo la primera vez

@@ -72,7 +72,7 @@ public class VisualizacionDemo {
         config.setMaxColumnas(3);
         config.setMaxLargoCadena(10);
         config.setNa("N/A");
-        config.setMostrarEtiquetaFila(false);
+        config.setMostrarEtiquetaFila(true);
         
         VConsola visualizadorPersonalizado = new VConsola(config);
         System.out.println("Visualización con objeto de configuración personalizado:");

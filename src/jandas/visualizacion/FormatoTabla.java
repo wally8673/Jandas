@@ -121,18 +121,18 @@ public class FormatoTabla {
      * Formatea una fila de datos para la tabla.
      * 
      * @param fila La fila a formatear
-     * @param indice Índice de la fila
+     * @param etiquetaFila Etiqueta de la fila
      * @param anchos Lista de anchuras de columnas
      * @param config Configuración de visualización
      * @return Cadena de fila de datos formateada
      */
-    public static String formatearFila(Fila fila, int indice, List<Integer> anchos, VConfig config) {
+    public static String formatearFila(Fila fila, Etiqueta etiquetaFila, List<Integer> anchos, VConfig config) {
         StringBuilder filaStr = new StringBuilder();
         List<Celda<?>> celdas = fila.getCeldasFila();
         int numColumnas = Math.min(celdas.size(), config.getMaxColumnas());
         
         if (config.isMostrarEtiquetaFila()) {
-            filaStr.append("| ").append(String.format("%-4s", indice)).append(" |");
+            filaStr.append("| ").append(String.format("%-4s", etiquetaFila.toString())).append(" |");
         } else {
             filaStr.append("|");
         }

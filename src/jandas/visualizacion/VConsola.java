@@ -75,7 +75,7 @@ public class VConsola implements Visualizable {
         for (int i = 0; i < numFilas; i++) {
             Etiqueta etiquetaFila = etiquetasFilas.get(i);
             Fila fila = tabla.getFila(etiquetaFila);
-            System.out.println(FormatoTabla.formatearFila(fila, i, anchos, config));
+            System.out.println(FormatoTabla.formatearFila(fila, etiquetaFila, anchos, config));
         }
 
         System.out.println(separador);
