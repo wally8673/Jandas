@@ -18,7 +18,7 @@ public class VConfig {
      */
     public VConfig() {
         this.maxFilas = 10;
-        this.maxColumnas = 10;
+        this.maxColumnas = 100;
         this.maxLargoCadena = 20;
         this.na = "NA";
         this.separadorCelda = " | ";

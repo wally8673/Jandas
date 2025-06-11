@@ -23,7 +23,5 @@ public interface Visualizable {
      *
      * @param tabla The DataFrame to visualize
      */
-    default void visualizar(Tabla tabla) {
-        visualizar(tabla, 10, 10, 20);
-    }
+    void visualizar(Tabla tabla);
 }

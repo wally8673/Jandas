@@ -37,6 +37,11 @@ public class VConsola implements Visualizable {
         visualizarConConfig(tabla, tempConfig);
     }
 
+    @Override
+    public void visualizar(Tabla tabla) {
+        visualizarConConfig(tabla, config);
+    }
+
     /**
      * Visualiza el dataframe utilizando la configuracion especificada.
      *
@@ -84,7 +89,10 @@ public class VConsola implements Visualizable {
         if (tabla.cantFilas() > config.getMaxFilas() || tabla.cantColumnas() > config.getMaxColumnas()) {
             System.out.println("Tabla acotada. Mostrando " +
                 Math.min(tabla.cantFilas(), config.getMaxFilas()) + " de " + tabla.cantFilas() + " filas y " +
-                Math.min(tabla.cantColumnas(), config.getMaxColumnas()) + " de " + tabla.cantColumnas() + " columnas.");
+                Math.min(tabla.cantColumnas(), config.getMaxColumnas()) + " de " + tabla.cantColumnas() + " columnas.\n");
+        }
+        else {
+            System.out.println("Mostrando todas las filas y columnas. \n");
         }
     }
 

@@ -26,22 +26,15 @@ public class Tabla {
     public Tabla(List<Etiqueta> etiquetasColumnas, List<Columna<?>> columnas) {
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
-        this.etiquetasFilas = new ArrayList<>();
+        this.etiquetasFilas = generarEtiquetaFilas();
 
-        // Generar etiquetas de filas basándose en el tamaño real de las columnas
-        if (!columnas.isEmpty()) {
-            int cantFilas = columnas.get(0).size();
-            for (int i = 0; i < cantFilas; i++) {
-                etiquetasFilas.add(new EtiquetaInt(i));
-            }
-        }
     }
 
     // Constructor para matriz con encabezado
     public Tabla(Object[][] datosConEncabezado) {
         this.columnas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
-        this.etiquetasFilas = new ArrayList<>();
+        this.etiquetasFilas = generarEtiquetaFilas();
 
         if (datosConEncabezado == null || datosConEncabezado.length < 2) {
             throw new JandasException("Se necesita al menos una fila de encabezado y una de datos.");
@@ -278,15 +271,26 @@ public class Tabla {
                 "Dimensiones no coinciden. Se esperaban %d columnas, pero se recibieron %d",
                 cantColumnas(), celdas.size()));
         }
-
         for (int i = 0; i < columnas.size(); i++) {
             Columna<Object> columna = (Columna<Object>) columnas.get(i);
             Celda<Object> celda = (Celda<Object>) celdas.get(i);
             columna.agregarCelda(celda);
         }
-
         etiquetasFilas.add(etiquetaFila);
     }
+
+    private List<Etiqueta> generarEtiquetaFilas() {
+        if (!columnas.isEmpty()) {
+            int cantFilas = columnas.get(0).size();
+            List<Etiqueta> etiquetas = new ArrayList<>();
+            for (int i = 0; i < cantFilas; i++) {
+                etiquetas.add(new EtiquetaInt(i));
+            }
+            return etiquetas;
+        }
+        return new ArrayList<>();
+    }
+
 
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
         for (int i = 0; i < etiquetas.size(); i++) {

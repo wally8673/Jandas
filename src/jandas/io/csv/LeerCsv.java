@@ -59,7 +59,7 @@ public class LeerCsv implements LeerArchivo {
             List<Etiqueta> etiquetasColumnas = new ArrayList<>();
 
             for (int i = 0; i < numColumnas; i++) {
-                String nombreCol = config.isTieneEncabezado() ? encabezados[i] : "Col" + i;
+                String nombreCol = config.isTieneEncabezado() ? encabezados[i] : "" + i;
                 etiquetasColumnas.add(new EtiquetaString(nombreCol));
                 // CORRECCIÓN: Crear columna como Object en lugar de String
                 columnas.add(new Columna<>(new EtiquetaString(nombreCol), Object.class));

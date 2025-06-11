@@ -58,15 +58,11 @@ public class VisualizacionDemo {
         System.out.println("Visualización con configuración por defecto:");
         visualizador.visualizar(df);
         
-        System.out.println("\n");
-        
         // Ahora visualizo con parametros personalizados
         System.out.println("Visualización con configuración personalizada:");
         visualizador.visualizar(df, 3, 2, 5);
         
-        System.out.println("\n");
-        
-        // Visualize with custom configuration object
+        // Visualizacion con objeto de configuracion personalizado
         VConfig config = new VConfig();
         config.setMaxFilas(4);
         config.setMaxColumnas(3);
