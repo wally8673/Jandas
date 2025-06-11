@@ -21,10 +21,6 @@ public class LeerCsv implements LeerArchivo {
         this.config = new CsvConfig();
     }
 
-    public LeerCsv(CsvConfig config) {
-        this.config = config;
-    }
-
     @Override
     public Tabla leer(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {

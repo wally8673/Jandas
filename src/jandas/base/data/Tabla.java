@@ -1,5 +1,6 @@
 package jandas.base.data;
 
+import jandas.base.etiquetas.EtiquetaString;
 import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
@@ -20,6 +21,8 @@ public class Tabla {
         this.etiquetasColumnas = new ArrayList<>();
     }
 
+    // Crea tabla en base a una lista de columnas y etiquetas
+
     public Tabla(List<Etiqueta> etiquetasColumnas, List<Columna<?>> columnas) {
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
@@ -29,6 +32,193 @@ public class Tabla {
         if (!columnas.isEmpty()) {
             int cantFilas = columnas.get(0).size();
             for (int i = 0; i < cantFilas; i++) {
+                etiquetasFilas.add(new EtiquetaInt(i));
+            }
+        }
+    }
+
+    // Constructor para matriz con encabezado
+    public Tabla(Object[][] datosConEncabezado) {
+        this.columnas = new ArrayList<>();
+        this.etiquetasColumnas = new ArrayList<>();
+        this.etiquetasFilas = new ArrayList<>();
+
+        if (datosConEncabezado == null || datosConEncabezado.length < 2) {
+            throw new JandasException("Se necesita al menos una fila de encabezado y una de datos.");
+        }
+
+        int cantidadFilas = datosConEncabezado.length;
+        int cantidadColumnas = datosConEncabezado[0].length;
+
+        // Validar que todas las filas tengan la misma cantidad de columnas
+        for (int i = 0; i < cantidadFilas; i++) {
+            if (datosConEncabezado[i].length != cantidadColumnas) {
+                throw new JandasException("Todas las filas deben tener la misma cantidad de columnas.");
+            }
+        }
+
+        // Procesar datos por columna
+        for (int j = 0; j < cantidadColumnas; j++) {
+            // Crear etiqueta del encabezado
+            Object encabezado = datosConEncabezado[0][j];
+            Etiqueta etiqueta = crearEtiquetaDesdeObjeto(encabezado);
+
+            // Recopilar valores de la columna (excluyendo encabezado)
+            List<Object> valoresColumna = new ArrayList<>();
+            for (int i = 1; i < cantidadFilas; i++) {
+                valoresColumna.add(datosConEncabezado[i][j]);
+            }
+
+            // Inferir el tipo de la columna y crearla directamente
+            Class<?> tipoColumna = inferirTipoColumna(valoresColumna);
+            crearYAgregarColumna(etiqueta, tipoColumna, valoresColumna);
+        }
+    }
+
+    // Método auxiliar para crear etiquetas desde objetos
+    private Etiqueta crearEtiquetaDesdeObjeto(Object obj) {
+        if (obj instanceof Integer) {
+            return new EtiquetaInt((Integer) obj);
+        } else {
+            return new EtiquetaString(obj.toString());
+        }
+    }
+
+    // Método auxiliar para inferir el tipo de una columna
+    private Class<?> inferirTipoColumna(List<Object> valores) {
+        if (valores.isEmpty()) {
+            return Object.class;
+        }
+
+        // Contar tipos no nulos
+        int contadorInteger = 0;
+        int contadorDouble = 0;
+        int contadorString = 0;
+        int contadorBoolean = 0;
+        int totalNoNulos = 0;
+
+        for (Object valor : valores) {
+            if (valor != null) {
+                totalNoNulos++;
+                if (valor instanceof Integer) {
+                    contadorInteger++;
+                } else if (valor instanceof Double || valor instanceof Float) {
+                    contadorDouble++;
+                } else if (valor instanceof Boolean) {
+                    contadorBoolean++;
+                } else {
+                    contadorString++;
+                }
+            }
+        }
+
+        if (totalNoNulos == 0) {
+            return Object.class;
+        }
+
+        // Determinar tipo predominante
+        if (contadorInteger == totalNoNulos) {
+            return Integer.class;
+        } else if (contadorDouble == totalNoNulos) {
+            return Double.class;
+        } else if (contadorBoolean == totalNoNulos) {
+            return Boolean.class;
+        } else if (contadorInteger + contadorDouble == totalNoNulos) {
+            // Mezcla de enteros y decimales -> usar Double
+            return Double.class;
+        } else {
+            // Cualquier otra combinación -> String
+            return String.class;
+        }
+    }
+
+    // Método auxiliar para crear columna con tipo específico (SIN agregar a listas)
+    @SuppressWarnings("unchecked")
+    private void crearYAgregarColumna(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
+        if (tipo == Integer.class) {
+            List<Integer> valoresInt = new ArrayList<>();
+            for (Object valor : valores) {
+                if (valor == null) {
+                    valoresInt.add(null);
+                } else if (valor instanceof Integer) {
+                    valoresInt.add((Integer) valor);
+                } else {
+                    try {
+                        valoresInt.add(Integer.valueOf(valor.toString()));
+                    } catch (NumberFormatException e) {
+                        valoresInt.add(null);
+                    }
+                }
+            }
+            // Crear directamente sin usar agregarColumna()
+            Columna<Integer> nuevaColumna = new Columna<>(etiqueta, Integer.class);
+            for (Integer valor : valoresInt) {
+                nuevaColumna.agregarCelda(new Celda<>(valor));
+            }
+            columnas.add(nuevaColumna);
+            etiquetasColumnas.add(etiqueta);
+
+        } else if (tipo == Double.class) {
+            List<Double> valoresDouble = new ArrayList<>();
+            for (Object valor : valores) {
+                if (valor == null) {
+                    valoresDouble.add(null);
+                } else if (valor instanceof Double) {
+                    valoresDouble.add((Double) valor);
+                } else if (valor instanceof Float) {
+                    valoresDouble.add(((Float) valor).doubleValue());
+                } else if (valor instanceof Integer) {
+                    valoresDouble.add(((Integer) valor).doubleValue());
+                } else {
+                    try {
+                        valoresDouble.add(Double.valueOf(valor.toString()));
+                    } catch (NumberFormatException e) {
+                        valoresDouble.add(null);
+                    }
+                }
+            }
+            Columna<Double> nuevaColumna = new Columna<>(etiqueta, Double.class);
+            for (Double valor : valoresDouble) {
+                nuevaColumna.agregarCelda(new Celda<>(valor));
+            }
+            columnas.add(nuevaColumna);
+            etiquetasColumnas.add(etiqueta);
+
+        } else if (tipo == Boolean.class) {
+            List<Boolean> valoresBoolean = new ArrayList<>();
+            for (Object valor : valores) {
+                if (valor == null) {
+                    valoresBoolean.add(null);
+                } else if (valor instanceof Boolean) {
+                    valoresBoolean.add((Boolean) valor);
+                } else {
+                    valoresBoolean.add(Boolean.valueOf(valor.toString()));
+                }
+            }
+            Columna<Boolean> nuevaColumna = new Columna<>(etiqueta, Boolean.class);
+            for (Boolean valor : valoresBoolean) {
+                nuevaColumna.agregarCelda(new Celda<>(valor));
+            }
+            columnas.add(nuevaColumna);
+            etiquetasColumnas.add(etiqueta);
+
+        } else {
+            // String por defecto
+            List<String> valoresString = new ArrayList<>();
+            for (Object valor : valores) {
+                valoresString.add(valor == null ? null : valor.toString());
+            }
+            Columna<String> nuevaColumna = new Columna<>(etiqueta, String.class);
+            for (String valor : valoresString) {
+                nuevaColumna.agregarCelda(new Celda<>(valor));
+            }
+            columnas.add(nuevaColumna);
+            etiquetasColumnas.add(etiqueta);
+        }
+
+        // Generar etiquetas de filas solo la primera vez
+        if (etiquetasFilas.isEmpty()) {
+            for (int i = 0; i < valores.size(); i++) {
                 etiquetasFilas.add(new EtiquetaInt(i));
             }
         }
@@ -115,37 +305,6 @@ public class Tabla {
         etiquetasFilas.add(etiquetaFila);
     }
 
-//    public void cargarDesdeMatriz(Object[][] datos, List<Etiqueta> etiquetasColumnas) {
-//        if (datos.length == 0) {
-//            throw new JandasException("La matriz está vacía.");
-//        }
-//
-//        int cantidadFilas = datos.length;
-//        int cantidadColumnas = datos[0].length;
-//
-//        // Validar que todas las filas tengan igual cantidad de columnas
-//        for (int i = 1; i < datos.length; i++) {
-//            if (datos[i].length != cantidadColumnas) {
-//                throw new JandasException("Todas las filas deben tener la misma cantidad de columnas.");
-//            }
-//        }
-//
-//        // Validar etiquetas
-//        if (etiquetasColumnas.size() != cantidadColumnas) {
-//            throw new JandasException("La cantidad de etiquetas de columnas no coincide con la cantidad de columnas.");
-//        }
-//
-//        // Crear columnas vacías
-//        for (int j = 0; j < cantidadColumnas; j++) {
-//            List<Object> valoresColumna = new ArrayList<>();
-//            for (int i = 0; i < cantidadFilas; i++) {
-//                valoresColumna.add(datos[i][j]);
-//            }
-//            // El tipo es Object porque no conocemos el tipo específico
-//            this.agregarColumna(etiquetasColumnas.get(j), Object.class, valoresColumna);
-//        }
-//    }
-//
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
         for (int i = 0; i < etiquetas.size(); i++) {
             if (etiquetas.get(i).getValor().equals(etiqueta.getValor())) {

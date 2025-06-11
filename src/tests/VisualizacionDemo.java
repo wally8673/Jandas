@@ -17,12 +17,14 @@ import java.util.Arrays;
 public class VisualizacionDemo {
     
     public static void main(String[] args) {
-        // Creo dataframe
+
+
+
+        //1 Creo dataframe
         Tabla df = new Tabla();
         
-        // Agrego columnas usando los 3 metodos
+        // Agrego columnas
 
-        // metodo 1
         df.agregarColumna(new EtiquetaString("Nombre"),
                 String.class,
                 Arrays.asList("Juan", "María", "Pedro" , "Ana", "Luis"));
@@ -38,6 +40,8 @@ public class VisualizacionDemo {
         df.agregarColumna(new EtiquetaString("Activo"),
                 Boolean.class,
                 Arrays.asList(true, false, true, true, false));
+
+        // agrego filas
 
         Celda<String> c1 = new Celda<>("ramon gutierrez");
         Celda<Integer> c2 = new Celda<>(4);
@@ -88,5 +92,19 @@ public class VisualizacionDemo {
 
         Tabla df3 = (new LeerCsv()).leer("df/flights_september.csv", new CsvConfig(",", true));
         visualizador.visualizar(df3);
+
+        // Por arreglo nativo de java
+
+        Object[][] datos = new Object[][] {{"id", "nombre", "altura"},
+            {4, "hernan", 1.80},
+            {7, "fernando", 9.4}};
+
+        Tabla matriz = new Tabla(datos);
+        visualizador.visualizar(matriz);
+
+
+
+
+
     }
 }

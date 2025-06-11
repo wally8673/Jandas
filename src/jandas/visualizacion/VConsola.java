@@ -55,7 +55,7 @@ public class VConsola implements Visualizable {
         }
 
         // Imprime informacion del DataFrame
-        System.out.println("DataFrame: " + tabla.cantFilas() + " filas × " + tabla.cantColumnas() + " columnas");
+        System.out.println("DataFrame con " + tabla.cantFilas() + " filas × " + tabla.cantColumnas() + " columnas");
 
         // Calcula ancho de columnas
         List<Integer> anchos = FormatoTabla.calcularAnchos(tabla, config.getMaxColumnas(), config.getMaxLargoCadena());
