@@ -23,7 +23,7 @@ public class VConfig {
         this.na = "NA";
         this.separadorCelda = " | ";
         this.separadorHeader = "-";
-        this.mostrarEtiquetaFila = true;
+        this.mostrarEtiquetaFila = false;
     }
     
     /**
