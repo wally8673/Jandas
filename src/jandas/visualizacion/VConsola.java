@@ -1,7 +1,7 @@
 package jandas.visualizacion;
 
-import jandas.base.data.Tabla;
 import jandas.base.data.Fila;
+import jandas.base.data.Tabla;
 import jandas.base.etiquetas.Etiqueta;
 
 import java.util.List;
