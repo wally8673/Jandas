@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GhostTextManager">
+    <option name="inputs">
+      <map>
+        <entry key="@&lt;file_name&gt;  can yo code me an csvreader">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="4.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749411278841" />
+                  <option value="1749411153416" />
+                  <option value="1749411108882" />
+                  <option value="1749411063333" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="@&lt;file_name&gt;  como implementar getIndex sin usar la clase Tabla, quiero hacer un proyecto propio y debo llegar a algo parecido a la clase Tabla por mis medios">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748995925078" />
+                  <option value="1748995824006" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="@&lt;file_name&gt;  como implementar getIndex sin usar otras clases">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748995755370" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="@&lt;file_name&gt; how to do getIndex">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748995659169" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="@&lt;file_name&gt;como implementar getIndex sin usar otras clases">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748995713357" />
+                  <option value="1748995708790" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Como implementar una visualizacion por programa externo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749110883036" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Como quedaria mi clase excepciones ya que la usaste anteriormente?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749000697369" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Como quedaria mi clase excepciones ya que la usaste anteriormente? ten en cuenta que está vacia">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749000772540" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="For following code:&#10;```&#10;            Columna&lt;?&gt; columna = columnas.get(i);&#10;            columna.agregarCelda(celdas.get(i));&#10;        }&#10;```&#10;We have the error: 'agregarCelda(jandas.core.data.Celda&lt;capture&lt;?&gt;&gt;)' in 'jandas.core.data.Columna' cannot be applied to '(jandas.core.data.Celda&lt;capture&lt;?&gt;&gt;)'&#10;Fix this.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749098001237" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Hay un tema, tengo mis valores declarados en clase Celda, por lo tanto en mi main no anda aunque en el tuyo si">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749002965701" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Justificame el uso de interfaces, o sea, que gano yo utilizando interfaces si ya tengo las clases Fila por ejemplo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749092584590" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="No hace falta que me escribas codigo, solo que me ayudes a plantear el problema, que me grafiques la mente como debe funcionar un programa de la forma que quede un codigo impoluto y profesional">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749000171273" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Pero como quedaria mi dataframeGenerico? tengo que migrar cosas? no entinedo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107435247" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Por que en visualizar, los parametros de Imprimir fila me dan error, en especial getFila">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748997049865" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="You recommend me to create an package cell or just everything in data package like you do">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749089183750" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="a friend did this, give me your opinion and whats better, yours or his code">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749412988247" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="agregar filas me aparece mal">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749003751552" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahi te pase el enunciado, el archivo es Enunciado.md">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749085955312" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahora como sigo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749094007879" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahora como sigo@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749094064082" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ahora necesito implementar el metodo agregarcolumna, esta esta compuesta de una lista de columna que a su vez esta compuesta de una lista de celdas@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748998153275" />
+                  <option value="1748998028515" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and dataReader dataConfig?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417921745" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and keep in mind, in the future i need to add groupby, sorting, agreggation, concatenation, filtering, sumarizing and stadistic methods">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749087698368" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and now the implementation in @EscribirCsv.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749421936387" />
+                  <option value="1749420074135" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and now you can do all that with my lecture flow?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749419973443" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="and what happend with my agregarColumna method from dataframeGenerico?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101592974" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you code me the csv reader? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749411374580" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como el el flujo de metere un archivo  y lo lea en tablesaw? no analices mi codigo solo quiero entender lo que hace esa libreria https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415790100" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como el el flujo de metere un archivo de csv y lo lea en tablesaw? no analices mi codigo solo quiero entender lo que hace esa libreria https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415542967" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como funciona este archivo @DataReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416792368" />
+                  <option value="1749416716340" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="como hago ahora por ejemplo para leer este archivo en el main@movies.csv">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749418494425" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="corregime toda la clase columnagenerica que me quedo un desastre te pido porfavor@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749095270891" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="de que me sirve que celda sea una interfaZ y que exista una celdaGenerica y abstracta">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088578502" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="en columna se puede hacer ese control con la clase excepciones? o esta mejor asi">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749080951330" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="esto es extensible? por ejemplo, si quiero usar mas metodos que visualizacion por consola como hago">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749099138348" />
+                  <option value="1749099132490" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it work csvreader for example?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749412572562" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works for example my DataConfig?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749419099839" />
+                  <option value="1749418873447" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me      @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107739683" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107962999" />
+                  <option value="1749107819183" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @&lt;file_name&gt; @ColumnaBuilder.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108002557" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?  migrating all builder methods on DataframeGeneric or whatever you want to add, just warn me @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108065574" />
+                  <option value="1749107907216" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works the builder package that you told me?@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101344124" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works this reader from a csv? https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415452878" />
+                  <option value="1749415395709" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works type package, keeping in mind my @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108229517" />
+                  <option value="1749108190658" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it works type package, keeping in mind my asdsa @DataFrameGenerico.java::DataFrameGenerico">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="3.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749108343209" />
+                  <option value="1749108324557" />
+                  <option value="1749108277780" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how it would work something like that in my code? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417709156" />
+                  <option value="1749417631225" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how work the builder package?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749101287862" />
+                  <option value="1749101224530" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how works bufferedreader? explain me like i never heard about that, how it would be the code withput that">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749413667420" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how works bufferedreader? explain me like if i was mental retarded">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749413566914" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="i see that tablesaw uses FileReader abstract class, dataoptions class, datareader interface and csv reader and csvoptions class . thats nice, how it would be in my code?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414148802" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="i see that tablesaw uses FileReader abstract class, dataoptions class, datareader interface and csv reader class. thats nice?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414068736" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="if i pass you a github repository can you analyze it?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415274102" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="if i pass you a github repository can you analyze it?https://github.com/jtablesaw/tablesaw/tree/5b27ac45e00396fd6dc30572da48ba5181d81ee2/core/src/main/java/tech/tablesaw/io">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749415329121" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088211086" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core. keep in mind the code i current have">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088283592" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="im gonnna do what you did, i need you to help me migrate all this. we can start with package core. keep in mind the code i current have and tell me how to migrate">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088468803" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="manera mas eficiente de hacer el cant filas@">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748997822737" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me ayudas a sobreescribir equals para que funcione de la mejor manera esa comparacion?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748996096794" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me interesaria que desarrollaras mas la opcion 3">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749083128180" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me podes explicar la carpeta visualizacion?@&lt;file_name&gt; @Visualizable.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749100739356" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="me refiero mas que nada al constructor, no seria mejor llamar a excepciones en vez de a objects? pregunto desde la ignorancia, ayudame">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749081096220" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="mi carpeta donde tengo celda, columna, datafram, etc se llama core, existe otra forma de  llamarlo? en español, lo mismo con los constructores">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749106928572" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="nice i like it, how it be my visualizer package with my code">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749097572034" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="no entineod la parte 1. Extensibilidad (Open/Closed Principle)&#10;Puedes crear tipos especializados de celdas sin modificar código existente:&#10;NumericCell con validaciones matemáticas específicas&#10;DateCell con manejo de fechas&#10;BooleanCell con lógica booleana optimizada. No entiendo porque en que parte quedaria DateCell por ejemplo, en teoria ya maneja esta info o no?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088804063" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="now do all the code with that architecture @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417763592" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que paso con abstractCelda por ejemploo">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749088922896" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @CsvReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416616907" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @DataReader.java::DataReader">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416642345" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="que significa esto @io\DataReader.java">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749416687746" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="theres something i dont understand with this organizaction, when i call Cell for example, i call Cell or GenericCell?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749091204547" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="what happened with abstractCell, i have to create it? and if i want to do an DateCell where i put it in my package organization">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749089061666" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="why generic o?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749417457559" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="why its the purpouse of EscribirConfig">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749567115863" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="y ahora como lo haria si quiero en mi main armar mi columna por ejemplo y luego insertarlo en mis df">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749003481186" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="y para cant columnas?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1748997895890" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="you know how it works tablesaw io?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749414761780" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="you recommend me for solid migrate all my builder methods in dataframegeneric to builders?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1749107518666" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
