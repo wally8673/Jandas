@@ -1,10 +1,8 @@
-package jandas.operaciones.impl;
+package jandas.operaciones.ordenamiento;
 
 import jandas.base.data.Celda;
 import jandas.base.data.Columna;
 import jandas.base.data.Tabla;
-import jandas.operaciones.ordenamiento.CriterioOrden;
-import jandas.operaciones.ordenamiento.TipoOrden;
 
 import java.util.Comparator;
 import java.util.List;

@@ -18,11 +18,13 @@ public class TestOrdenar {
                         {"Ana", 35, 1.70, 4500}};
         Tabla df = new Tabla(datos);
 
-
+        // 2 Ordeno por una columna
         Tabla df_o = df.ordenar("Salario", TipoOrden.DESCENDENTE);
         Visualizable consola = new VConsola();
         consola.visualizar(df_o);
-        consola.visualizar(df);
+
+        // Dentro de visualizar puedo pasarle el tipo de ordenamiento
+        consola.visualizar(df.ordenar("Edad", TipoOrden.ASCENDENTE));
 
     }
 }

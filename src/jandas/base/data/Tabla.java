@@ -5,7 +5,7 @@ import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.operaciones.Ordenable;
-import jandas.operaciones.impl.OrdenadorTabla;
+import jandas.operaciones.ordenamiento.OrdenadorTabla;
 import jandas.operaciones.ordenamiento.CriterioOrden;
 import jandas.operaciones.ordenamiento.TipoOrden;
 

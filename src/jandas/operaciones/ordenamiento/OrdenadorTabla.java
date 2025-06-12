@@ -1,4 +1,4 @@
-package jandas.operaciones.impl;
+package jandas.operaciones.ordenamiento;
 
 import jandas.base.data.Celda;
 import jandas.base.data.Columna;
@@ -6,9 +6,6 @@ import jandas.base.data.Tabla;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaString;
 import jandas.excepciones.JandasException;
-import jandas.operaciones.impl.ComparadorMultiplesCriterios;
-import jandas.operaciones.ordenamiento.CriterioOrden;
-import jandas.operaciones.ordenamiento.TipoOrden;
 
 import java.util.ArrayList;
 import java.util.Arrays;
