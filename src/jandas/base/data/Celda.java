@@ -1,5 +1,7 @@
 package jandas.base.data;
 
+import java.lang.reflect.Method;
+
 public class Celda<T>  {
     private T valor;
 
@@ -40,5 +42,9 @@ public class Celda<T>  {
     public int hashCode() {
         return valor != null ? valor.hashCode() : 0;
     }
+
+
+
+
 
 }

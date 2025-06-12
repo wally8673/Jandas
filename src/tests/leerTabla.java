@@ -88,6 +88,7 @@ public class leerTabla {
                 Arrays.asList(c17, c18, c19)
         );
 
+        //tabla matriz
         Object[][] datos = {
                 {"Nombre", "Edad", "Promedio", "Aprobado"},
                 {"Ana", 20, 8.5, true},
@@ -97,14 +98,43 @@ public class leerTabla {
                 {"Luis", 20, 5.5, false}
         };
 
-        Tabla estudiantes = new Tabla(datos);
-        System.out.println("Tabla original:");
-        estudiantes.visualizar();
+        Object[][] datos2 = {
+                {"Nombre", "Edad", "Promedio"},
+                {"Ana", 20, null},
+                {"Juan", null, 7.5},
+                {"María", 22, null}
+        };
 
-        System.out.println("\nEstudiantes mayores de 20 años:");
+
+        Tabla estudiantes = new Tabla(datos);
+        System.out.println("Tabla Datos:");
+
+
+        // Usando AND (2 condiciones)
         Condicion mayoresDe20 = new CondicionComparacion("Edad", ">", 20);
-        Tabla filtro1 = estudiantes.filtrar(mayoresDe20);
-        filtro1.visualizar();
+        Condicion aprobados = new CondicionComparacion("Aprobado", "=", true);
+        Condicion promedioAlto = new CondicionComparacion("Promedio", ">=", 7.0);
+        Tabla filtro1 = estudiantes.filtrar(Condicion.and(mayoresDe20, aprobados));
+        System.out.println("filtro mayores y aprobados");
+        //filtro1.visualizar();
+
+        // Usando AND (1 condicion)
+        Tabla tablaCopia = estudiantes.copiar();
+        System.out.println("copia profunda de la tabla estudiantes");
+
+        Condicion menoresDe20Copia = new CondicionComparacion("Edad", "<", 20);
+        Tabla filtro2 = tablaCopia.filtrar(menoresDe20Copia);
+        //filtro2.visualizar();
+
+        //PROBANDO LA IMPUTACION
+        System.out.println("Tabla Datos:");
+        Tabla df2 = new Tabla(datos2);
+        df2.visualizar();
+
+        // de la columna edad, cambio los NA por 0 y mantiene el tipo de dato
+        df2.imputarColumna(new EtiquetaString("Edad"), 0);
+        df2.imputarDefault();
+        df2.visualizar();
 
     }
 }

@@ -103,4 +103,6 @@ public class Columna<T> {
     public int hashCode() {
         return Objects.hash(etiqueta, tipo, celdas);
     }
+
+
 }
