@@ -4,6 +4,8 @@ import jandas.base.data.Celda;
 import jandas.base.data.Columna;
 import jandas.base.data.Tabla;
 import jandas.base.etiquetas.EtiquetaString;
+import jandas.operaciones.filtros.*;
+
 
 import java.util.Arrays;
 
@@ -56,7 +58,7 @@ public class leerTabla {
         df.agregarColumna(
                 new EtiquetaString("Letras"),
                 String.class,
-                Arrays.asList("a","b","1","d")
+                Arrays.asList("a", "b", "1", "d")
         );
 
 
@@ -65,7 +67,7 @@ public class leerTabla {
         df.agregarColumnaCeldas(
                 new EtiquetaString("Numeros"),
                 Integer.class,
-                Arrays.asList(c5,c6,c7,c8)
+                Arrays.asList(c5, c6, c7, c8)
         );
 
         // Metodo 3
@@ -75,7 +77,7 @@ public class leerTabla {
                 Boolean.class
         );
 
-        columna3.agregarCeldas(Arrays.asList(c9,c10,c11,c12));
+        columna3.agregarCeldas(Arrays.asList(c9, c10, c11, c12));
 
         df.agregarColumna(columna3);
 
@@ -83,10 +85,27 @@ public class leerTabla {
 
         df.agregarFila(
                 new EtiquetaString("Fila 5"),
-                Arrays.asList(c17,c18,c19)
+                Arrays.asList(c17, c18, c19)
         );
 
-        //df.visualizar(5,3);
+        Object[][] datos = {
+                {"Nombre", "Edad", "Promedio", "Aprobado"},
+                {"Ana", 20, 8.5, true},
+                {"Juan", 22, 7.0, true},
+                {"Pedro", 19, 4.5, false},
+                {"María", 21, 9.0, true},
+                {"Luis", 20, 5.5, false}
+        };
+
+        Tabla estudiantes = new Tabla(datos);
+        System.out.println("Tabla original:");
+        estudiantes.visualizar();
+
+        System.out.println("\nEstudiantes mayores de 20 años:");
+        Condicion mayoresDe20 = new CondicionComparacion("Edad", ">", 20);
+        Tabla filtro1 = estudiantes.filtrar(mayoresDe20);
+        filtro1.visualizar();
 
     }
 }
+

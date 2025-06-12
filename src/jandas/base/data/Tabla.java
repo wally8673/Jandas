@@ -1,5 +1,7 @@
 package jandas.base.data;
 
+import jandas.operaciones.filtros.*;
+import jandas.visualizacion.*;
 import jandas.base.etiquetas.EtiquetaString;
 import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tabla {
-
+public class Tabla{
+    private VConsola visualizador;
     private List<Columna<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
     private List<Etiqueta> etiquetasColumnas;
@@ -19,6 +21,7 @@ public class Tabla {
         this.columnas = new ArrayList<>();
         this.etiquetasFilas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
+        this.visualizador = new VConsola();
     }
 
     // Crea tabla en base a una lista de columnas y etiquetas
@@ -27,7 +30,7 @@ public class Tabla {
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
         this.etiquetasFilas = generarEtiquetaFilas();
-
+        this.visualizador = new VConsola();
     }
 
     // Constructor para matriz con encabezado
@@ -35,6 +38,7 @@ public class Tabla {
         this.columnas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
         this.etiquetasFilas = generarEtiquetaFilas();
+        this.visualizador = new VConsola();
 
         if (datosConEncabezado == null || datosConEncabezado.length < 2) {
             throw new JandasException("Se necesita al menos una fila de encabezado y una de datos.");
@@ -264,7 +268,7 @@ public class Tabla {
         }
 
     }
-
+    //metodo para agregar filas
     public void agregarFila(Etiqueta etiquetaFila, List<Celda<?>> celdas) {
         if (celdas.size() != cantColumnas()) {
             throw new JandasException(String.format(
@@ -359,4 +363,103 @@ public class Tabla {
         return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);
     }
 
+
+    //Metodo head()
+    public Tabla head(int n) {
+        if (n <= 0) {
+            throw new JandasException("El número de filas debe ser positivo");
+        }
+
+        // Ajustar n si es mayor que el número total de filas
+        n = Math.min(n, cantFilas());
+
+        // Crear nuevas columnas con las primeras n filas
+        List<Columna<?>> nuevasColumnas = new ArrayList<>();
+        for (Columna<?> columnaOriginal : getColumnas()) {
+            @SuppressWarnings("unchecked")
+            Columna<Object> nuevaColumna = new Columna<>(
+                    columnaOriginal.getEtiqueta(),
+                    (Class<Object>) columnaOriginal.getTipoDato()
+            );
+
+            List<? extends Celda<?>> celdasOriginales = columnaOriginal.getCeldas();
+            for (int i = 0; i < Math.min(n, celdasOriginales.size()); i++) {
+                Celda<?> celdaOriginal = celdasOriginales.get(i);
+                @SuppressWarnings("unchecked")
+                Celda<Object> nuevaCelda = new Celda<>(celdaOriginal.getValor());
+                nuevaColumna.agregarCelda(nuevaCelda);
+            }
+            nuevasColumnas.add(nuevaColumna);
+        }
+
+        // Crear nueva tabla con las etiquetas de columnas y las nuevas columnas
+        Tabla resultado = new Tabla(getEtiquetasColumnas(), nuevasColumnas);
+
+        // Establecer las etiquetas de filas correspondientes
+        List<Etiqueta> nuevasEtiquetasFilas = getEtiquetasFilas().subList(0, n);
+        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
+
+        return resultado;
+    }
+
+    //Metodo para visualizar la tabla en consola
+    public void visualizar() {
+        visualizador.visualizar(this);
+    }
+
+    /**
+     * Visualiza la tabla con parámetros personalizados
+     */
+    public void visualizar(int maxFilas, int maxColumnas, int maxLargoCadena) {
+        visualizador.visualizar(this, maxFilas, maxColumnas, maxLargoCadena);
+    }
+
+    /**
+     * Visualiza la tabla con una configuración personalizada
+     */
+    public void visualizarConConfig(VConfig config) {
+        visualizador.visualizarConConfig(this, config);
+    }
+
+    /**
+     * Cambia el visualizador de la tabla
+     */
+    public void setVisualizador(VConsola visualizador) {
+        this.visualizador = visualizador;
+    }
+
+    //Filtrado
+    public Tabla filtrar(Condicion condicion) {
+        List<Columna<?>> nuevasColumnas = new ArrayList<>();
+        List<Etiqueta> nuevasEtiquetasFilas = new ArrayList<>();
+
+        // Crear nuevas columnas vacías con sus tipos correctos
+        for (Columna<?> columnaOriginal : columnas) {
+            Columna<?> nuevaColumna = new Columna<>(
+                    columnaOriginal.getEtiqueta(),
+                    columnaOriginal.getTipoDato()
+            );
+            nuevasColumnas.add(nuevaColumna);
+        }
+
+        // Evaluar cada fila y agregar las que cumplen la condición
+        for (int i = 0; i < cantFilas(); i++) {
+            Fila fila = getFila(etiquetasFilas.get(i));
+            if (condicion.evaluar(fila)) {
+                // Agregar la fila a las nuevas columnas
+                for (int j = 0; j < cantColumnas(); j++) {
+                    Celda<?> celdaOriginal = fila.getCeldasFila().get(j);
+                    Columna columna = nuevasColumnas.get(j);
+                    columna.agregarCelda(new Celda<>(celdaOriginal.getValor()));
+                }
+                nuevasEtiquetasFilas.add(etiquetasFilas.get(i));
+            }
+        }
+
+        Tabla resultado = new Tabla(etiquetasColumnas, nuevasColumnas);
+        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
+        return resultado;
+    }
 }
+
+

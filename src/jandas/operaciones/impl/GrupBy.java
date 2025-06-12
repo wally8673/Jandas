@@ -1,4 +1,4 @@
 package jandas.operaciones.impl;
 
-public class GroupBy {
+public class GrupBy {
 }
