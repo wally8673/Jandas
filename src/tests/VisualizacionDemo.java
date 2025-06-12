@@ -77,20 +77,20 @@ public class VisualizacionDemo {
         consolaCustom.visualizarConConfig(df, config);
 
 
-        //Inicializo lector general
+        //Inicializo con lector general
         LeerArchivo lector = new LeerCsv();
-        Tabla df3 = lector.leer("df/flights_september.csv");
-        consola.visualizar(df3);
+        Tabla df2 = lector.leer("df/flights_september.csv");
+        consola.visualizar(df2);
 
-        // Inicializo lectorcsv y Lee archivo csv default
+        // Inicializo con lectorcsv y Lee archivo csv default
         LectorCsv csv = new LeerCsv();
 
-        Tabla peliculas = csv.leer("df/flights_september.csv");
-        consola.visualizar(peliculas);
+        Tabla df3 = csv.leer("df/flights_september.csv");
+        consola.visualizar(df3);
 
         // leer csv con config custom
-        Tabla df2 = csv.leer("df/flights_september.csv", false, ",");
-        consola.visualizar(df2);
+        Tabla df4 = csv.leer("df/flights_september.csv", false, ",");
+        consola.visualizar(df4);
 
 
         // Por arreglo nativo de java
