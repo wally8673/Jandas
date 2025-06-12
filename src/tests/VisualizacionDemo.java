@@ -98,9 +98,5 @@ public class VisualizacionDemo {
         Tabla matriz = new Tabla(datos);
         visualizador.visualizar(matriz);
 
-
-
-
-
     }
 }

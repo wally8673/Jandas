@@ -5,6 +5,7 @@ import jandas.base.data.Columna;
 import jandas.base.data.Tabla;
 import jandas.base.etiquetas.EtiquetaString;
 import jandas.operaciones.filtros.*;
+import jandas.visualizacion.VConsola;
 
 
 import java.util.Arrays;
@@ -109,6 +110,8 @@ public class leerTabla {
         Tabla estudiantes = new Tabla(datos);
         System.out.println("Tabla Datos:");
 
+        VConsola visualizador1 = new VConsola();
+        visualizador1.visualizar(estudiantes);
 
         // Usando AND (2 condiciones)
         Condicion mayoresDe20 = new CondicionComparacion("Edad", ">", 20);
@@ -116,7 +119,7 @@ public class leerTabla {
         Condicion promedioAlto = new CondicionComparacion("Promedio", ">=", 7.0);
         Tabla filtro1 = estudiantes.filtrar(Condicion.and(mayoresDe20, aprobados));
         System.out.println("filtro mayores y aprobados");
-        //filtro1.visualizar();
+        visualizador1.visualizar(filtro1);
 
         // Usando AND (1 condicion)
         Tabla tablaCopia = estudiantes.copiar();
@@ -124,18 +127,19 @@ public class leerTabla {
 
         Condicion menoresDe20Copia = new CondicionComparacion("Edad", "<", 20);
         Tabla filtro2 = tablaCopia.filtrar(menoresDe20Copia);
-        //filtro2.visualizar();
+        visualizador1.visualizar(filtro2);
 
         //PROBANDO LA IMPUTACION
         System.out.println("Tabla Datos:");
         Tabla df2 = new Tabla(datos2);
-        df2.visualizar();
+        visualizador1.visualizar(df2);
 
         // de la columna edad, cambio los NA por 0 y mantiene el tipo de dato
         df2.imputarColumna(new EtiquetaString("Edad"), 0);
         df2.imputarDefault();
-        df2.visualizar();
+        visualizador1.visualizar(df2);
 
+        visualizador1.visualizar(df2.tail(2));
     }
 }
 

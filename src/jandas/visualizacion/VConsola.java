@@ -88,8 +88,8 @@ public class VConsola implements Visualizable {
         // Si muestra menos filas o columnas que las originales, avisar por pantalla
         if (tabla.cantFilas() > config.getMaxFilas() || tabla.cantColumnas() > config.getMaxColumnas()) {
             System.out.println("Tabla acotada. Mostrando " +
-                Math.min(tabla.cantFilas(), config.getMaxFilas()) + " de " + tabla.cantFilas() + " filas y " +
-                Math.min(tabla.cantColumnas(), config.getMaxColumnas()) + " de " + tabla.cantColumnas() + " columnas.\n");
+                    Math.min(tabla.cantFilas(), config.getMaxFilas()) + " de " + tabla.cantFilas() + " filas y " +
+                    Math.min(tabla.cantColumnas(), config.getMaxColumnas()) + " de " + tabla.cantColumnas() + " columnas.\n");
         }
         else {
             System.out.println("Mostrando todas las filas y columnas. \n");

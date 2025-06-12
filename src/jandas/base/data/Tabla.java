@@ -21,7 +21,6 @@ public class Tabla{
         this.columnas = new ArrayList<>();
         this.etiquetasFilas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
-        this.visualizador = new VConsola();
     }
 
     // Crea tabla en base a una lista de columnas y etiquetas
@@ -30,7 +29,6 @@ public class Tabla{
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
         this.etiquetasFilas = generarEtiquetaFilas();
-        this.visualizador = new VConsola();
     }
 
     // Constructor para matriz con encabezado
@@ -443,32 +441,6 @@ public class Tabla{
         return resultado;
     }
 
-    //Metodo para visualizar la tabla en consola
-    public void visualizar() {
-        visualizador.visualizar(this);
-    }
-
-    /**
-     * Visualiza la tabla con parámetros personalizados
-     */
-    public void visualizar(int maxFilas, int maxColumnas, int maxLargoCadena) {
-        visualizador.visualizar(this, maxFilas, maxColumnas, maxLargoCadena);
-    }
-
-    /**
-     * Visualiza la tabla con una configuración personalizada
-     */
-    public void visualizarConConfig(VConfig config) {
-        visualizador.visualizarConConfig(this, config);
-    }
-
-    /**
-     * Cambia el visualizador de la tabla
-     */
-    public void setVisualizador(VConsola visualizador) {
-        this.visualizador = visualizador;
-    }
-
     //FILTRADO
     public Tabla filtrar(Condicion condicion) {
         List<Columna<?>> nuevasColumnas = new ArrayList<>();
@@ -536,9 +508,6 @@ public class Tabla{
         // Crear nueva tabla con las copias
         Tabla tablaCopia = new Tabla(etiquetasColumnasCopiadas, columnasCopiadas);
         tablaCopia.setEtiquetasFilas(etiquetasFilasCopiadas);
-
-        // Copiar configuración del visualizador si es necesario
-        tablaCopia.setVisualizador(new VConsola());
 
         return tablaCopia;
     }
