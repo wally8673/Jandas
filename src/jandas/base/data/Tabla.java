@@ -4,25 +4,29 @@ import jandas.base.etiquetas.EtiquetaString;
 import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
+import jandas.operaciones.Ordenable;
+import jandas.operaciones.impl.OrdenadorTabla;
+import jandas.operaciones.ordenamiento.CriterioOrden;
+import jandas.operaciones.ordenamiento.TipoOrden;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tabla {
+public class Tabla implements Ordenable  {
 
     private List<Columna<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
     private List<Etiqueta> etiquetasColumnas;
 
+    // Constructor vacío
     public Tabla() {
         this.columnas = new ArrayList<>();
         this.etiquetasFilas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
     }
 
-    // Crea tabla en base a una lista de columnas y etiquetas
-
+    // Constructor tabla en base a una lista de columnas y etiquetas
     public Tabla(List<Etiqueta> etiquetasColumnas, List<Columna<?>> columnas) {
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
@@ -40,6 +44,7 @@ public class Tabla {
         procesarMatriz(datos);
     }
 
+    // Constrctor secuencia lineal
     /**
      * Constructor para crear tabla desde una secuencia lineal de strings
      * @param datos Lista de strings con los datos en secuencia lineal
@@ -360,6 +365,23 @@ public class Tabla {
         return new ArrayList<>();
     }
 
+    // operaciones
+
+    public Tabla ordenar(String nombreColumna) {
+        return OrdenadorTabla.ordenar(this, nombreColumna);
+    }
+
+    public Tabla ordenar(String nombreColumna, TipoOrden direccion) {
+        Columna<?> columna = getColumna(nombreColumna);
+        return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
+    }
+
+    public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
+        return OrdenadorTabla.ordenarPorCriterios(this, criterios);
+    }
+
+
+
 
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
         for (int i = 0; i < etiquetas.size(); i++) {
@@ -403,6 +425,13 @@ public class Tabla {
             }
         }
         throw new JandasException("No se encontró una columna con la etiqueta: " + nombreEtiqueta);
+    }
+
+    public Columna<?> getColumna(int index) {
+        if (index < 0 || index >= columnas.size()) {
+            throw new JandasException("Índice de columna fuera de rango: " + index);
+        }
+        return columnas.get(index);
     }
 
     public int cantColumnas() {
