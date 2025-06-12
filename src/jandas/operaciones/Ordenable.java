@@ -8,11 +8,14 @@ import java.util.List;
 
 public interface Ordenable {
 
-    // default
-    Tabla ordenar(String nombreColumna);
+
 
     // ordenamiento personalizado
     Tabla ordenar(String nombreColumna, Orden direccion);
+
+    // string varios criterios
+
+    Tabla ordenar(String... criterios);
 
     // varios criterios
     Tabla ordenarPorCriterios(List<CriterioOrden> criterios);

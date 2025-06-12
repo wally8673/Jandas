@@ -367,19 +367,28 @@ public class Tabla implements Ordenable  {
 
     // operaciones
 
-    public Tabla ordenar(String nombreColumna) {
-        return OrdenadorTabla.ordenar(this, nombreColumna);
-    }
 
     public Tabla ordenar(String nombreColumna, Orden direccion) {
         Columna<?> columna = getColumna(nombreColumna);
         return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
     }
 
+    public Tabla ordenar(String... criterios) {
+        List<CriterioOrden> lista = new ArrayList<>();
+        for (String criterio : criterios) {
+            String[] partes = criterio.trim().split("\\s+"); // Ej: "Ciudad DESC"
+            String nombre = partes[0];
+            Orden orden = (partes.length > 1 && partes[1].equalsIgnoreCase("DESC"))
+                    ? Orden.DESCENDENTE
+                    : Orden.ASCENDENTE;
+            lista.add(new CriterioOrden(new EtiquetaString(nombre), orden));
+        }
+        return this.ordenarPorCriterios(lista);
+    }
+
     public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
         return OrdenadorTabla.ordenarPorCriterios(this, criterios);
     }
-
 
 
 

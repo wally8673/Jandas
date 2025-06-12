@@ -54,6 +54,7 @@ public class OrdenadorTabla {
      * @param criterios Lista de criterios de ordenamiento
      * @return Nueva tabla ordenada
      */
+
     public static Tabla ordenarPorCriterios(Tabla tabla, List<CriterioOrden> criterios) {
         if (criterios == null || criterios.isEmpty()) {
             throw new JandasException("Debe proporcionar al menos un criterio de ordenamiento");
