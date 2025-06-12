@@ -20,8 +20,6 @@ public class VisualizacionDemo {
     
     public static void main(String[] args) {
 
-
-
         //1 Creo dataframe
         Tabla df = new Tabla();
         
@@ -76,20 +74,23 @@ public class VisualizacionDemo {
         System.out.println("Visualización con objeto de configuración personalizado:");
         consolaCustom.visualizarConConfig(df, config);
 
+        //Archivo csv
+
+        String data = "df/flights_september.csv";
 
         //Inicializo con lector general
         LeerArchivo lector = new LeerCsv();
-        Tabla df2 = lector.leer("df/flights_september.csv");
+        Tabla df2 = lector.leer(data);
         consola.visualizar(df2);
 
         // Inicializo con lectorcsv y Lee archivo csv default
         LectorCsv csv = new LeerCsv();
 
-        Tabla df3 = csv.leer("df/flights_september.csv");
+        Tabla df3 = csv.leer(data);
         consola.visualizar(df3);
 
         // leer csv con config custom
-        Tabla df4 = csv.leer("df/flights_september.csv", false, ",");
+        Tabla df4 = csv.leer(data, false, ",");
         consola.visualizar(df4);
 
 
