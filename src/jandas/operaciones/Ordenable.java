@@ -1,11 +1,9 @@
 package jandas.operaciones;
 
 import jandas.base.data.Tabla;
-import jandas.base.etiquetas.Etiqueta;
 import jandas.operaciones.ordenamiento.CriterioOrden;
-import jandas.operaciones.ordenamiento.TipoOrden;
+import jandas.operaciones.ordenamiento.Orden;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface Ordenable {
@@ -14,7 +12,7 @@ public interface Ordenable {
     Tabla ordenar(String nombreColumna);
 
     // ordenamiento personalizado
-    Tabla ordenar(String nombreColumna, TipoOrden direccion);
+    Tabla ordenar(String nombreColumna, Orden direccion);
 
     // varios criterios
     Tabla ordenarPorCriterios(List<CriterioOrden> criterios);

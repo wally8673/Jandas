@@ -7,7 +7,7 @@ import jandas.base.etiquetas.EtiquetaInt;
 import jandas.operaciones.Ordenable;
 import jandas.operaciones.ordenamiento.OrdenadorTabla;
 import jandas.operaciones.ordenamiento.CriterioOrden;
-import jandas.operaciones.ordenamiento.TipoOrden;
+import jandas.operaciones.ordenamiento.Orden;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -371,7 +371,7 @@ public class Tabla implements Ordenable  {
         return OrdenadorTabla.ordenar(this, nombreColumna);
     }
 
-    public Tabla ordenar(String nombreColumna, TipoOrden direccion) {
+    public Tabla ordenar(String nombreColumna, Orden direccion) {
         Columna<?> columna = getColumna(nombreColumna);
         return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
     }

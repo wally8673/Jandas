@@ -26,7 +26,7 @@ public class ComparadorMultiplesCriterios implements Comparator<Integer> {
             int resultado = compararCeldas(celda1, celda2);
 
             if (resultado != 0) {
-                return criterio.getTipoOrden() == TipoOrden.DESCENDENTE ? -resultado : resultado;
+                return criterio.getTipoOrden() == Orden.DESCENDENTE ? -resultado : resultado;
             }
         }
         return 0;

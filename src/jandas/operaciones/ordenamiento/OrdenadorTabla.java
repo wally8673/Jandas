@@ -21,7 +21,7 @@ public class OrdenadorTabla {
      * @param direccion Dirección del ordenamiento
      * @return Nueva tabla ordenada
      */
-    public static Tabla ordenar(Tabla tabla, Etiqueta etiqueta, TipoOrden direccion) {
+    public static Tabla ordenar(Tabla tabla, Etiqueta etiqueta, Orden direccion) {
         CriterioOrden criterio = new CriterioOrden(etiqueta, direccion);
         return ordenarPorCriterios(tabla, Arrays.asList(criterio));
     }
@@ -33,7 +33,7 @@ public class OrdenadorTabla {
      * @param direccion Dirección del ordenamiento
      * @return Nueva tabla ordenada
      */
-    public static Tabla ordenar(Tabla tabla, String nombreColumna, TipoOrden direccion) {
+    public static Tabla ordenar(Tabla tabla, String nombreColumna, Orden direccion) {
         Etiqueta etiqueta = new EtiquetaString(nombreColumna);
         return ordenar(tabla, etiqueta, direccion);
     }
@@ -45,7 +45,7 @@ public class OrdenadorTabla {
      * @return Nueva tabla ordenada
      */
     public static Tabla ordenar(Tabla tabla, String nombreColumna) {
-        return ordenar(tabla, nombreColumna, TipoOrden.ASCENDENTE);
+        return ordenar(tabla, nombreColumna, Orden.ASCENDENTE);
     }
 
     /**
@@ -87,7 +87,7 @@ public class OrdenadorTabla {
      * @param direcciones Direcciones de ordenamiento para cada columna
      * @return Nueva tabla ordenada
      */
-    public static Tabla ordenarPorColumnas(Tabla tabla, String[] nombresColumnas, TipoOrden[] direcciones) {
+    public static Tabla ordenarPorColumnas(Tabla tabla, String[] nombresColumnas, Orden[] direcciones) {
         if (nombresColumnas.length != direcciones.length) {
             throw new JandasException("El número de columnas debe coincidir con el número de direcciones");
         }
@@ -171,18 +171,18 @@ public class OrdenadorTabla {
      * Métodos auxiliares estáticos para crear criterios de ordenamiento fácilmente
      */
     public static CriterioOrden asc(String nombreColumna) {
-        return new CriterioOrden(new EtiquetaString(nombreColumna), TipoOrden.ASCENDENTE);
+        return new CriterioOrden(new EtiquetaString(nombreColumna), Orden.ASCENDENTE);
     }
 
     public static CriterioOrden desc(String nombreColumna) {
-        return new CriterioOrden(new EtiquetaString(nombreColumna), TipoOrden.DESCENDENTE);
+        return new CriterioOrden(new EtiquetaString(nombreColumna), Orden.DESCENDENTE);
     }
 
     public static CriterioOrden asc(Etiqueta etiqueta) {
-        return new CriterioOrden(etiqueta, TipoOrden.ASCENDENTE);
+        return new CriterioOrden(etiqueta, Orden.ASCENDENTE);
     }
 
     public static CriterioOrden desc(Etiqueta etiqueta) {
-        return new CriterioOrden(etiqueta, TipoOrden.DESCENDENTE);
+        return new CriterioOrden(etiqueta, Orden.DESCENDENTE);
     }
 }

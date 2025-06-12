@@ -1,6 +1,6 @@
 package jandas.operaciones.ordenamiento;
 
-public enum TipoOrden {
+public enum Orden {
     ASCENDENTE,
     DESCENDENTE
 }

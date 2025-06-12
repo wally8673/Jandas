@@ -1,9 +1,13 @@
 package tests;
 
 import jandas.base.data.Tabla;
-import jandas.operaciones.ordenamiento.TipoOrden;
+import jandas.operaciones.ordenamiento.CriterioOrden;
+import jandas.operaciones.ordenamiento.Orden;
 import jandas.visualizacion.VConsola;
 import jandas.visualizacion.Visualizable;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TestOrdenar {
     public static void main(String[] args) {
@@ -19,12 +23,20 @@ public class TestOrdenar {
         Tabla df = new Tabla(datos);
 
         // 2 Ordeno por una columna
-        Tabla df_o = df.ordenar("Salario", TipoOrden.DESCENDENTE);
+        Tabla df_o = df.ordenar("Salario", Orden.DESCENDENTE);
         Visualizable consola = new VConsola();
         consola.visualizar(df_o);
 
-        // Dentro de visualizar puedo pasarle el tipo de ordenamiento
-        consola.visualizar(df.ordenar("Edad", TipoOrden.ASCENDENTE));
+        // 3 Dentro de visualizar puedo pasarle el tipo de ordenamiento
+        consola.visualizar(df.ordenar("Edad", Orden.ASCENDENTE));
+
+        // 4 Ordeno por múltiples criterios
+
+        List<CriterioOrden> criterios = Arrays.asList(
+                new CriterioOrden("Edad", Orden.ASCENDENTE),
+                new CriterioOrden("Salario", Orden.DESCENDENTE));
+        Tabla df_multi = df.ordenarPorCriterios(criterios);
+        consola.visualizar(df_multi);
 
     }
 }

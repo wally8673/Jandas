@@ -5,19 +5,24 @@ import jandas.base.etiquetas.EtiquetaString;
 
 public class CriterioOrden {
     private Etiqueta etiqueta;
-    private TipoOrden direccion;
+    private Orden direccion;
 
-    public CriterioOrden(Etiqueta etiqueta, TipoOrden direccion) {
+    public CriterioOrden(Etiqueta etiqueta, Orden direccion) {
         this.etiqueta = etiqueta;
+        this.direccion = direccion;
+    }
+
+    public CriterioOrden(String nombreColumna, Orden direccion) {
+        this.etiqueta = new EtiquetaString(nombreColumna);
         this.direccion = direccion;
     }
 
     public CriterioOrden(Etiqueta etiqueta) {
         this.etiqueta = etiqueta;
-        this.direccion = TipoOrden.ASCENDENTE;
+        this.direccion = Orden.ASCENDENTE;
     }
 
     public Etiqueta getEtiqueta() { return etiqueta; }
 
-    public TipoOrden getTipoOrden() { return direccion;}
+    public Orden getTipoOrden() { return direccion;}
 }
