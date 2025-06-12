@@ -4,6 +4,8 @@ import jandas.base.etiquetas.EtiquetaString;
 import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
+import jandas.operaciones.Muestreable;
+import jandas.operaciones.muestreo.MuestreadorTabla;
 import jandas.operaciones.Ordenable;
 import jandas.operaciones.ordenamiento.OrdenadorTabla;
 import jandas.operaciones.ordenamiento.CriterioOrden;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tabla implements Ordenable  {
+public class Tabla implements Ordenable, Muestreable {
 
     private List<Columna<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
@@ -367,12 +369,14 @@ public class Tabla implements Ordenable  {
 
     // operaciones
 
+    // // Ordenar
 
+    @Override
     public Tabla ordenar(String nombreColumna, Orden direccion) {
         Columna<?> columna = getColumna(nombreColumna);
         return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
     }
-
+    @Override
     public Tabla ordenar(String... criterios) {
         List<CriterioOrden> lista = new ArrayList<>();
         for (String criterio : criterios) {
@@ -385,10 +389,27 @@ public class Tabla implements Ordenable  {
         }
         return this.ordenarPorCriterios(lista);
     }
-
+    @Override
     public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
         return OrdenadorTabla.ordenarPorCriterios(this, criterios);
     }
+    // // Muestrear
+
+    @Override
+    public Tabla muestrear(int porcentaje) {
+        return MuestreadorTabla.muestrear(this, porcentaje);
+    }
+
+    @Override
+    public Tabla muestrear(int cantidadFilas, boolean exacto) {
+        return MuestreadorTabla.muestrear(this, cantidadFilas, exacto);
+    }
+
+    @Override
+    public Tabla muestrearEstratificado(String nombreColumna, int porcentaje) {
+        return MuestreadorTabla.muestrearEstratificado(this, nombreColumna, porcentaje);
+    }
+
 
 
 
