@@ -3,7 +3,11 @@ package tests;
 import jandas.base.data.Celda;
 import jandas.base.data.Columna;
 import jandas.base.data.Tabla;
+import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
+import jandas.io.LeerArchivo;
+import jandas.visualizacion.VConsola;
+import jandas.visualizacion.Visualizable;
 
 import java.util.Arrays;
 
@@ -86,7 +90,16 @@ public class leerTabla {
                 Arrays.asList(c17,c18,c19)
         );
 
-        //df.visualizar(5,3);
+        // Visualizo por consola
 
+        Visualizable consola = new VConsola();
+        consola.visualizar(df);
+
+        // Visualizo por consola acotada
+
+        consola.visualizar(df, 3, 2, 5);
+
+        // tipo de dato de la columna letras
+        System.out.println(df.getColumna("Letras").getTipoDato());
     }
 }

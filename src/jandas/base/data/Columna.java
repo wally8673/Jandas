@@ -68,9 +68,7 @@ public class Columna<T> {
         celdas.set(indice, celda);
     }
 
-    public Class<T> getTipoDato() {
-        return tipo;
-    }
+    public Class<T> getTipoDato() {return tipo;}
 
     public List<Celda<T>> getCeldas() {
         return new ArrayList<>(celdas);

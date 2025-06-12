@@ -84,7 +84,6 @@ public class Tabla {
         return matriz;
     }
 
-
     private void validarDatos(Object[][] datos) {
         if (datos == null || datos.length < 2) {
             throw new JandasException("Se necesita al menos una fila de encabezado y una de datos.");
@@ -110,7 +109,7 @@ public class Tabla {
             // Recopilar valores de la columna (excluyendo encabezado)
             List<Object> valoresColumna = new ArrayList<>();
             for (int i = 1; i < cantidadFilas; i++) {
-                valoresColumna.add(datos[i][j]);
+                valoresColumna.add(parsearValor(datos[i][j].toString()));
             }
 
             // Inferir el tipo de la columna y crearla directamente
@@ -120,6 +119,23 @@ public class Tabla {
 
     }
 
+    private Object parsearValor(String s) {
+        if (s == null || s.trim().isEmpty()) return null;
+
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e1) {
+            try {
+                return Double.parseDouble(s);
+            } catch (NumberFormatException e2) {
+                if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
+                    return Boolean.parseBoolean(s);
+                }
+            }
+        }
+
+        return s; // default: sigue siendo string
+    }
 
     // Método auxiliar para crear etiquetas desde objetos
     private Etiqueta crearEtiquetaDesdeObjeto(Object obj) {
@@ -378,6 +394,15 @@ public class Tabla {
     public Columna<?> getColumna(Etiqueta etiqueta) {
         int index = getIndex(etiqueta, etiquetasColumnas);
         return columnas.get(index);
+    }
+
+    public Columna<?> getColumna(String nombreEtiqueta) {
+        for (Columna<?> columna : columnas) {
+            if (columna.getEtiqueta().getValor().equals(nombreEtiqueta)) {
+                return columna;
+            }
+        }
+        throw new JandasException("No se encontró una columna con la etiqueta: " + nombreEtiqueta);
     }
 
     public int cantColumnas() {

@@ -104,6 +104,8 @@ public class VisualizacionDemo {
         Tabla matriz = new Tabla(datos);
         consola.visualizar(matriz);
 
+        System.out.println("Tipo de dato de la columna altura:" + matriz.getColumna("altura").getTipoDato());
+
         // Crear tabla desde secuencia lineal de strings
         List<String> secuencia = Arrays.asList(
                 "id", "nombre", "altura",
@@ -111,6 +113,8 @@ public class VisualizacionDemo {
                 "4", "Maria", "1.5");
         Tabla secuenciaTabla = new Tabla(secuencia, 3);
         consola.visualizar(secuenciaTabla);
+
+        System.out.println("Tipo de dato de la columna altura:" + secuenciaTabla.getColumna("altura").getTipoDato());
 
 
 
