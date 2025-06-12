@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeerCsv implements LeerArchivo {
+public class LeerCsv implements LectorCsv {
 
     private CsvConfig config;
 
@@ -102,9 +102,23 @@ public class LeerCsv implements LeerArchivo {
         }
     }
 
-    public Tabla leer(String rutaArchvio, CsvConfig config) {
+    @Override
+    public Tabla leer(String rutaArchivo, CsvConfig config) {
         this.config = config;
-        return leer(rutaArchvio);
+        return leer(rutaArchivo);
+    }
+
+    @Override
+    public Tabla leer(String rutaArchivo, boolean encabezado) {
+        config.setTieneEncabezado(encabezado);
+        return leer(rutaArchivo);
+    }
+
+    @Override
+    public Tabla leer(String rutaArchivo, boolean encabezado, String separador) {
+        config.setSeparador(separador);
+        config.setTieneEncabezado(encabezado);
+        return leer(rutaArchivo);
     }
 
     private Object convertirValor(String valor) {

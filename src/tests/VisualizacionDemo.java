@@ -4,7 +4,9 @@ import jandas.base.data.Celda;
 import jandas.base.data.Tabla;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
+import jandas.io.LeerArchivo;
 import jandas.io.csv.CsvConfig;
+import jandas.io.csv.LectorCsv;
 import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
@@ -52,15 +54,15 @@ public class VisualizacionDemo {
                 Arrays.asList(c1,c2,c3,c4));
         
         // Creo visualizador de consola
-        VConsola visualizador = new VConsola();
+        VConsola consola = new VConsola();
         
         // al no pasar parametros, por sobrecargar carga unos por defecto
         System.out.println("Visualización con configuración por defecto:");
-        visualizador.visualizar(df);
+        consola.visualizar(df);
         
         // Ahora visualizo con parametros personalizados
         System.out.println("Visualización con configuración personalizada:");
-        visualizador.visualizar(df, 3, 2, 5);
+        consola.visualizar(df, 3, 2, 5);
         
         // Visualizacion con objeto de configuracion personalizado
         VConfig config = new VConfig();
@@ -70,24 +72,26 @@ public class VisualizacionDemo {
         config.setNa("N/A");
         config.setMostrarEtiquetaFila(true);
         
-        VConsola visualizadorPersonalizado = new VConsola(config);
+        VConsola consolaCustom = new VConsola(config);
         System.out.println("Visualización con objeto de configuración personalizado:");
-        visualizadorPersonalizado.visualizarConConfig(df, config);
+        consolaCustom.visualizarConConfig(df, config);
 
 
-        // iniciañoizo lector CSV
-        LeerCsv lectorCsv = new LeerCsv();
+        //Inicializo lector general
+        LeerArchivo lector = new LeerCsv();
+        Tabla df3 = lector.leer("df/flights_september.csv");
+        consola.visualizar(df3);
 
-        // Lee archivo csv default
-        Tabla peliculas = lectorCsv.leer("df/flights_september.csv");
-        visualizador.visualizar(peliculas);
+        // Inicializo lectorcsv y Lee archivo csv default
+        LectorCsv csv = new LeerCsv();
+
+        Tabla peliculas = csv.leer("df/flights_september.csv");
+        consola.visualizar(peliculas);
 
         // leer csv con config custom
-        Tabla df2 = lectorCsv.leer("df/flights_september.csv", new CsvConfig(",", false));
-        visualizador.visualizar(df2);
+        Tabla df2 = csv.leer("df/flights_september.csv", false, ",");
+        consola.visualizar(df2);
 
-        Tabla df3 = (new LeerCsv()).leer("df/flights_september.csv", new CsvConfig(",", true));
-        visualizador.visualizar(df3);
 
         // Por arreglo nativo de java
 
@@ -96,7 +100,7 @@ public class VisualizacionDemo {
             {7, "fernando", 9.4}};
 
         Tabla matriz = new Tabla(datos);
-        visualizador.visualizar(matriz);
+        consola.visualizar(matriz);
 
 
 
