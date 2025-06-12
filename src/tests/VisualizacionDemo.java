@@ -12,6 +12,7 @@ import jandas.visualizacion.VConfig;
 import jandas.visualizacion.VConsola;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Demo class showing how to use the visualization package.
@@ -102,6 +103,16 @@ public class VisualizacionDemo {
 
         Tabla matriz = new Tabla(datos);
         consola.visualizar(matriz);
+
+        // Crear tabla desde secuencia lineal de strings
+        List<String> secuencia = Arrays.asList(
+                "id", "nombre", "altura",
+                "1", "Julian", "1.78",
+                "4", "Maria", "1.5");
+        Tabla secuenciaTabla = new Tabla(secuencia, 3);
+        consola.visualizar(secuenciaTabla);
+
+
 
 
 

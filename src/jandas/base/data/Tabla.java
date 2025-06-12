@@ -31,42 +31,95 @@ public class Tabla {
     }
 
     // Constructor para matriz con encabezado
-    public Tabla(Object[][] datosConEncabezado) {
+    public Tabla(Object[][] datos) {
         this.columnas = new ArrayList<>();
         this.etiquetasColumnas = new ArrayList<>();
         this.etiquetasFilas = generarEtiquetaFilas();
 
-        if (datosConEncabezado == null || datosConEncabezado.length < 2) {
+        validarDatos(datos);
+        procesarMatriz(datos);
+    }
+
+    /**
+     * Constructor para crear tabla desde una secuencia lineal de strings
+     * @param datos Lista de strings con los datos en secuencia lineal
+     * @param numColumnas Número de columnas para organizar los datos
+     */
+    public Tabla(List<String> datos, int numColumnas) {
+        this.columnas = new ArrayList<>();
+        this.etiquetasColumnas = new ArrayList<>();
+        this.etiquetasFilas = generarEtiquetaFilas();
+
+        validarDatosLineales(datos, numColumnas);
+        Object[][] matriz = construirMatriz(datos, numColumnas);
+        procesarMatriz(matriz);
+    }
+
+    private void validarDatosLineales(List<String> datos, int numColumnas) {
+        if (datos == null || datos.isEmpty()) {
+            throw new JandasException("La lista de datos no puede ser null o vacía");
+        }
+
+        if (numColumnas <= 0) {
+            throw new JandasException("El número de columnas debe ser mayor a 0");
+        }
+
+        if (datos.size() % numColumnas != 0) {
+            throw new JandasException(String.format(
+                    "La cantidad de datos (%d) no es divisible por el número de columnas (%d)",
+                    datos.size(), numColumnas));
+        }
+    }
+
+    private Object[][] construirMatriz(List<String> datos, int numColumnas) {
+        int numFilas = datos.size() / numColumnas;
+        Object[][] matriz = new Object[numFilas][numColumnas];
+
+        for (int i = 0; i < datos.size(); i++) {
+            int fila = i / numColumnas;
+            int columna = i % numColumnas;
+            matriz[fila][columna] = datos.get(i);
+        }
+
+        return matriz;
+    }
+
+
+    private void validarDatos(Object[][] datos) {
+        if (datos == null || datos.length < 2) {
             throw new JandasException("Se necesita al menos una fila de encabezado y una de datos.");
         }
 
-        int cantidadFilas = datosConEncabezado.length;
-        int cantidadColumnas = datosConEncabezado[0].length;
-
-        // Validar que todas las filas tengan la misma cantidad de columnas
-        for (int i = 0; i < cantidadFilas; i++) {
-            if (datosConEncabezado[i].length != cantidadColumnas) {
+        int columnasEsperadas = datos[0].length;
+        for (int i = 0; i < datos.length; i++) {
+            if (datos[i].length != columnasEsperadas) {
                 throw new JandasException("Todas las filas deben tener la misma cantidad de columnas.");
             }
         }
+    }
 
+    private void procesarMatriz(Object[][] datos) {
+        int cantidadFilas = datos.length;
+        int cantidadColumnas = datos[0].length;
         // Procesar datos por columna
         for (int j = 0; j < cantidadColumnas; j++) {
             // Crear etiqueta del encabezado
-            Object encabezado = datosConEncabezado[0][j];
+            Object encabezado = datos[0][j];
             Etiqueta etiqueta = crearEtiquetaDesdeObjeto(encabezado);
 
             // Recopilar valores de la columna (excluyendo encabezado)
             List<Object> valoresColumna = new ArrayList<>();
             for (int i = 1; i < cantidadFilas; i++) {
-                valoresColumna.add(datosConEncabezado[i][j]);
+                valoresColumna.add(datos[i][j]);
             }
 
             // Inferir el tipo de la columna y crearla directamente
             Class<?> tipoColumna = inferirTipoColumna(valoresColumna);
             crearYAgregarColumna(etiqueta, tipoColumna, valoresColumna);
         }
+
     }
+
 
     // Método auxiliar para crear etiquetas desde objetos
     private Etiqueta crearEtiquetaDesdeObjeto(Object obj) {
