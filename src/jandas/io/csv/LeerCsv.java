@@ -24,6 +24,8 @@ public class LeerCsv implements LectorCsv {
     @Override
     public Tabla leer(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            //Inicializo timer
+            long startTime = System.nanoTime();
             // Lista para almacenar todas las líneas del archivo
             List<String[]> lineasDatos = new ArrayList<>();
             String linea;
@@ -92,9 +94,19 @@ public class LeerCsv implements LectorCsv {
                 }
             }
 
-            // CORRECCIÓN: Crear la tabla correctamente
+            // Crear la tabla
             Tabla tabla = new Tabla(etiquetasColumnas, columnas);
             tabla.setEtiquetasFilas(etiquetasFilas);
+
+            // Capturar el tiempo después de la ejecución
+            long endTime = System.nanoTime();
+
+            // Calcular la diferencia en segundos
+            double duration = (endTime - startTime) / 1_000_000_000.0;
+
+            // Imprimir el tiempo en el formato deseado
+            System.out.printf("Tiempo de ejecución: %.3f segundos %n", duration);
+
             return tabla;
 
         } catch (IOException e) {
