@@ -5,6 +5,7 @@ import jandas.excepciones.JandasException;
 import jandas.base.etiquetas.Etiqueta;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.operaciones.Muestreable;
+import jandas.operaciones.concatenacion.ConcatenarTabla;
 import jandas.operaciones.muestreo.MuestreadorTabla;
 import jandas.operaciones.Ordenable;
 import jandas.operaciones.ordenamiento.OrdenadorTabla;
@@ -32,7 +33,7 @@ public class Tabla implements
         this.etiquetasColumnas = new ArrayList<>();
     }
 
-    // Constructor tabla en base a una lista de columnas y etiquetas
+    // Constructor de tablas en base a una lista de columnas y etiquetas
     public Tabla(List<Etiqueta> etiquetasColumnas, List<Columna<?>> columnas) {
         this.columnas = new ArrayList<>(columnas);
         this.etiquetasColumnas = new ArrayList<>(etiquetasColumnas);
@@ -65,6 +66,8 @@ public class Tabla implements
         Object[][] matriz = construirMatriz(datos, numColumnas);
         procesarMatriz(matriz);
     }
+
+    // Procesamiento de datos
 
     private void validarDatosLineales(List<String> datos, int numColumnas) {
         if (datos == null || datos.isEmpty()) {
@@ -158,9 +161,9 @@ public class Tabla implements
     }
 
     // Método auxiliar para inferir el tipo de una columna
-    private Class<?> inferirTipoColumna(List<Object> valores) {
+    public Class<?> inferirTipoColumna(List<Object> valores) {
         if (valores.isEmpty()) {
-            return Object.class;
+            return String.class;
         }
 
         // Contar tipos no nulos
@@ -186,7 +189,7 @@ public class Tabla implements
         }
 
         if (totalNoNulos == 0) {
-            return Object.class;
+            return String.class;
         }
 
         // Determinar tipo predominante
@@ -207,7 +210,7 @@ public class Tabla implements
 
     // Método auxiliar para crear columna con tipo específico (SIN agregar a listas)
     @SuppressWarnings("unchecked")
-    private void crearYAgregarColumna(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
+    public void crearYAgregarColumna(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
         if (tipo == Integer.class) {
             List<Integer> valoresInt = new ArrayList<>();
             for (Object valor : valores) {
@@ -280,7 +283,7 @@ public class Tabla implements
         }
     }
 
-    // Métodos para agregar columnas
+    // Métodos para agregar columnas o filas
 
     public <T> void agregarColumna(Etiqueta etiquetaColumna, Class<T> tipo, List<T> valores) {
         if (!columnas.isEmpty() && valores.size() != cantFilas()) {
@@ -371,160 +374,9 @@ public class Tabla implements
         return new ArrayList<>();
     }
 
-    // operaciones
+    // Manipulacion de columnas y filas
 
-    // // Ordenar
-
-    @Override
-    public Tabla ordenar(String nombreColumna, Orden direccion) {
-        Columna<?> columna = getColumna(nombreColumna);
-        return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
-    }
-    @Override
-    public Tabla ordenar(String... criterios) {
-        List<CriterioOrden> lista = new ArrayList<>();
-        for (String criterio : criterios) {
-            String[] partes = criterio.trim().split("\\s+"); // Ej: "Ciudad DESC"
-            String nombre = partes[0];
-            Orden orden = (partes.length > 1 && partes[1].equalsIgnoreCase("DESC"))
-                    ? Orden.DESCENDENTE
-                    : Orden.ASCENDENTE;
-            lista.add(new CriterioOrden(new EtiquetaString(nombre), orden));
-        }
-        return this.ordenarPorCriterios(lista);
-    }
-    @Override
-    public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
-        return OrdenadorTabla.ordenarPorCriterios(this, criterios);
-    }
-    // // Muestrear
-
-    @Override
-    public Tabla muestrear(int porcentaje) {
-        return MuestreadorTabla.muestrear(this, porcentaje);
-    }
-
-    @Override
-    public Tabla muestrear(int cantidadFilas, boolean exacto) {
-        return MuestreadorTabla.muestrear(this, cantidadFilas, exacto);
-    }
-
-    @Override
-    public Tabla muestrearEstratificado(String nombreColumna, int porcentaje) {
-        return MuestreadorTabla.muestrearEstratificado(this, nombreColumna, porcentaje);
-    }
-
-
-
-
-    private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
-        for (int i = 0; i < etiquetas.size(); i++) {
-            if (etiquetas.get(i).getValor().equals(etiqueta.getValor())) {
-                return i;
-            }
-        }
-        throw new JandasException("Etiqueta no encontrada: " + etiqueta.getValor());
-    }
-
-    public Fila getFila(Etiqueta etiquetaFila) {
-        int indexFila = getIndex(etiquetaFila, etiquetasFilas);
-        List<Celda<?>> celdasFilas = new ArrayList<>();
-        for (Columna<?> col : columnas) {
-            celdasFilas.add(col.getCeldas().get(indexFila));
-        }
-        return new Fila(etiquetaFila, celdasFilas, etiquetasColumnas);
-    }
-
-    public void setEtiquetasFilas(List<Etiqueta> nuevasEtiquetas) {
-        if (nuevasEtiquetas.size() != cantFilas()) {
-            throw new JandasException(String.format(
-                "Debe proporcionar exactamente %d etiquetas", cantFilas()));
-        }
-        this.etiquetasFilas = new ArrayList<>(nuevasEtiquetas);
-    }
-
-    public List<Columna<?>> getColumnas() {
-        return new ArrayList<>(columnas); // copia defensiva
-    }
-
-    public Columna<?> getColumna(Etiqueta etiqueta) {
-        int index = getIndex(etiqueta, etiquetasColumnas);
-        return columnas.get(index);
-    }
-
-    public Columna<?> getColumna(String nombreEtiqueta) {
-        for (Columna<?> columna : columnas) {
-            if (columna.getEtiqueta().getValor().equals(nombreEtiqueta)) {
-                return columna;
-            }
-        }
-        throw new JandasException("No se encontró una columna con la etiqueta: " + nombreEtiqueta);
-    }
-
-    public Columna<?> getColumna(int index) {
-        if (index < 0 || index >= columnas.size()) {
-            throw new JandasException("Índice de columna fuera de rango: " + index);
-        }
-        return columnas.get(index);
-    }
-
-    public int cantColumnas() {
-        return columnas.size();
-    }
-
-    public int cantFilas() {
-        return columnas.isEmpty() ? 0 : columnas.get(0).size();
-    }
-
-    public List<Etiqueta> getEtiquetasColumnas() {
-        return new ArrayList<>(etiquetasColumnas);
-    }
-
-    public List<Etiqueta> getEtiquetasFilas() {
-        return new ArrayList<>(etiquetasFilas);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Tabla other = (Tabla) obj;
-        return Objects.equals(columnas, other.columnas) &&
-               Objects.equals(etiquetasFilas, other.etiquetasFilas) &&
-               Objects.equals(etiquetasColumnas, other.etiquetasColumnas);
-    }
-
-    @Override
-    public int hashCode() { return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);}
-
-    public void setValoresCelda(int valorfila, String valorcolumna, Object valor) {
-        EtiquetaInt fila = new EtiquetaInt(valorfila);
-        EtiquetaString columna = new EtiquetaString(valorcolumna);
-
-        int idxfilas = etiquetasFilas.indexOf(fila);
-        if (idxfilas == -1) {
-            throw new JandasException("Etiqueta de fila no encontrada: " + fila.getValor());
-        }
-
-        for (Columna<?> col : columnas) {
-            if (col.getEtiqueta().getValor().equals(columna.getValor())) {
-                if (!col.getTipoDato().isInstance(valor)) {
-                    throw new JandasException(String.format(
-                            "Tipo incompatible. Se esperaba %s pero se recibió %s.",
-                            col.getTipoDato().getSimpleName(),
-                            valor == null ? "null" : valor.getClass().getSimpleName()
-                    ));
-                }
-                Celda celda = col.getCeldas().get(idxfilas);
-                celda.setValor(valor);  // Actualiza directamente la celda
-                return;
-            }
-        }
-        throw new JandasException("Etiqueta de columna no encontrada: " + columna.getValor());
-    }
-
-    public <T> void insertarColumnaDesdeColumna(String colunueva, String coluorigen) {
+    public <T> void duplicarColumna(String colunueva, String coluorigen) {
         EtiquetaString etiquetaColumnaOrigen = new EtiquetaString(coluorigen);
         EtiquetaString nuevaEtiqueta = new EtiquetaString(colunueva);
         Columna<?> columnaOrigen = getColumna(etiquetaColumnaOrigen);
@@ -644,76 +496,7 @@ public class Tabla implements
             }
         }
     }
-    public Tabla concatenacion(Tabla otra) {
-        // Verificar que ambas tablas tengan la misma cantidad de columnas
-        if (cantColumnas() != otra.cantColumnas()) {
-            throw new JandasException("No se pueden concatenar: las tablas tienen diferente cantidad de columnas");
-        }
 
-        // Verificar que las tablas no estén vacías
-        if (cantColumnas() == 0) {
-            throw new JandasException("No se pueden concatenar tablas vacías");
-        }
-
-        // Verificar que las columnas coincidan en orden, tipo y etiquetas
-        for (int i = 0; i < cantColumnas(); i++) {
-            Etiqueta etiquetaEsta = etiquetasColumnas.get(i);
-            Etiqueta etiquetaOtra = otra.etiquetasColumnas.get(i);
-            Class<?> tipoEsta = columnas.get(i).getTipoDato();
-            Class<?> tipoOtra = otra.columnas.get(i).getTipoDato();
-
-            // Verificar que las etiquetas sean iguales
-            if (!etiquetaEsta.getValor().equals(etiquetaOtra.getValor())) {
-                throw new JandasException(String.format(
-                        "Las etiquetas de columna no coinciden en la posición %d: '%s' vs '%s'",
-                        i, etiquetaEsta.getValor(), etiquetaOtra.getValor()));
-            }
-
-            // Verificar que los tipos sean iguales
-            if (!tipoEsta.equals(tipoOtra)) {
-                throw new JandasException(String.format(
-                        "Los tipos de datos no coinciden en la columna '%s': %s vs %s",
-                        etiquetaEsta.getValor(), tipoEsta.getSimpleName(), tipoOtra.getSimpleName()));
-            }
-        }
-
-        // Crear nueva tabla resultado
-        Tabla resultado = new Tabla();
-
-        // Copiar todas las columnas de la primera tabla
-        for (int i = 0; i < cantColumnas(); i++) {
-            Columna<?> columnaOriginal = columnas.get(i);
-            Etiqueta etiquetaColumna = etiquetasColumnas.get(i);
-
-            // Crear lista con todas las celdas de esta columna de ambas tablas
-            List<Object> valoresCombinados = new ArrayList<>();
-
-            // Agregar valores de la primera tabla
-            for (Celda<?> celda : columnaOriginal.getCeldas()) {
-                valoresCombinados.add(celda.getValor());
-            }
-
-            // Agregar valores de la segunda tabla
-            Columna<?> columnaOtra = otra.columnas.get(i);
-            for (Celda<?> celda : columnaOtra.getCeldas()) {
-                valoresCombinados.add(celda.getValor());
-            }
-
-
-            resultado.agregarColumnaConCast(etiquetaColumna, columnaOriginal.getTipoDato(), valoresCombinados);
-        }
-
-        return resultado;
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> void agregarColumnaConCast(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
-        List<T> valoresTipoSeguro = new ArrayList<>();
-        for (Object valor : valores) {
-            valoresTipoSeguro.add((T) valor);
-        }
-        agregarColumna(etiqueta, (Class<T>) tipo, valoresTipoSeguro);
-    }
     public Object getCeldaColYFila(String nombreColumna, int indiceFila) {
         EtiquetaString etiquetaColumna = new EtiquetaString(nombreColumna);
         EtiquetaInt etiquetaFila = new EtiquetaInt(indiceFila);
@@ -752,5 +535,165 @@ public class Tabla implements
 
         return celda.getValor();
     }
+
+    public void setValoresCelda(int valorfila, String valorcolumna, Object valor) {
+        EtiquetaInt fila = new EtiquetaInt(valorfila);
+        EtiquetaString columna = new EtiquetaString(valorcolumna);
+
+        int idxfilas = etiquetasFilas.indexOf(fila);
+        if (idxfilas == -1) {
+            throw new JandasException("Etiqueta de fila no encontrada: " + fila.getValor());
+        }
+
+        for (Columna<?> col : columnas) {
+            if (col.getEtiqueta().getValor().equals(columna.getValor())) {
+                if (!col.getTipoDato().isInstance(valor)) {
+                    throw new JandasException(String.format(
+                            "Tipo incompatible. Se esperaba %s pero se recibió %s.",
+                            col.getTipoDato().getSimpleName(),
+                            valor == null ? "null" : valor.getClass().getSimpleName()
+                    ));
+                }
+                Celda celda = col.getCeldas().get(idxfilas);
+                celda.setValor(valor);  // Actualiza directamente la celda
+                return;
+            }
+        }
+        throw new JandasException("Etiqueta de columna no encontrada: " + columna.getValor());
+    }
+
+    // operaciones
+
+    // // Ordenar
+
+    @Override
+    public Tabla ordenar(String nombreColumna, Orden direccion) {
+        Columna<?> columna = getColumna(nombreColumna);
+        return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
+    }
+    @Override
+    public Tabla ordenar(String... criterios) {
+        List<CriterioOrden> lista = new ArrayList<>();
+        for (String criterio : criterios) {
+            String[] partes = criterio.trim().split("\\s+"); // Ej: "Ciudad DESC"
+            String nombre = partes[0];
+            Orden orden = (partes.length > 1 && partes[1].equalsIgnoreCase("DESC"))
+                    ? Orden.DESCENDENTE
+                    : Orden.ASCENDENTE;
+            lista.add(new CriterioOrden(new EtiquetaString(nombre), orden));
+        }
+        return this.ordenarPorCriterios(lista);
+    }
+    @Override
+    public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
+        return OrdenadorTabla.ordenarPorCriterios(this, criterios);
+    }
+    // // Muestrear
+
+    @Override
+    public Tabla muestrear(int porcentaje) {
+        return MuestreadorTabla.muestrear(this, porcentaje);
+    }
+
+    @Override
+    public Tabla muestrear(int cantidadFilas, boolean exacto) {
+        return MuestreadorTabla.muestrear(this, cantidadFilas, exacto);
+    }
+
+    @Override
+    public Tabla muestrearEstratificado(String nombreColumna, int porcentaje) {
+        return MuestreadorTabla.muestrearEstratificado(this, nombreColumna, porcentaje);
+    }
+    // // Concatenacion
+
+    @Override
+    public Tabla concatenacion(Tabla otra) {
+        return ConcatenarTabla.concatenacion(this, otra);
+    }
+
+
+
+
+    private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
+        for (int i = 0; i < etiquetas.size(); i++) {
+            if (etiquetas.get(i).getValor().equals(etiqueta.getValor())) {
+                return i;
+            }
+        }
+        throw new JandasException("Etiqueta no encontrada: " + etiqueta.getValor());
+    }
+
+    public Fila getFila(Etiqueta etiquetaFila) {
+        int indexFila = getIndex(etiquetaFila, etiquetasFilas);
+        List<Celda<?>> celdasFilas = new ArrayList<>();
+        for (Columna<?> col : columnas) {
+            celdasFilas.add(col.getCeldas().get(indexFila));
+        }
+        return new Fila(etiquetaFila, celdasFilas, etiquetasColumnas);
+    }
+
+    public void setEtiquetasFilas(List<Etiqueta> nuevasEtiquetas) {
+        if (nuevasEtiquetas.size() != cantFilas()) {
+            throw new JandasException(String.format(
+                "Debe proporcionar exactamente %d etiquetas", cantFilas()));
+        }
+        this.etiquetasFilas = new ArrayList<>(nuevasEtiquetas);
+    }
+
+    public List<Columna<?>> getColumnas() {
+        return new ArrayList<>(columnas); // copia defensiva
+    }
+
+    public Columna<?> getColumna(Etiqueta etiqueta) {
+        int index = getIndex(etiqueta, etiquetasColumnas);
+        return columnas.get(index);
+    }
+
+    public Columna<?> getColumna(String nombreEtiqueta) {
+        for (Columna<?> columna : columnas) {
+            if (columna.getEtiqueta().getValor().equals(nombreEtiqueta)) {
+                return columna;
+            }
+        }
+        throw new JandasException("No se encontró una columna con la etiqueta: " + nombreEtiqueta);
+    }
+
+    public Columna<?> getColumna(int index) {
+        if (index < 0 || index >= columnas.size()) {
+            throw new JandasException("Índice de columna fuera de rango: " + index);
+        }
+        return columnas.get(index);
+    }
+
+    public int cantColumnas() {
+        return columnas.size();
+    }
+
+    public int cantFilas() {
+        return columnas.isEmpty() ? 0 : columnas.get(0).size();
+    }
+
+    public List<Etiqueta> getEtiquetasColumnas() {
+        return new ArrayList<>(etiquetasColumnas);
+    }
+
+    public List<Etiqueta> getEtiquetasFilas() {
+        return new ArrayList<>(etiquetasFilas);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Tabla other = (Tabla) obj;
+        return Objects.equals(columnas, other.columnas) &&
+               Objects.equals(etiquetasFilas, other.etiquetasFilas) &&
+               Objects.equals(etiquetasColumnas, other.etiquetasColumnas);
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);}
+
 
 }
