@@ -10,12 +10,16 @@ import jandas.operaciones.Ordenable;
 import jandas.operaciones.ordenamiento.OrdenadorTabla;
 import jandas.operaciones.ordenamiento.CriterioOrden;
 import jandas.operaciones.ordenamiento.Orden;
+import jandas.operaciones.Concatenable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tabla implements Ordenable, Muestreable {
+public class Tabla implements
+        Ordenable,
+        Muestreable,
+        Concatenable {
 
     private List<Columna<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
@@ -493,5 +497,260 @@ public class Tabla implements Ordenable, Muestreable {
 
     @Override
     public int hashCode() { return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);}
+
+    public void setValoresCelda(int valorfila, String valorcolumna, Object valor) {
+        EtiquetaInt fila = new EtiquetaInt(valorfila);
+        EtiquetaString columna = new EtiquetaString(valorcolumna);
+
+        int idxfilas = etiquetasFilas.indexOf(fila);
+        if (idxfilas == -1) {
+            throw new JandasException("Etiqueta de fila no encontrada: " + fila.getValor());
+        }
+
+        for (Columna<?> col : columnas) {
+            if (col.getEtiqueta().getValor().equals(columna.getValor())) {
+                if (!col.getTipoDato().isInstance(valor)) {
+                    throw new JandasException(String.format(
+                            "Tipo incompatible. Se esperaba %s pero se recibió %s.",
+                            col.getTipoDato().getSimpleName(),
+                            valor == null ? "null" : valor.getClass().getSimpleName()
+                    ));
+                }
+                Celda celda = col.getCeldas().get(idxfilas);
+                celda.setValor(valor);  // Actualiza directamente la celda
+                return;
+            }
+        }
+        throw new JandasException("Etiqueta de columna no encontrada: " + columna.getValor());
+    }
+
+    public <T> void insertarColumnaDesdeColumna(String colunueva, String coluorigen) {
+        EtiquetaString etiquetaColumnaOrigen = new EtiquetaString(coluorigen);
+        EtiquetaString nuevaEtiqueta = new EtiquetaString(colunueva);
+        Columna<?> columnaOrigen = getColumna(etiquetaColumnaOrigen);
+
+        // Crear nueva columna con el mismo tipo que la columna origen
+        Class<T> tipoColumna = (Class<T>) columnaOrigen.getTipoDato();
+        Columna<T> nuevaColumna = new Columna<>(nuevaEtiqueta, tipoColumna);
+
+        // Copiar todas las celdas de la columna origen
+        for (Celda<?> celdaOrigen : columnaOrigen.getCeldas()) {
+            T valor = (T) celdaOrigen.getValor();
+            nuevaColumna.agregarCelda(new Celda<>(valor));
+        }
+
+        // Agregar la nueva columna a la tabla
+        columnas.add(nuevaColumna);
+        etiquetasColumnas.add(nuevaEtiqueta);
+    }
+
+    public <T> void insertarColumnaDesdeSecuencia(String valorColumna, Class<T> tipo, List<T> secuencia) {
+        EtiquetaString etiquetaColumna = new EtiquetaString(valorColumna);
+        // Validar que la secuencia tenga la cantidad correcta de elementos
+        if (!columnas.isEmpty() && secuencia.size() != cantFilas()) {
+            throw new JandasException(String.format(
+                    "Dimensiones no coinciden. Se esperaban %d elementos, pero se recibieron %d",
+                    cantFilas(), secuencia.size()));
+        }
+
+        // Validar que el tipo sea permitido
+        if (!tipo.equals(String.class) && !tipo.equals(Integer.class) && !tipo.equals(Double.class) && !tipo.equals(Boolean.class)) {
+            throw new JandasException("Tipo no permitido. Solo se permiten: String, Integer, Double, Boolean");
+        }
+
+        // Si la tabla está vacía, crear etiquetas de filas automáticamente
+        if (columnas.isEmpty()) {
+            for (int i = 0; i < secuencia.size(); i++) {
+                etiquetasFilas.add(new EtiquetaInt(i));
+            }
+        }
+
+        // Crear nueva columna
+        Columna<T> nuevaColumna = new Columna<>(etiquetaColumna, tipo);
+        for (T valor : secuencia) {
+            nuevaColumna.agregarCelda(new Celda<>(valor));
+        }
+
+        // Agregar columna a la tabla
+        columnas.add(nuevaColumna);
+        etiquetasColumnas.add(etiquetaColumna);
+    }
+
+    public void eliminarColumna(String valor) {
+        EtiquetaString etiqueta = new EtiquetaString(valor);
+        // Verificar que la tabla no esté vacía
+        if (columnas.isEmpty()) {
+            throw new JandasException("No se puede eliminar columna: la tabla está vacía");
+        }
+
+        // Buscar el índice de la columna a eliminar
+        int indiceColumna = -1;
+        for (int i = 0; i < etiquetasColumnas.size(); i++) {
+            if (etiquetasColumnas.get(i).getValor().equals(etiqueta.getValor())) {
+                indiceColumna = i;
+                break;
+            }
+        }
+
+        // Verificar que la columna existe
+        if (indiceColumna == -1) {
+            throw new JandasException("Columna no encontrada: " + etiqueta.getValor());
+        }
+
+        // Eliminar la columna y su etiqueta
+        columnas.remove(indiceColumna);
+        etiquetasColumnas.remove(indiceColumna);
+
+        // Si eliminamos todas las columnas, también limpiamos las etiquetas de filas
+        if (columnas.isEmpty()) {
+            etiquetasFilas.clear();
+        }
+    }
+
+    public void eliminarFila(int valor) {
+        EtiquetaInt etiqueta = new EtiquetaInt(valor);
+        // Verificar que la tabla no esté vacía
+        if (columnas.isEmpty() || etiquetasFilas.isEmpty()) {
+            throw new JandasException("No se puede eliminar fila: la tabla está vacía");
+        }
+
+        // Buscar el índice de la fila a eliminar
+        int indiceFila = -1;
+        for (int i = 0; i < etiquetasFilas.size(); i++) {
+            if (etiquetasFilas.get(i).getValor().equals(etiqueta.getValor())) {
+                indiceFila = i;
+                break;
+            }
+        }
+
+        // Verificar que la fila existe
+        if (indiceFila == -1) {
+            throw new JandasException("Fila no encontrada: " + etiqueta.getValor());
+        }
+
+        // Eliminar la celda correspondiente de cada columna
+        for (Columna<?> columna : columnas) {
+            columna.getCeldas().remove(indiceFila);
+        }
+
+        // Eliminar la etiqueta de la fila
+        etiquetasFilas.remove(indiceFila);
+
+        // Si eliminamos todas las filas, también limpiamos las etiquetas de filas
+        if (etiquetasFilas.isEmpty()) {
+            // Las columnas quedan vacías pero mantienen su estructura
+            for (Columna<?> columna : columnas) {
+                columna.getCeldas().clear();
+            }
+        }
+    }
+    public Tabla concatenacion(Tabla otra) {
+        // Verificar que ambas tablas tengan la misma cantidad de columnas
+        if (cantColumnas() != otra.cantColumnas()) {
+            throw new JandasException("No se pueden concatenar: las tablas tienen diferente cantidad de columnas");
+        }
+
+        // Verificar que las tablas no estén vacías
+        if (cantColumnas() == 0) {
+            throw new JandasException("No se pueden concatenar tablas vacías");
+        }
+
+        // Verificar que las columnas coincidan en orden, tipo y etiquetas
+        for (int i = 0; i < cantColumnas(); i++) {
+            Etiqueta etiquetaEsta = etiquetasColumnas.get(i);
+            Etiqueta etiquetaOtra = otra.etiquetasColumnas.get(i);
+            Class<?> tipoEsta = columnas.get(i).getTipoDato();
+            Class<?> tipoOtra = otra.columnas.get(i).getTipoDato();
+
+            // Verificar que las etiquetas sean iguales
+            if (!etiquetaEsta.getValor().equals(etiquetaOtra.getValor())) {
+                throw new JandasException(String.format(
+                        "Las etiquetas de columna no coinciden en la posición %d: '%s' vs '%s'",
+                        i, etiquetaEsta.getValor(), etiquetaOtra.getValor()));
+            }
+
+            // Verificar que los tipos sean iguales
+            if (!tipoEsta.equals(tipoOtra)) {
+                throw new JandasException(String.format(
+                        "Los tipos de datos no coinciden en la columna '%s': %s vs %s",
+                        etiquetaEsta.getValor(), tipoEsta.getSimpleName(), tipoOtra.getSimpleName()));
+            }
+        }
+
+        // Crear nueva tabla resultado
+        Tabla resultado = new Tabla();
+
+        // Copiar todas las columnas de la primera tabla
+        for (int i = 0; i < cantColumnas(); i++) {
+            Columna<?> columnaOriginal = columnas.get(i);
+            Etiqueta etiquetaColumna = etiquetasColumnas.get(i);
+
+            // Crear lista con todas las celdas de esta columna de ambas tablas
+            List<Object> valoresCombinados = new ArrayList<>();
+
+            // Agregar valores de la primera tabla
+            for (Celda<?> celda : columnaOriginal.getCeldas()) {
+                valoresCombinados.add(celda.getValor());
+            }
+
+            // Agregar valores de la segunda tabla
+            Columna<?> columnaOtra = otra.columnas.get(i);
+            for (Celda<?> celda : columnaOtra.getCeldas()) {
+                valoresCombinados.add(celda.getValor());
+            }
+
+
+            resultado.agregarColumnaConCast(etiquetaColumna, columnaOriginal.getTipoDato(), valoresCombinados);
+        }
+
+        return resultado;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> void agregarColumnaConCast(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
+        List<T> valoresTipoSeguro = new ArrayList<>();
+        for (Object valor : valores) {
+            valoresTipoSeguro.add((T) valor);
+        }
+        agregarColumna(etiqueta, (Class<T>) tipo, valoresTipoSeguro);
+    }
+    public Object getCeldaColYFila(String nombreColumna, int indiceFila) {
+        EtiquetaString etiquetaColumna = new EtiquetaString(nombreColumna);
+        EtiquetaInt etiquetaFila = new EtiquetaInt(indiceFila);
+
+        // Buscar el índice de la columna
+        int indiceColumna = -1;
+        for (int i = 0; i < etiquetasColumnas.size(); i++) {
+            if (etiquetasColumnas.get(i).getValor().equals(etiquetaColumna.getValor())) {
+                indiceColumna = i;
+                break;
+            }
+        }
+
+        // Verificar que la columna existe
+        if (indiceColumna == -1) {
+            throw new JandasException("Columna no encontrada: " + nombreColumna);
+        }
+
+        // Buscar el índice de la fila
+        int indiceFilaReal = -1;
+        for (int i = 0; i < etiquetasFilas.size(); i++) {
+            if (etiquetasFilas.get(i).getValor().equals(etiquetaFila.getValor())) {
+                indiceFilaReal = i;
+                break;
+            }
+        }
+
+        // Verificar que la fila existe
+        if (indiceFilaReal == -1) {
+            throw new JandasException("Fila no encontrada: " + indiceFila);
+        }
+
+        // Obtener la celda
+        Columna<?> columna = columnas.get(indiceColumna);
+        Celda<?> celda = columna.getCeldas().get(indiceFilaReal);
+
+        return celda.getValor();
+    }
 
 }

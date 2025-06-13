@@ -11,4 +11,19 @@ public class EtiquetaString implements Etiqueta {
 
     @Override
     public String toString(){return String.valueOf(etiqueta);}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        EtiquetaString other = (EtiquetaString) obj;
+        return etiqueta.equals(other.etiqueta);
+    }
+
+    @Override
+    public int hashCode() {
+        return etiqueta.hashCode();
+    }
+
+
 }
