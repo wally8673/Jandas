@@ -30,7 +30,7 @@ El sistema incorporará capacidades de importación/exportación CSV con configu
 
 Las operaciones de manipulación incluirán funcionalidades de filtrado mediante consultas condicionales, ordenamiento multi-columna, selección parcial (slicing), concatenación de estructuras compatibles, y operaciones especializadas como imputación de valores faltantes, muestreo y agrupamiento para alicar operaciones estadísticas. El sistema garantizará la independencia de memoria mediante operaciones de copia profunda cuando sea necesario.
 
-## ⚙️ Requerimientos Funcionales Más Relevantes
+## ⚙️ Requerimientos Funcionales
 
 ### 📊 Macro-requerimiento 1: Gestión de Información Básica
 - **RF 1.1**: El sistema debe proporcionar información sobre cantidad de filas y columnas
