@@ -13,7 +13,6 @@ Desarrollar una librería para el lenguaje Java que permita manipular y analizar
 
 ### 🔍 Alcance
 
-#### ✅ Funcionalidades
 - **Gestión de Estructuras Tabulares**: Creación, modificación y manipulación de datos en formato tabla
 - **Operaciones de Acceso y Consulta**: Acceso indexado por filas, columnas y celdas individuales
 - **Procesamiento de Datos**: Filtrado, ordenamiento, selección y concatenación de estructuras
@@ -84,8 +83,7 @@ Las operaciones de manipulación incluirán funcionalidades de filtrado mediante
 - **RNF-PE1**: La importación de archivos CSV debe procesar al menos 1,000 filas por segundo
 
 ### 🎯 Funcionalidad
-- **RNF-F1**: El sistema debe incluir mecanismos de medición de tiempo de ejecución para leer archivos externos
-- **RNF-F2**: El sistema debe preservar la precisión numérica para operaciones con números decimales
+- **RNF-F1**: El sistema debe incluir mecanismos de medición de tiempo de ejecución a la hora de leer archivos externos
 
 ---
 
