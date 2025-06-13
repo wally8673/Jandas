@@ -1,18 +1,8 @@
 # Jandas - Librería de Manipulación de Datos Tabulares para Java
 
 [![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
-[![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow.svg)]()
 
 Una librería Java para manipulación y análisis de datos en formato tabular, inspirada en pandas pero diseñada específicamente para el ecosistema Java.
-
-## 📋 Tabla de Contenidos
-
-- [Características](#características)
-- [Instalación](#instalación)
-- [Uso Rápido](#uso-rápido)
-- [Documentación](#documentación)
-- [Contribuir](#contribuir)
-- [Licencia](#licencia)
 
 ## 🚀 Características
 
@@ -24,24 +14,6 @@ Una librería Java para manipulación y análisis de datos en formato tabular, i
 - **Gestión de valores faltantes** (NA)
 - **Visualización** por consola
 
-## 📦 Instalación
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/jandas.git
-
-# Compilar el proyecto
-cd jandas
-javac -d bin src/**/*.java
-```
-
-## 🔧 Uso Rápido
-
-```java
-// Crear una estructura tabular
-```
-
----
 
 ## 📊 Análisis de Requerimientos
 
