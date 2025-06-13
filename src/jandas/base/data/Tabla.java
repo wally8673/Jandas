@@ -1,5 +1,8 @@
 package jandas.base.data;
 
+import jandas.operaciones.Agrupable;
+import jandas.operaciones.estadisticas.AgruparTabla;
+import jandas.operaciones.estadisticas.OperacionEstadistica;
 import jandas.operaciones.filtros.*;
 import jandas.visualizacion.*;
 import jandas.base.etiquetas.EtiquetaString;
@@ -17,12 +20,14 @@ import jandas.operaciones.Concatenable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Tabla implements
         Ordenable,
         Muestreable,
-        Concatenable {
+        Concatenable,
+        Agrupable {
 
     private List<Columna<?>> columnas;
     private List<Etiqueta> etiquetasFilas;
@@ -628,6 +633,246 @@ public class Tabla implements
         return ConcatenarTabla.concatenacion(this, otra);
     }
 
+    // // Filtrado
+    public Tabla filtrar(Condicion condicion) {
+        List<Columna<?>> nuevasColumnas = new ArrayList<>();
+        List<Etiqueta> nuevasEtiquetasFilas = new ArrayList<>();
+
+        // Crear nuevas columnas vacías con sus tipos correctos
+        for (Columna<?> columnaOriginal : columnas) {
+            Columna<?> nuevaColumna = new Columna<>(
+                    columnaOriginal.getEtiqueta(),
+                    columnaOriginal.getTipoDato()
+            );
+            nuevasColumnas.add(nuevaColumna);
+        }
+
+        // Evaluar cada fila y agregar las que cumplen la condición
+        for (int i = 0; i < cantFilas(); i++) {
+            Fila fila = getFila(etiquetasFilas.get(i));
+            if (condicion.evaluar(fila)) {
+                // Agregar la fila a las nuevas columnas
+                for (int j = 0; j < cantColumnas(); j++) {
+                    Celda<?> celdaOriginal = fila.getCeldasFila().get(j);
+                    Columna columna = nuevasColumnas.get(j);
+                    columna.agregarCelda(new Celda<>(celdaOriginal.getValor()));
+                }
+                nuevasEtiquetasFilas.add(etiquetasFilas.get(i));
+            }
+        }
+
+        Tabla resultado = new Tabla(etiquetasColumnas, nuevasColumnas);
+        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
+        return resultado;
+    }
+
+    // // Imputar
+    public <T> void imputarColumna(Etiqueta etiquetaColumna, T valorImputacion) {
+        Columna<?> columna = getColumna(etiquetaColumna);
+
+        if (valorImputacion != null &&
+                !columna.getTipoDato().isAssignableFrom(valorImputacion.getClass())) {
+            throw new JandasException(String.format(
+                    "Tipo incompatible. La columna es de tipo %s pero el valor de imputación es %s",
+                    columna.getTipoDato().getSimpleName(),
+                    valorImputacion.getClass().getSimpleName()));
+        }
+
+        @SuppressWarnings("unchecked")
+        Columna<T> columnaTyped = (Columna<T>) columna;
+
+        for (int i = 0; i < columnaTyped.size(); i++) {
+            Celda<T> celda = columnaTyped.getCelda(i);
+            if (celda.esNA()) {
+                celda.setValor(valorImputacion);
+            }
+        }
+    }
+
+    /**
+     * RELLENA LOS NA CON EL TIPO DE DATO QUE LE PASEMOS Y MANTIENE EL TIPO DE DATO DE LA COLUMNA
+     **/
+    public void imputarDefault() {
+        for (Columna<?> columna : columnas) {
+            Class<?> tipo = columna.getTipoDato();
+
+            if (tipo == Integer.class) {
+                imputarColumna(columna.getEtiqueta(), 0);
+            } else if (tipo == Double.class) {
+                imputarColumna(columna.getEtiqueta(), 0.0);
+            } else if (tipo == String.class) {
+                imputarColumna(columna.getEtiqueta(), "");
+            } else if (tipo == Boolean.class) {
+                imputarColumna(columna.getEtiqueta(), false);
+            }
+        }
+    }
+
+    // Agrupar
+
+    @Override
+    public Tabla agruparPor(String nombreColumna, Map<String, OperacionEstadistica> operaciones) {
+        return AgruparTabla.agruparPor(this, nombreColumna, operaciones);
+    }
+
+    @Override
+    public Tabla agruparPor(String[] nombresColumnas, Map<String, OperacionEstadistica> operaciones) {
+        return AgruparTabla.agruparPor(this, nombresColumnas, operaciones);
+    }
+
+    @Override
+    public Tabla agruparPor(String nombreColumna, OperacionEstadistica operacion) {
+        return AgruparTabla.agruparPor(this, nombreColumna, operacion);
+    }
+
+    // Seleccionar
+
+    //Metodo head()
+    public Tabla head(int n) {
+        if (n <= 0) {
+            throw new JandasException("El número de filas debe ser positivo");
+        }
+
+        // Ajustar n si es mayor que el número total de filas
+        n = Math.min(n, cantFilas());
+
+        // Crear nuevas columnas con las primeras n filas
+        List<Columna<?>> nuevasColumnas = new ArrayList<>();
+        for (Columna<?> columnaOriginal : getColumnas()) {
+            @SuppressWarnings("unchecked")
+            Columna<Object> nuevaColumna = new Columna<>(
+                    columnaOriginal.getEtiqueta(),
+                    (Class<Object>) columnaOriginal.getTipoDato()
+            );
+
+            List<? extends Celda<?>> celdasOriginales = columnaOriginal.getCeldas();
+            for (int i = 0; i < Math.min(n, celdasOriginales.size()); i++) {
+                Celda<?> celdaOriginal = celdasOriginales.get(i);
+                @SuppressWarnings("unchecked")
+                Celda<Object> nuevaCelda = new Celda<>(celdaOriginal.getValor());
+                nuevaColumna.agregarCelda(nuevaCelda);
+            }
+            nuevasColumnas.add(nuevaColumna);
+        }
+
+        // Crear nueva tabla con las etiquetas de columnas y las nuevas columnas
+        Tabla resultado = new Tabla(getEtiquetasColumnas(), nuevasColumnas);
+
+        // Establecer las etiquetas de filas correspondientes
+        List<Etiqueta> nuevasEtiquetasFilas = getEtiquetasFilas().subList(0, n);
+        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
+
+        return resultado;
+    }
+
+    //Metodo tail()
+    public Tabla tail(int n) {
+        if (n <= 0) {
+            throw new JandasException("El número de filas debe ser positivo");
+        }
+
+        // Ajustar n si es mayor que el número total de filas
+        n = Math.min(n, cantFilas());
+
+        // Calcular el índice de inicio
+        int inicio = cantFilas() - n;
+
+        // Crear nuevas columnas con las últimas n filas
+        List<Columna<?>> nuevasColumnas = new ArrayList<>();
+        for (Columna<?> columnaOriginal : getColumnas()) {
+            @SuppressWarnings("unchecked")
+            Columna<Object> nuevaColumna = new Columna<>(
+                    columnaOriginal.getEtiqueta(),
+                    (Class<Object>) columnaOriginal.getTipoDato()
+            );
+
+            List<? extends Celda<?>> celdasOriginales = columnaOriginal.getCeldas();
+            for (int i = inicio; i < cantFilas(); i++) {
+                Celda<?> celdaOriginal = celdasOriginales.get(i);
+                @SuppressWarnings("unchecked")
+                Celda<Object> nuevaCelda = new Celda<>(celdaOriginal.getValor());
+                nuevaColumna.agregarCelda(nuevaCelda);
+            }
+            nuevasColumnas.add(nuevaColumna);
+        }
+
+        // Crear nueva tabla con las etiquetas de columnas y las nuevas columnas
+        Tabla resultado = new Tabla(getEtiquetasColumnas(), nuevasColumnas);
+
+        // Establecer las etiquetas de filas correspondientes
+        List<Etiqueta> nuevasEtiquetasFilas = getEtiquetasFilas().subList(inicio, cantFilas());
+        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
+
+        return resultado;
+    }
+
+
+    //METODO COPIA PROFUNDA
+    public Tabla copiar() {
+        // Crear nuevas listas para la copia
+        List<Columna<?>> columnasCopiadas = new ArrayList<>();
+        List<Etiqueta> etiquetasColumnasCopiadas = new ArrayList<>();
+        List<Etiqueta> etiquetasFilasCopiadas = new ArrayList<>();
+
+        // Copiar etiquetas de columnas
+        for (Etiqueta etiqueta : etiquetasColumnas) {
+            if (etiqueta instanceof EtiquetaString) {
+                etiquetasColumnasCopiadas.add(new EtiquetaString(etiqueta.getValor().toString()));
+            } else if (etiqueta instanceof EtiquetaInt) {
+                etiquetasColumnasCopiadas.add(new EtiquetaInt((Integer) etiqueta.getValor()));
+            }
+        }
+
+        // Copiar etiquetas de filas
+        for (Etiqueta etiqueta : etiquetasFilas) {
+            if (etiqueta instanceof EtiquetaString) {
+                etiquetasFilasCopiadas.add(new EtiquetaString(etiqueta.getValor().toString()));
+            } else if (etiqueta instanceof EtiquetaInt) {
+                etiquetasFilasCopiadas.add(new EtiquetaInt((Integer) etiqueta.getValor()));
+            }
+        }
+
+        // Copiar cada columna
+        for (Columna<?> columnaOriginal : columnas) {
+            columnasCopiadas.add(copiarColumna(columnaOriginal));
+        }
+
+        // Crear nueva tabla con las copias
+        Tabla tablaCopia = new Tabla(etiquetasColumnasCopiadas, columnasCopiadas);
+        tablaCopia.setEtiquetasFilas(etiquetasFilasCopiadas);
+
+        return tablaCopia;
+    }
+
+    private <T> Columna<T> copiarColumna(Columna<T> columnaOriginal) {
+        Columna<T> columnaCopia = new Columna<>(
+                copiarEtiqueta(columnaOriginal.getEtiqueta()),
+                columnaOriginal.getTipoDato()
+        );
+
+        // Copiar cada celda de la columna
+        for (Celda<T> celdaOriginal : columnaOriginal.getCeldas()) {
+            columnaCopia.agregarCelda(copiarCelda(celdaOriginal));
+        }
+
+        return columnaCopia;
+    }
+
+    private <T> Celda<T> copiarCelda(Celda<T> celdaOriginal) {
+        // Crear nueva celda con el valor de la original
+        return new Celda<>(celdaOriginal.getValor());
+    }
+
+    private Etiqueta copiarEtiqueta(Etiqueta etiqueta) {
+        if (etiqueta instanceof EtiquetaString) {
+            return new EtiquetaString(etiqueta.getValor().toString());
+        } else if (etiqueta instanceof EtiquetaInt) {
+            return new EtiquetaInt((Integer) etiqueta.getValor());
+        }
+        throw new JandasException("Tipo de etiqueta no soportado");
+    }
+
+
 
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
         for (int i = 0; i < etiquetas.size(); i++) {
@@ -712,226 +957,7 @@ public class Tabla implements
         return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);
     }
 
-    //Metodo head()
-    public Tabla head(int n) {
-        if (n <= 0) {
-            throw new JandasException("El número de filas debe ser positivo");
-        }
 
-        // Ajustar n si es mayor que el número total de filas
-        n = Math.min(n, cantFilas());
-
-        // Crear nuevas columnas con las primeras n filas
-        List<Columna<?>> nuevasColumnas = new ArrayList<>();
-        for (Columna<?> columnaOriginal : getColumnas()) {
-            @SuppressWarnings("unchecked")
-            Columna<Object> nuevaColumna = new Columna<>(
-                    columnaOriginal.getEtiqueta(),
-                    (Class<Object>) columnaOriginal.getTipoDato()
-            );
-
-            List<? extends Celda<?>> celdasOriginales = columnaOriginal.getCeldas();
-            for (int i = 0; i < Math.min(n, celdasOriginales.size()); i++) {
-                Celda<?> celdaOriginal = celdasOriginales.get(i);
-                @SuppressWarnings("unchecked")
-                Celda<Object> nuevaCelda = new Celda<>(celdaOriginal.getValor());
-                nuevaColumna.agregarCelda(nuevaCelda);
-            }
-            nuevasColumnas.add(nuevaColumna);
-        }
-
-        // Crear nueva tabla con las etiquetas de columnas y las nuevas columnas
-        Tabla resultado = new Tabla(getEtiquetasColumnas(), nuevasColumnas);
-
-        // Establecer las etiquetas de filas correspondientes
-        List<Etiqueta> nuevasEtiquetasFilas = getEtiquetasFilas().subList(0, n);
-        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
-
-        return resultado;
-    }
-
-    //Metodo tail()
-    public Tabla tail(int n) {
-        if (n <= 0) {
-            throw new JandasException("El número de filas debe ser positivo");
-        }
-
-        // Ajustar n si es mayor que el número total de filas
-        n = Math.min(n, cantFilas());
-
-        // Calcular el índice de inicio
-        int inicio = cantFilas() - n;
-
-        // Crear nuevas columnas con las últimas n filas
-        List<Columna<?>> nuevasColumnas = new ArrayList<>();
-        for (Columna<?> columnaOriginal : getColumnas()) {
-            @SuppressWarnings("unchecked")
-            Columna<Object> nuevaColumna = new Columna<>(
-                    columnaOriginal.getEtiqueta(),
-                    (Class<Object>) columnaOriginal.getTipoDato()
-            );
-
-            List<? extends Celda<?>> celdasOriginales = columnaOriginal.getCeldas();
-            for (int i = inicio; i < cantFilas(); i++) {
-                Celda<?> celdaOriginal = celdasOriginales.get(i);
-                @SuppressWarnings("unchecked")
-                Celda<Object> nuevaCelda = new Celda<>(celdaOriginal.getValor());
-                nuevaColumna.agregarCelda(nuevaCelda);
-            }
-            nuevasColumnas.add(nuevaColumna);
-        }
-
-        // Crear nueva tabla con las etiquetas de columnas y las nuevas columnas
-        Tabla resultado = new Tabla(getEtiquetasColumnas(), nuevasColumnas);
-
-        // Establecer las etiquetas de filas correspondientes
-        List<Etiqueta> nuevasEtiquetasFilas = getEtiquetasFilas().subList(inicio, cantFilas());
-        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
-
-        return resultado;
-    }
-
-    //FILTRADO
-    public Tabla filtrar(Condicion condicion) {
-        List<Columna<?>> nuevasColumnas = new ArrayList<>();
-        List<Etiqueta> nuevasEtiquetasFilas = new ArrayList<>();
-
-        // Crear nuevas columnas vacías con sus tipos correctos
-        for (Columna<?> columnaOriginal : columnas) {
-            Columna<?> nuevaColumna = new Columna<>(
-                    columnaOriginal.getEtiqueta(),
-                    columnaOriginal.getTipoDato()
-            );
-            nuevasColumnas.add(nuevaColumna);
-        }
-
-        // Evaluar cada fila y agregar las que cumplen la condición
-        for (int i = 0; i < cantFilas(); i++) {
-            Fila fila = getFila(etiquetasFilas.get(i));
-            if (condicion.evaluar(fila)) {
-                // Agregar la fila a las nuevas columnas
-                for (int j = 0; j < cantColumnas(); j++) {
-                    Celda<?> celdaOriginal = fila.getCeldasFila().get(j);
-                    Columna columna = nuevasColumnas.get(j);
-                    columna.agregarCelda(new Celda<>(celdaOriginal.getValor()));
-                }
-                nuevasEtiquetasFilas.add(etiquetasFilas.get(i));
-            }
-        }
-
-        Tabla resultado = new Tabla(etiquetasColumnas, nuevasColumnas);
-        resultado.setEtiquetasFilas(nuevasEtiquetasFilas);
-        return resultado;
-    }
-
-
-    //METODO COPIA PROFUNDA
-    public Tabla copiar() {
-        // Crear nuevas listas para la copia
-        List<Columna<?>> columnasCopiadas = new ArrayList<>();
-        List<Etiqueta> etiquetasColumnasCopiadas = new ArrayList<>();
-        List<Etiqueta> etiquetasFilasCopiadas = new ArrayList<>();
-
-        // Copiar etiquetas de columnas
-        for (Etiqueta etiqueta : etiquetasColumnas) {
-            if (etiqueta instanceof EtiquetaString) {
-                etiquetasColumnasCopiadas.add(new EtiquetaString(etiqueta.getValor().toString()));
-            } else if (etiqueta instanceof EtiquetaInt) {
-                etiquetasColumnasCopiadas.add(new EtiquetaInt((Integer) etiqueta.getValor()));
-            }
-        }
-
-        // Copiar etiquetas de filas
-        for (Etiqueta etiqueta : etiquetasFilas) {
-            if (etiqueta instanceof EtiquetaString) {
-                etiquetasFilasCopiadas.add(new EtiquetaString(etiqueta.getValor().toString()));
-            } else if (etiqueta instanceof EtiquetaInt) {
-                etiquetasFilasCopiadas.add(new EtiquetaInt((Integer) etiqueta.getValor()));
-            }
-        }
-
-        // Copiar cada columna
-        for (Columna<?> columnaOriginal : columnas) {
-            columnasCopiadas.add(copiarColumna(columnaOriginal));
-        }
-
-        // Crear nueva tabla con las copias
-        Tabla tablaCopia = new Tabla(etiquetasColumnasCopiadas, columnasCopiadas);
-        tablaCopia.setEtiquetasFilas(etiquetasFilasCopiadas);
-
-        return tablaCopia;
-    }
-
-    private <T> Columna<T> copiarColumna(Columna<T> columnaOriginal) {
-        Columna<T> columnaCopia = new Columna<>(
-                copiarEtiqueta(columnaOriginal.getEtiqueta()),
-                columnaOriginal.getTipoDato()
-        );
-
-        // Copiar cada celda de la columna
-        for (Celda<T> celdaOriginal : columnaOriginal.getCeldas()) {
-            columnaCopia.agregarCelda(copiarCelda(celdaOriginal));
-        }
-
-        return columnaCopia;
-    }
-
-    private <T> Celda<T> copiarCelda(Celda<T> celdaOriginal) {
-        // Crear nueva celda con el valor de la original
-        return new Celda<>(celdaOriginal.getValor());
-    }
-
-    private Etiqueta copiarEtiqueta(Etiqueta etiqueta) {
-        if (etiqueta instanceof EtiquetaString) {
-            return new EtiquetaString(etiqueta.getValor().toString());
-        } else if (etiqueta instanceof EtiquetaInt) {
-            return new EtiquetaInt((Integer) etiqueta.getValor());
-        }
-        throw new JandasException("Tipo de etiqueta no soportado");
-    }
-
-
-    //IMPUTAR
-    public <T> void imputarColumna(Etiqueta etiquetaColumna, T valorImputacion) {
-        Columna<?> columna = getColumna(etiquetaColumna);
-
-        if (valorImputacion != null &&
-                !columna.getTipoDato().isAssignableFrom(valorImputacion.getClass())) {
-            throw new JandasException(String.format(
-                    "Tipo incompatible. La columna es de tipo %s pero el valor de imputación es %s",
-                    columna.getTipoDato().getSimpleName(),
-                    valorImputacion.getClass().getSimpleName()));
-        }
-
-        @SuppressWarnings("unchecked")
-        Columna<T> columnaTyped = (Columna<T>) columna;
-
-        for (int i = 0; i < columnaTyped.size(); i++) {
-            Celda<T> celda = columnaTyped.getCelda(i);
-            if (celda.esNA()) {
-                celda.setValor(valorImputacion);
-            }
-        }
-    }
-
-    /**
-     * RELLENA LOS NA CON EL TIPO DE DATO QUE LE PASEMOS Y MANTIENE EL TIPO DE DATO DE LA COLUMNA
-     **/
-    public void imputarDefault() {
-        for (Columna<?> columna : columnas) {
-            Class<?> tipo = columna.getTipoDato();
-
-            if (tipo == Integer.class) {
-                imputarColumna(columna.getEtiqueta(), 0);
-            } else if (tipo == Double.class) {
-                imputarColumna(columna.getEtiqueta(), 0.0);
-            } else if (tipo == String.class) {
-                imputarColumna(columna.getEtiqueta(), "");
-            } else if (tipo == Boolean.class) {
-                imputarColumna(columna.getEtiqueta(), false);
-            }
-        }
-    }
 }
 
 
