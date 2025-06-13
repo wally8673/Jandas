@@ -42,11 +42,11 @@ Desarrollar una librería para el lenguaje Java que permita manipular y analizar
 
 La librería Jandas estará compuesta por un núcleo de gestión de datos tabulares que permitirá la creación y manipulación de estructuras bidimensionales similares a DataFrames. El sistema incluirá un módulo de validación de tipos de datos que garantizará la integridad de la información almacenada, soportando tipos numéricos, booleanos y cadenas de texto, además de un valor especial NA para datos faltantes.
 
-La arquitectura incluirá un sistema de etiquetado flexible que permitirá el uso de identificadores numéricos o de cadena para filas y columnas, con generación automática de etiquetas numéricas cuando no se especifiquen. Un módulo de acceso indexado proporcionará interfaces para la consulta eficiente de filas completas, columnas completas o celdas individuales.
+La arquitectura incluirá un sistema de etiquetado flexible que permitirá el uso de identificadores numéricos o de cadena para filas y columnas. Un módulo de acceso indexado proporcionará interfaces para la consulta eficiente de filas completas, columnas completas o celdas individuales.
 
-El sistema incorporará capacidades de importación/exportación CSV con configuración personalizable de delimitadores y encabezados, así como un motor de visualización que presentará los datos en formato texto tabular con opciones de truncamiento configurables para estructuras grandes.
+El sistema incorporará capacidades de importación/exportación CSV con configuración personalizable de delimitadores y encabezados, así como un motor de visualización que presentará los datos en formato texto tabular con opciones de acotamiento configurables para estructuras grandes.
 
-Las operaciones de manipulación incluirán funcionalidades de filtrado mediante consultas condicionales, ordenamiento multi-columna, selección parcial (slicing), concatenación de estructuras compatibles, y operaciones especializadas como imputación de valores faltantes y muestreo estadístico. El sistema garantizará la independencia de memoria mediante operaciones de copia profunda cuando sea necesario.
+Las operaciones de manipulación incluirán funcionalidades de filtrado mediante consultas condicionales, ordenamiento multi-columna, selección parcial (slicing), concatenación de estructuras compatibles, y operaciones especializadas como imputación de valores faltantes, muestreo y agrupamiento para alicar operaciones estadísticas. El sistema garantizará la independencia de memoria mediante operaciones de copia profunda cuando sea necesario.
 
 ## ⚙️ Requerimientos Funcionales Más Relevantes
 
