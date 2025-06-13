@@ -4,17 +4,6 @@
 
 Una librería Java para manipulación y análisis de datos en formato tabular, inspirada en pandas pero diseñada específicamente para el ecosistema Java.
 
-## 🚀 Características
-
-- **Manipulación de datos tabulares** en 2 dimensiones
-- **Soporte para múltiples tipos de datos**: numérico, booleano, cadena
-- **Importación/Exportación CSV** con configuración flexible
-- **Operaciones avanzadas**: filtrado, ordenamiento, concatenación
-- **Acceso indexado** por filas, columnas y celdas
-- **Gestión de valores faltantes** (NA)
-- **Visualización** por consola
-
-
 ## 📊 Análisis de Requerimientos
 
 ### Objetivo y Alcance
@@ -24,19 +13,13 @@ Desarrollar una librería para el lenguaje Java que permita manipular y analizar
 
 ### 🔍 Alcance
 
-#### ✅ Funcionalidades Incluidas
+#### ✅ Funcionalidades
 - **Gestión de Estructuras Tabulares**: Creación, modificación y manipulación de datos en formato tabla
 - **Operaciones de Acceso y Consulta**: Acceso indexado por filas, columnas y celdas individuales
 - **Procesamiento de Datos**: Filtrado, ordenamiento, selección y concatenación de estructuras
 - **Gestión de Archivos**: Importación y exportación en formato CSV
-- **Visualización**: Presentación de datos en formato texto tabular
-- **Operaciones Avanzadas**: Imputación de valores faltantes y muestreo aleatorio
-
-#### ❌ Funcionalidades Excluidas
-- Dependencias de librerías externas (salvo autorización previa)
-- Optimización de rendimiento como prioridad principal
-- Integración con bases de datos
-- Soporte para formatos de archivo distintos a CSV en esta fase
+- **Visualización**: Presentación de datos en formato texto tabular por consola
+- **Operaciones Avanzadas**: Imputación de valores faltantes, muestreo aleatorio, agrupamiento por una o más columnas y operaciones estadísticas.
 
 ## 🏗️ Descripción de Alto Nivel del Sistema
 
@@ -78,6 +61,7 @@ Las operaciones de manipulación incluirán funcionalidades de filtrado mediante
 - **RF 5.2**: El sistema debe permitir ordenamiento multi-columna con criterios ascendente/descendente
 - **RF 5.3**: El sistema debe soportar imputación de valores faltantes (NA)
 - **RF 5.4**: El sistema debe implementar muestreo aleatorio por porcentaje
+- **RF 5.5**: El sistema debe permitir agrupar y aplicar operaciones estadísticas
 
 ## 📋 Requerimientos No Funcionales
 
