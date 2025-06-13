@@ -8,8 +8,6 @@ public class Celda<T>  {
     public Celda() {this.valor = null;}
 
     //metodos
-
-
     public boolean esNA(){
         return valor == null;
     }

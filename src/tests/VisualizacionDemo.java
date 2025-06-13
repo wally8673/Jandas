@@ -115,5 +115,7 @@ public class VisualizacionDemo {
         consola.visualizar(secuenciaTabla);
 
         System.out.println("Tipo de dato de la columna altura:" + secuenciaTabla.getColumna("altura").getTipoDato());
+        visualizador.visualizar(matriz);
+
     }
 }
