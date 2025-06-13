@@ -492,8 +492,6 @@ public class Tabla implements Ordenable, Muestreable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);
-    }
+    public int hashCode() { return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);}
 
 }

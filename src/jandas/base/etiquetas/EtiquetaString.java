@@ -11,5 +11,4 @@ public class EtiquetaString implements Etiqueta {
 
     @Override
     public String toString(){return String.valueOf(etiqueta);}
-
 }

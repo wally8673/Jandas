@@ -1,5 +1,7 @@
 package jandas.base.etiquetas;
 
+import java.util.Objects;
+
 public class EtiquetaInt implements Etiqueta {
 
     private int etiqueta;
