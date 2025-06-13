@@ -54,9 +54,11 @@ public class Tabla implements
     }
 
     // Constrctor secuencia lineal
+
     /**
      * Constructor para crear tabla desde una secuencia lineal de strings
-     * @param datos Lista de strings con los datos en secuencia lineal
+     *
+     * @param datos       Lista de strings con los datos en secuencia lineal
      * @param numColumnas Número de columnas para organizar los datos
      */
     public Tabla(List<String> datos, int numColumnas) {
@@ -125,7 +127,17 @@ public class Tabla implements
             // Recopilar valores de la columna (excluyendo encabezado)
             List<Object> valoresColumna = new ArrayList<>();
             for (int i = 1; i < cantidadFilas; i++) {
-                valoresColumna.add(parsearValor(datos[i][j].toString()));
+                Object valorCrudo = datos[i][j];
+                if (valorCrudo == null) {
+                    valoresColumna.add(null);
+                } else if (valorCrudo instanceof String) {
+                    valoresColumna.add(parsearValor((String) valorCrudo));
+                } else {
+                    valoresColumna.add(valorCrudo); // mantener tipo original
+                }
+
+
+
             }
 
             // Inferir el tipo de la columna y crearla directamente
@@ -165,7 +177,7 @@ public class Tabla implements
     // Método auxiliar para inferir el tipo de una columna
     public Class<?> inferirTipoColumna(List<Object> valores) {
         if (valores.isEmpty()) {
-            return String.class;
+            return Object.class;
         }
 
         // Contar tipos no nulos
@@ -191,7 +203,7 @@ public class Tabla implements
         }
 
         if (totalNoNulos == 0) {
-            return String.class;
+            return Object.class;
         }
 
         // Determinar tipo predominante
@@ -313,8 +325,8 @@ public class Tabla implements
     public <T> void agregarColumnaCeldas(Etiqueta etiquetaColumna, Class<T> tipo, List<Celda<T>> celdas) {
         if (!columnas.isEmpty() && celdas.size() != cantFilas()) {
             throw new JandasException(String.format(
-                "Dimensiones no coinciden. Se esperaban %d filas, pero se recibieron %d",
-                cantFilas(), celdas.size()));
+                    "Dimensiones no coinciden. Se esperaban %d filas, pero se recibieron %d",
+                    cantFilas(), celdas.size()));
         }
 
         Columna<T> nuevaColumna = new Columna<>(etiquetaColumna, tipo);
@@ -334,8 +346,8 @@ public class Tabla implements
     public <T> void agregarColumna(Columna<T> columna) {
         if (!columnas.isEmpty() && columna.size() != cantFilas()) {
             throw new JandasException(String.format(
-                "Dimensiones no coinciden. Se esperaban %d filas, pero se recibieron %d",
-                cantFilas(), columna.size()));
+                    "Dimensiones no coinciden. Se esperaban %d filas, pero se recibieron %d",
+                    cantFilas(), columna.size()));
         }
 
         columnas.add(columna);
@@ -349,12 +361,13 @@ public class Tabla implements
         }
 
     }
+
     //metodo para agregar filas
     public void agregarFila(Etiqueta etiquetaFila, List<Celda<?>> celdas) {
         if (celdas.size() != cantColumnas()) {
             throw new JandasException(String.format(
-                "Dimensiones no coinciden. Se esperaban %d columnas, pero se recibieron %d",
-                cantColumnas(), celdas.size()));
+                    "Dimensiones no coinciden. Se esperaban %d columnas, pero se recibieron %d",
+                    cantColumnas(), celdas.size()));
         }
         for (int i = 0; i < columnas.size(); i++) {
             Columna<Object> columna = (Columna<Object>) columnas.get(i);
@@ -573,6 +586,7 @@ public class Tabla implements
         Columna<?> columna = getColumna(nombreColumna);
         return OrdenadorTabla.ordenar(this, nombreColumna, direccion);
     }
+
     @Override
     public Tabla ordenar(String... criterios) {
         List<CriterioOrden> lista = new ArrayList<>();
@@ -586,6 +600,7 @@ public class Tabla implements
         }
         return this.ordenarPorCriterios(lista);
     }
+
     @Override
     public Tabla ordenarPorCriterios(List<CriterioOrden> criterios) {
         return OrdenadorTabla.ordenarPorCriterios(this, criterios);
@@ -614,8 +629,6 @@ public class Tabla implements
     }
 
 
-
-
     private int getIndex(Etiqueta etiqueta, List<Etiqueta> etiquetas) {
         for (int i = 0; i < etiquetas.size(); i++) {
             if (etiquetas.get(i).getValor().equals(etiqueta.getValor())) {
@@ -637,7 +650,7 @@ public class Tabla implements
     public void setEtiquetasFilas(List<Etiqueta> nuevasEtiquetas) {
         if (nuevasEtiquetas.size() != cantFilas()) {
             throw new JandasException(String.format(
-                "Debe proporcionar exactamente %d etiquetas", cantFilas()));
+                    "Debe proporcionar exactamente %d etiquetas", cantFilas()));
         }
         this.etiquetasFilas = new ArrayList<>(nuevasEtiquetas);
     }
@@ -690,15 +703,14 @@ public class Tabla implements
 
         Tabla other = (Tabla) obj;
         return Objects.equals(columnas, other.columnas) &&
-               Objects.equals(etiquetasFilas, other.etiquetasFilas) &&
-               Objects.equals(etiquetasColumnas, other.etiquetasColumnas);
+                Objects.equals(etiquetasFilas, other.etiquetasFilas) &&
+                Objects.equals(etiquetasColumnas, other.etiquetasColumnas);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);}
-
-
-}
+    public int hashCode() {
+        return Objects.hash(columnas, etiquetasFilas, etiquetasColumnas);
+    }
 
     //Metodo head()
     public Tabla head(int n) {
@@ -902,7 +914,9 @@ public class Tabla implements
         }
     }
 
-    /** RELLENA LOS NA CON EL TIPO DE DATO QUE LE PASEMOS Y MANTIENE EL TIPO DE DATO DE LA COLUMNA**/
+    /**
+     * RELLENA LOS NA CON EL TIPO DE DATO QUE LE PASEMOS Y MANTIENE EL TIPO DE DATO DE LA COLUMNA
+     **/
     public void imputarDefault() {
         for (Columna<?> columna : columnas) {
             Class<?> tipo = columna.getTipoDato();
@@ -918,7 +932,7 @@ public class Tabla implements
             }
         }
     }
-
+}
 
 
 
