@@ -1,7 +1,6 @@
 # Jandas - Librería de Manipulación de Datos Tabulares para Java
 
 [![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow.svg)]()
 
 Una librería Java para manipulación y análisis de datos en formato tabular, inspirada en pandas pero diseñada específicamente para el ecosistema Java.
@@ -23,8 +22,7 @@ Una librería Java para manipulación y análisis de datos en formato tabular, i
 - **Operaciones avanzadas**: filtrado, ordenamiento, concatenación
 - **Acceso indexado** por filas, columnas y celdas
 - **Gestión de valores faltantes** (NA)
-- **Visualización** en formato texto
-- **Sin dependencias externas** - Solo Java puro
+- **Visualización** por consola
 
 ## 📦 Instalación
 
@@ -41,21 +39,6 @@ javac -d bin src/**/*.java
 
 ```java
 // Crear una estructura tabular
-DataFrame df = new DataFrame();
-
-// Cargar desde CSV
-DataFrame df = DataFrame.fromCSV("datos.csv");
-
-// Acceso a datos
-df.getRow("fila1");          // Obtener fila completa
-df.getColumn("columna1");    // Obtener columna completa
-df.getCell("fila1", "col1"); // Obtener celda específica
-
-// Filtrado
-DataFrame filtrado = df.query("columna1 > 10 and columna2 = 'valor'");
-
-// Ordenamiento
-DataFrame ordenado = df.sort("columna1", true); // ascendente
 ```
 
 ---
@@ -129,37 +112,29 @@ Las operaciones de manipulación incluirán funcionalidades de filtrado mediante
 ### 👤 Usabilidad
 - **RNF-U1**: Los usuarios deben poder crear una estructura tabular básica en menos de 5 minutos de entrenamiento
 - **RNF-U2**: El sistema debe proporcionar mensajes de error claros y descriptivos para operaciones inválidas
-- **RNF-U3**: La documentación debe incluir ejemplos de código para cada operación principal
 
 ### 🌐 Portabilidad
 - **RNF-P1**: El sistema debe ser compatible con Java 8 o versiones superiores
-- **RNF-P2**: El 100% de las funcionalidades deben ejecutarse sin dependencias de librerías externas
-- **RNF-P3**: El sistema debe funcionar en Windows, macOS y Linux
+- **RNF-P2**: El sistema debe funcionar en Windows y Linux
 
 ### 🛡️ Robustez
-- **RNF-R1**: El sistema debe validar tipos de datos con una precisión del 100% para prevenir corrupción
-- **RNF-R2**: Las operaciones de copia profunda deben garantizar independencia total de memoria
-- **RNF-R3**: El sistema debe manejar archivos CSV malformados sin terminar abruptamente
+- **RNF-R1**: Las operaciones de copia profunda deben garantizar independencia total de memoria
+- **RNF-R2**: El sistema debe manejar archivos CSV malformados sin terminar abruptamente
 
 ### 🔧 Mantenibilidad
-- **RNF-M1**: La arquitectura debe permitir agregar nuevos tipos de datos sin modificar código existente
-- **RNF-M2**: Las operaciones de filtrado deben ser extensibles para nuevos operadores de comparación
-- **RNF-M3**: El código debe mantener un nivel de cobertura de pruebas mínimo del 80%
+- **RNF-M1**: Las operaciones de filtrado deben ser extensibles para nuevos operadores de comparación
 
 ### ⚡ Performance
-- **RNF-PE1**: Las operaciones de acceso indexado deben completarse en menos de 100 milisegundos para estructuras de hasta 10,000 filas
-- **RNF-PE2**: La importación de archivos CSV debe procesar al menos 1,000 filas por segundo
-- **RNF-PE3**: Las operaciones de filtrado deben ejecutarse en tiempo lineal O(n) respecto al número de filas
+- **RNF-PE1**: La importación de archivos CSV debe procesar al menos 1,000 filas por segundo
 
 ### 🎯 Funcionalidad
-- **RNF-F1**: El sistema debe incluir mecanismos de medición de tiempo de ejecución para operaciones principales
-- **RNF-F2**: Las estructuras deben soportar un mínimo de 100,000 filas y 1,000 columnas
-- **RNF-F3**: El sistema debe preservar la precisión numérica para operaciones con números decimales
+- **RNF-F1**: El sistema debe incluir mecanismos de medición de tiempo de ejecución para leer archivos externos
+- **RNF-F2**: El sistema debe preservar la precisión numérica para operaciones con números decimales
 
 ---
 
 ## 👥 Autores
 
-- **Agustin Rebechi** - [AgustinRebechi](https://github.com/AgustinRebechi) 
 - **Walter Villalba** - [wally8673](https://github.com/wally8673)
 - **Ignacio Figuera** - [nachongo](https://github.com/nachongo)
+- **Agustin Rebechi** - [AgustinRebechi](https://github.com/AgustinRebechi) 
