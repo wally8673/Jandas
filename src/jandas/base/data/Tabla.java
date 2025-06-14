@@ -712,7 +712,7 @@ public class Tabla implements
     /**
      * Establece el valor de una celda específica en la tabla mediante coordenadas de fila y columna.
      *
-     * @param valorfila    El índice de la fila donde se encuentra la celda
+     * @param valorfila El índice de la fila donde se encuentra la celda
      * @param valorcolumna El nombre de la columna donde se encuentra la celda
      * @param valor El nuevo valor a asignar a la celda
      * @throws JandasException Si la etiqueta de fila no se encuentra en la tabla
