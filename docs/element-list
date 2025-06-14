@@ -1,0 +1,12 @@
+jandas.base.data
+jandas.base.etiquetas
+jandas.excepciones
+jandas.io
+jandas.io.csv
+jandas.operaciones
+jandas.operaciones.concatenacion
+jandas.operaciones.estadisticas
+jandas.operaciones.filtros
+jandas.operaciones.muestreo
+jandas.operaciones.ordenamiento
+jandas.visualizacion
