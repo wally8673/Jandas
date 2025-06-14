@@ -5,7 +5,7 @@
 Una librería Java para manipulación y análisis de datos en formato tabular, inspirada en pandas pero diseñada específicamente para el ecosistema Java.
 
 ## [Documentación Web generada con JavaDocs](https://wally8673.github.io/Jandas/index.html)
---
+
 ## 📊 Análisis de Requerimientos
 
 ### Objetivo y Alcance
