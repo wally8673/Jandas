@@ -19,8 +19,8 @@ public class Fila {
     /**
      * Crea una nueva fila con su etiqueta, celdas y etiquetas de columnas asociadas.
      *
-     * @param etiquetaFila      Etiqueta que identifica esta fila (por ejemplo, un índice numérico o textual).
-     * @param celdas            Lista de celdas que conforman esta fila. Cada celda puede contener un valor o NA.
+     * @param etiquetaFila Etiqueta que identifica esta fila (por ejemplo, un índice numérico o textual).
+     * @param celdas Lista de celdas que conforman esta fila. Cada celda puede contener un valor o NA.
      * @param etiquetaColumnas  Lista de etiquetas que identifican las columnas a las que pertenece cada celda.
      */
     public Fila(Etiqueta etiquetaFila, List<Celda<?>> celdas, List<Etiqueta> etiquetaColumnas) {

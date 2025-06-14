@@ -4,7 +4,7 @@ package jandas.operaciones.estadisticas;
  * Enumeración que representa las distintas operaciones estadísticas
  * que pueden aplicarse sobre columnas numéricas al realizar una
  * agregación grupal en una tabla.
- *
+ * <p>
  * Las operaciones disponibles son:
  * <ul>
  *   <li>{@link #SUMA} - Suma de los valores numéricos.</li>
