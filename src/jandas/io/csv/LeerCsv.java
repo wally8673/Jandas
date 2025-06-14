@@ -13,25 +13,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase para leer archivos CSV y convertirlos en objetos {@link Tabla} de Jandas.
+ * <p>
+ * Soporta archivos con o sin encabezado, inferencia automática del tipo de dato por columna
+ * y manejo de valores nulos.
+ * <p>
+ * La configuración del lector (separador, si tiene encabezado, etc.) se maneja mediante {@link CsvConfig}.
+ */
 public class LeerCsv implements LectorCsv {
 
+    /**
+     * Configuración para la lectura del archivo CSV, como separador y si tiene encabezado.
+     */
     private CsvConfig config;
 
+    /**
+     * Constructor por defecto que inicializa la configuración con valores predeterminados.
+     */
     public LeerCsv() {
         this.config = new CsvConfig();
     }
 
+    /**
+     * Lee un archivo CSV desde la ruta especificada y lo convierte en un objeto {@link Tabla}.
+     * <p>
+     * El archivo puede contener encabezados (nombres de columnas) o no, según la configuración.
+     * Los datos se agrupan por columna y se infiere automáticamente el tipo de dato de cada columna.
+     * <p>
+     * También mide el tiempo de ejecución del proceso de lectura.
+     *
+     * @param rutaArchivo Ruta completa del archivo CSV a leer.
+     * @return Objeto {@link Tabla} que contiene los datos del CSV.
+     * @throws JandasException si el archivo está vacío o hay errores en la lectura.
+     */
     @Override
     public Tabla leer(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            //Inicializo timer
             long startTime = System.nanoTime();
-            // Lista para almacenar todas las líneas del archivo
+
             List<String[]> lineasDatos = new ArrayList<>();
             String linea;
             String[] encabezados = null;
 
-            // Leer la primera línea (potencialmente encabezados)
+            // Leer primera línea para encabezados o datos
             if ((linea = br.readLine()) != null) {
                 if (config.isTieneEncabezado()) {
                     encabezados = linea.split(config.getSeparador(), -1);
@@ -39,54 +64,49 @@ public class LeerCsv implements LectorCsv {
                     lineasDatos.add(linea.split(config.getSeparador(), -1));
                 }
             } else {
-                // Archivo vacío
                 throw new JandasException("El archivo CSV está vacío");
             }
 
-            // Leer el resto de las líneas
+            // Leer resto de líneas
             while ((linea = br.readLine()) != null) {
                 lineasDatos.add(linea.split(config.getSeparador(), -1));
             }
 
-            // Verificar que haya datos
             if (lineasDatos.isEmpty() && !config.isTieneEncabezado()) {
                 throw new JandasException("No hay datos en el archivo CSV");
             }
 
-            // Determinar el número de columnas
             int numColumnas = config.isTieneEncabezado() ? encabezados.length : lineasDatos.get(0).length;
 
-            // NUEVO: Convertir datos y agrupar por columnas
+            // Agrupar datos por columnas
             List<List<Object>> datosPorColumna = new ArrayList<>();
             List<Etiqueta> etiquetasColumnas = new ArrayList<>();
 
-            // Inicializar listas para cada columna
             for (int i = 0; i < numColumnas; i++) {
                 String nombreCol = config.isTieneEncabezado() ? encabezados[i] : "" + i;
                 etiquetasColumnas.add(new EtiquetaString(nombreCol));
                 datosPorColumna.add(new ArrayList<>());
             }
 
-            // Procesar datos fila por fila y agrupar por columnas
+            // Convertir y agrupar datos fila por fila
             for (String[] fila : lineasDatos) {
                 for (int j = 0; j < numColumnas; j++) {
                     Object valor;
                     if (j < fila.length) {
                         valor = convertirValor(fila[j].trim());
                     } else {
-                        valor = null; // Rellenar con null si faltan datos
+                        valor = null; // valor nulo si falta dato
                     }
                     datosPorColumna.get(j).add(valor);
                 }
             }
 
-            // NUEVO: Crear columnas con tipos inferidos
+            // Crear columnas con tipos inferidos
             List<Columna<?>> columnas = new ArrayList<>();
             for (int i = 0; i < numColumnas; i++) {
                 Etiqueta etiqueta = etiquetasColumnas.get(i);
                 List<Object> valoresColumna = datosPorColumna.get(i);
 
-                // Inferir tipo y crear columna tipada
                 Class<?> tipoInferido = inferirTipoColumna(valoresColumna);
                 Columna<?> columna = crearColumnaConTipo(etiqueta, tipoInferido, valoresColumna);
                 columnas.add(columna);
@@ -98,11 +118,9 @@ public class LeerCsv implements LectorCsv {
                 etiquetasFilas.add(new EtiquetaInt(i));
             }
 
-            // Crear la tabla
             Tabla tabla = new Tabla(etiquetasColumnas, columnas);
             tabla.setEtiquetasFilas(etiquetasFilas);
 
-            // Capturar el tiempo después de la ejecución
             long endTime = System.nanoTime();
             double duration = (endTime - startTime) / 1_000_000_000.0;
             System.out.printf("Tiempo de ejecución: %.3f segundos %n", duration);
@@ -114,13 +132,21 @@ public class LeerCsv implements LectorCsv {
         }
     }
 
-    // NUEVO: Método para inferir tipo de columna (copiado de Tabla.java)
+    /**
+     * Infiera el tipo de dato predominante de una columna basada en sus valores no nulos.
+     * <p>
+     * El tipo puede ser {@code Integer}, {@code Double}, {@code Boolean} o {@code String}.
+     * Si hay mezcla de enteros y decimales, se elige {@code Double}.
+     * Si no hay datos no nulos, se retorna {@code Object.class}.
+     *
+     * @param valores Lista de valores de la columna (puede contener null).
+     * @return Clase representando el tipo inferido.
+     */
     private Class<?> inferirTipoColumna(List<Object> valores) {
         if (valores.isEmpty()) {
             return Object.class;
         }
 
-        // Contar tipos no nulos
         int contadorInteger = 0;
         int contadorDouble = 0;
         int contadorString = 0;
@@ -146,7 +172,6 @@ public class LeerCsv implements LectorCsv {
             return Object.class;
         }
 
-        // Determinar tipo predominante
         if (contadorInteger == totalNoNulos) {
             return Integer.class;
         } else if (contadorDouble == totalNoNulos) {
@@ -154,15 +179,22 @@ public class LeerCsv implements LectorCsv {
         } else if (contadorBoolean == totalNoNulos) {
             return Boolean.class;
         } else if (contadorInteger + contadorDouble == totalNoNulos) {
-            // Mezcla de enteros y decimales -> usar Double
             return Double.class;
         } else {
-            // Cualquier otra combinación -> String
             return String.class;
         }
     }
 
-    // NUEVO: Método para crear columna con tipo específico
+    /**
+     * Crea una columna tipada a partir de la etiqueta, tipo inferido y lista de valores.
+     * <p>
+     * Convierte cada valor al tipo correspondiente, manejando conversiones y valores nulos.
+     *
+     * @param etiqueta Etiqueta de la columna.
+     * @param tipo Tipo inferido para la columna.
+     * @param valores Valores a incluir en la columna.
+     * @return Objeto {@link Columna} con los valores convertidos.
+     */
     @SuppressWarnings("unchecked")
     private Columna<?> crearColumnaConTipo(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
         if (tipo == Integer.class) {
@@ -176,7 +208,7 @@ public class LeerCsv implements LectorCsv {
                         try {
                             valorInt = Integer.valueOf(valor.toString());
                         } catch (NumberFormatException e) {
-                            // Mantener como null si no se puede convertir
+                            // mantener null si no se puede convertir
                         }
                     }
                 }
@@ -199,7 +231,7 @@ public class LeerCsv implements LectorCsv {
                         try {
                             valorDouble = Double.valueOf(valor.toString());
                         } catch (NumberFormatException e) {
-                            // Mantener como null si no se puede convertir
+                            // mantener null si no se puede convertir
                         }
                     }
                 }
@@ -223,7 +255,7 @@ public class LeerCsv implements LectorCsv {
             return columna;
 
         } else {
-            // String por defecto
+            // Por defecto String
             Columna<String> columna = new Columna<>(etiqueta, String.class);
             for (Object valor : valores) {
                 String valorString = valor == null ? null : valor.toString();
@@ -233,18 +265,40 @@ public class LeerCsv implements LectorCsv {
         }
     }
 
+    /**
+     * Lee un archivo CSV usando una configuración personalizada.
+     *
+     * @param rutaArchivo Ruta del archivo CSV.
+     * @param config Configuración específica para lectura.
+     * @return Tabla con los datos leídos.
+     */
     @Override
     public Tabla leer(String rutaArchivo, CsvConfig config) {
         this.config = config;
         return leer(rutaArchivo);
     }
 
+    /**
+     * Lee un archivo CSV indicando si tiene encabezado o no.
+     *
+     * @param rutaArchivo Ruta del archivo CSV.
+     * @param encabezado {@code true} si el archivo tiene encabezado; {@code false} en caso contrario.
+     * @return Tabla con los datos leídos.
+     */
     @Override
     public Tabla leer(String rutaArchivo, boolean encabezado) {
         config.setTieneEncabezado(encabezado);
         return leer(rutaArchivo);
     }
 
+    /**
+     * Lee un archivo CSV indicando si tiene encabezado y el separador a usar.
+     *
+     * @param rutaArchivo Ruta del archivo CSV.
+     * @param encabezado {@code true} si el archivo tiene encabezado.
+     * @param separador Separador de columnas (ej: ",", ";", "\t").
+     * @return Tabla con los datos leídos.
+     */
     @Override
     public Tabla leer(String rutaArchivo, boolean encabezado, String separador) {
         config.setSeparador(separador);
@@ -252,14 +306,22 @@ public class LeerCsv implements LectorCsv {
         return leer(rutaArchivo);
     }
 
+    /**
+     * Convierte un valor de tipo {@link String} a un objeto del tipo más adecuado.
+     * <p>
+     * Intenta convertir a {@link Boolean}, {@link Integer} o {@link Double}.
+     * Si no se puede convertir, devuelve el valor como {@link String}.
+     * Los valores vacíos se interpretan como {@code null}.
+     *
+     * @param valor Valor en texto a convertir.
+     * @return Objeto convertido o {@code null} si el valor está vacío.
+     */
     private Object convertirValor(String valor) {
         if (valor.isEmpty()) {
             return null;
         }
 
-        // Intentar convertir a número
         try {
-            // Verificar si es un booleano
             if (valor.equalsIgnoreCase("true") || valor.equalsIgnoreCase("false")) {
                 return Boolean.parseBoolean(valor);
             }
@@ -269,7 +331,6 @@ public class LeerCsv implements LectorCsv {
                 return Integer.parseInt(valor);
             }
         } catch (NumberFormatException e) {
-            // Si no es número, devolver como String
             return valor;
         }
     }

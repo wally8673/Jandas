@@ -12,15 +12,40 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+
+/**
+ * Clase utilitaria que proporciona métodos para realizar muestreo aleatorio
+ * sobre una {@link Tabla}. Incluye funcionalidades para muestreo simple,
+ * muestreo con tamaño fijo, muestreo estratificado y control de semilla
+ * para reproducibilidad.
+ * <p>
+ * Los métodos de esta clase generan nuevas instancias de {@code Tabla} con
+ * subconjuntos de filas seleccionadas de forma aleatoria.
+ * </p>
+ *
+ * <p>Tipos de muestreo disponibles:</p>
+ * <ul>
+ *     <li>Muestreo aleatorio simple por porcentaje.</li>
+ *     <li>Muestreo aleatorio simple por cantidad fija de filas.</li>
+ *     <li>Muestreo estratificado por una columna específica.</li>
+ * </ul>
+ *
+ * <p>Los métodos respetan los tipos de datos de las columnas y copian
+ * las etiquetas de fila correspondientes a las filas seleccionadas.</p>
+ */
+
 public class MuestreadorTabla {
 
     private static final Random random = new Random();
 
     /**
-     * Obtiene una muestra aleatoria de la tabla basada en un porcentaje
+     * Devuelve una muestra aleatoria de una tabla, seleccionando un porcentaje
+     * de las filas de forma uniforme y sin reemplazo.
+     *
      * @param tabla Tabla original de la cual obtener la muestra
-     * @param porcentaje Porcentaje de filas a incluir en la muestra (1-100)
-     * @return Nueva tabla con la muestra aleatoria
+     * @param porcentaje Porcentaje de filas a seleccionar (1-100)
+     * @return Una nueva tabla que contiene una muestra aleatoria de las filas
+     * @throws JandasException si el porcentaje no está en el rango válido
      */
     public static Tabla muestrear(Tabla tabla, int porcentaje) {
         if (porcentaje < 1 || porcentaje > 100) {
@@ -48,10 +73,13 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Obtiene una muestra aleatoria de tamaño fijo
-     * @param tabla Tabla original de la cual obtener la muestra
-     * @param cantidadFilas Cantidad exacta de filas a incluir en la muestra
-     * @return Nueva tabla con la muestra aleatoria
+     * Devuelve una muestra aleatoria de tamaño fijo de una tabla.
+     *
+     * @param tabla Tabla original
+     * @param cantidadFilas Número de filas a seleccionar
+     * @param exacto (parámetro ignorado en esta implementación)
+     * @return Nueva tabla con una muestra de tamaño fijo
+     * @throws JandasException si la cantidad es negativa
      */
     public static Tabla muestrear(Tabla tabla, int cantidadFilas, boolean exacto) {
         if (cantidadFilas < 0) {
@@ -81,11 +109,15 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Obtiene una muestra aleatoria estratificada por una columna
+     * Devuelve una muestra aleatoria estratificada, agrupando por los valores
+     * de una columna especificada. Dentro de cada grupo (estrato), se toma un
+     * porcentaje de las filas.
+     *
      * @param tabla Tabla original
-     * @param nombreColumna Nombre de la columna para estratificar
-     * @param porcentaje Porcentaje de cada estrato a incluir
-     * @return Nueva tabla con muestra estratificada
+     * @param nombreColumna Nombre de la columna usada para estratificar
+     * @param porcentaje Porcentaje de cada estrato a incluir (1-100)
+     * @return Una nueva tabla con la muestra estratificada
+     * @throws JandasException si el porcentaje está fuera del rango válido
      */
     public static Tabla muestrearEstratificado(Tabla tabla, String nombreColumna, int porcentaje) {
         if (porcentaje < 1 || porcentaje > 100) {
@@ -117,15 +149,21 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Establece la semilla para el generador de números aleatorios
-     * @param semilla Semilla para reproducibilidad
+     * Establece una semilla fija para el generador de números aleatorios,
+     * permitiendo que los resultados del muestreo sean reproducibles.
+     *
+     * @param semilla Valor de la semilla
      */
     public static void setSemilla(long semilla) {
         random.setSeed(semilla);
     }
 
     /**
-     * Genera una lista de índices aleatorios únicos
+     * Genera una lista de índices aleatorios únicos desde un total de filas.
+     *
+     * @param totalFilas Cantidad total de filas
+     * @param cantidadAMuestrear Número de índices a generar
+     * @return Lista con índices seleccionados al azar
      */
     private static List<Integer> generarIndicesAleatorios(int totalFilas, int cantidadAMuestrear) {
         // Crear lista con todos los índices posibles
@@ -140,7 +178,11 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Genera índices aleatorios de una lista específica de índices
+     * Genera una lista de índices aleatorios únicos desde una lista específica.
+     *
+     * @param indicesDisponibles Lista de índices posibles
+     * @param cantidadAMuestrear Número de índices a generar
+     * @return Sublista aleatoria de los índices disponibles
      */
     private static List<Integer> generarIndicesAleatorios(List<Integer> indicesDisponibles, int cantidadAMuestrear) {
         List<Integer> copiaIndices = new ArrayList<>(indicesDisponibles);
@@ -151,7 +193,11 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Agrupa los índices de filas por el valor de una columna
+     * Agrupa los índices de las filas de una columna según su valor,
+     * generando listas separadas para cada valor único.
+     *
+     * @param columna Columna por la cual agrupar
+     * @return Lista de grupos de índices (estratos)
      */
     private static List<List<Integer>> agruparPorValor(Columna<?> columna) {
         List<List<Integer>> grupos = new ArrayList<>();
@@ -187,7 +233,11 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Crea una nueva tabla con las filas seleccionadas por los índices
+     * Crea una nueva tabla a partir de una lista de índices seleccionados.
+     *
+     * @param tablaOriginal Tabla fuente
+     * @param indices Índices de filas a incluir
+     * @return Nueva tabla con las filas seleccionadas
      */
     private static Tabla crearTablaMuestreada(Tabla tablaOriginal, List<Integer> indices) {
         Tabla tablaMuestreada = new Tabla();
@@ -222,7 +272,13 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Método auxiliar para agregar columna muestreada manteniendo tipos
+     * Método auxiliar que agrega una columna a la tabla muestreada,
+     * preservando el tipo de datos original.
+     *
+     * @param tabla Tabla destino
+     * @param etiqueta Etiqueta de la columna
+     * @param tipo Tipo de dato (Integer, Double, etc.)
+     * @param valores Valores a insertar
      */
     @SuppressWarnings("unchecked")
     private static void agregarColumnaMuestreada(Tabla tabla, Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
@@ -254,7 +310,10 @@ public class MuestreadorTabla {
     }
 
     /**
-     * Copia toda la tabla (útil cuando el porcentaje es 100% o más)
+     * Copia toda la tabla original generando una nueva instancia.
+     *
+     * @param tablaOriginal Tabla a copiar
+     * @return Copia exacta de la tabla original
      */
     private static Tabla copiarTablaCompleta(Tabla tablaOriginal) {
         List<Integer> todosLosIndices = IntStream.range(0, tablaOriginal.cantFilas())
