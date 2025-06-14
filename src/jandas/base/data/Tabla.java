@@ -30,9 +30,6 @@ import java.util.Objects;
  *
  * <p>Una tabla consiste en columnas tipadas, etiquetas de filas y etiquetas de columnas.
  * Soporta diferentes tipos de datos incluyendo Integer, Double, String y Boolean.</p>
- *
- * @author Jandas Framework
- * @version 1.0
  */
 public class Tabla implements
         Ordenable,
@@ -69,7 +66,7 @@ public class Tabla implements
      * Constructor que crea una tabla basada en etiquetas de columnas y lista de columnas.
      *
      * @param etiquetasColumnas Lista de etiquetas para las columnas
-     * @param columnas          Lista de columnas que conformarán la tabla
+     * @param columnas Lista de columnas que conformarán la tabla
      */
     public Tabla(List<Etiqueta> etiquetasColumnas, List<Columna<?>> columnas) {
         this.columnas = new ArrayList<>(columnas);
@@ -83,7 +80,7 @@ public class Tabla implements
      * La primera fila se interpreta como encabezados de columna.
      *
      * @param datos Matriz bidimensional donde la primera fila contiene los encabezados
-     *              y las siguientes filas contienen los datos
+     * y las siguientes filas contienen los datos
      * @throws JandasException si los datos son inválidos o inconsistentes
      */
     public Tabla(Object[][] datos) {
@@ -98,7 +95,7 @@ public class Tabla implements
     /**
      * Constructor para crear tabla desde una secuencia lineal de strings
      *
-     * @param datos       Lista de strings con los datos en secuencia lineal
+     * @param datos Lista de strings con los datos en secuencia lineal
      * @param numColumnas Número de columnas para organizar los datos
      * @throws JandasException si la cantidad de datos no es divisible por el número de columnas
      */
@@ -115,7 +112,7 @@ public class Tabla implements
     /**
      * Valida que los datos lineales sean consistentes con el número de columnas especificado.
      *
-     * @param datos       Lista de datos a validar
+     * @param datos Lista de datos a validar
      * @param numColumnas Número de columnas esperado
      * @throws JandasException si los datos son nulos, vacíos o no divisibles por numColumnas
      */
@@ -138,7 +135,7 @@ public class Tabla implements
     /**
      * Construye una matriz bidimensional a partir de una lista lineal de datos.
      *
-     * @param datos       Lista de datos en secuencia lineal
+     * @param datos Lista de datos en secuencia lineal
      * @param numColumnas Número de columnas para la matriz resultante
      * @return Matriz bidimensional organizada por filas y columnas
      */
@@ -311,8 +308,8 @@ public class Tabla implements
      * Maneja la conversión de tipos y la creación de etiquetas de filas si es necesario.
      *
      * @param etiqueta Etiqueta para la nueva columna
-     * @param tipo     Clase que representa el tipo de datos de la columna
-     * @param valores  Lista de valores para la columna
+     * @param tipo Clase que representa el tipo de datos de la columna
+     * @param valores Lista de valores para la columna
      */
     @SuppressWarnings("unchecked")
     public void crearYAgregarColumna(Etiqueta etiqueta, Class<?> tipo, List<Object> valores) {
@@ -392,10 +389,10 @@ public class Tabla implements
      * Agrega una nueva columna a la tabla con los valores especificados.
      * Valida que las dimensiones coincidan con las filas existentes.
      *
-     * @param <T>             Tipo de datos de la columna
+     * @param <T> Tipo de datos de la columna
      * @param etiquetaColumna Etiqueta identificadora de la columna
-     * @param tipo            Clase que representa el tipo de datos
-     * @param valores         Lista de valores para la columna
+     * @param tipo Clase que representa el tipo de datos
+     * @param valores Lista de valores para la columna
      * @throws JandasException si las dimensiones no coinciden
      */
     public <T> void agregarColumna(Etiqueta etiquetaColumna, Class<T> tipo, List<T> valores) {
@@ -424,10 +421,10 @@ public class Tabla implements
     /**
      * Agrega una nueva columna usando una lista de celdas directamente.
      *
-     * @param <T>             Tipo de datos de la columna
+     * @param <T> Tipo de datos de la columna
      * @param etiquetaColumna Etiqueta identificadora de la columna
-     * @param tipo            Clase que representa el tipo de datos
-     * @param celdas          Lista de celdas para la columna
+     * @param tipo Clase que representa el tipo de datos
+     * @param celdas Lista de celdas para la columna
      * @throws JandasException si las dimensiones no coinciden
      */
     public <T> void agregarColumnaCeldas(Etiqueta etiquetaColumna, Class<T> tipo, List<Celda<T>> celdas) {
@@ -454,7 +451,7 @@ public class Tabla implements
     /**
      * Agrega una columna ya creada a la tabla.
      *
-     * @param <T>     Tipo de datos de la columna
+     * @param <T> Tipo de datos de la columna
      * @param columna Columna a agregar
      * @throws JandasException si las dimensiones no coinciden
      */
@@ -481,7 +478,7 @@ public class Tabla implements
      * Agrega una nueva fila a la tabla.
      *
      * @param etiquetaFila Etiqueta identificadora de la fila
-     * @param celdas       Lista de celdas que conforman la fila
+     * @param celdas Lista de celdas que conforman la fila
      * @throws JandasException si el número de celdas no coincide con el número de columnas
      */
     public void agregarFila(Etiqueta etiquetaFila, List<Celda<?>> celdas) {
@@ -518,7 +515,7 @@ public class Tabla implements
     /**
      * Duplica una columna existente con un nuevo nombre.
      *
-     * @param <T>        Tipo de datos de la columna
+     * @param <T> Tipo de datos de la columna
      * @param colunueva  Nombre para la nueva columna
      * @param coluorigen Nombre de la columna a duplicar
      * @throws JandasException si la columna origen no existe
@@ -546,10 +543,10 @@ public class Tabla implements
     /**
      * Inserta una nueva columna desde una secuencia de valores.
      *
-     * @param <T>          Tipo de datos de la columna
+     * @param <T> Tipo de datos de la columna
      * @param valorColumna Nombre de la nueva columna
-     * @param tipo         Clase que representa el tipo de datos
-     * @param secuencia    Lista de valores para la columna
+     * @param tipo Clase que representa el tipo de datos
+     * @param secuencia Lista de valores para la columna
      * @throws JandasException si las dimensiones no coinciden o el tipo no es válido
      */
     public <T> void insertarColumnaDesdeSecuencia(String valorColumna, Class<T> tipo, List<T> secuencia) {
@@ -669,7 +666,7 @@ public class Tabla implements
      * Obtiene el valor de una celda específica por nombre de columna e índice de fila.
      *
      * @param nombreColumna Nombre de la columna
-     * @param indiceFila    Índice de la fila
+     * @param indiceFila Índice de la fila
      * @return Valor de la celda especificada
      * @throws JandasException si la columna o fila no existen
      */
@@ -717,7 +714,7 @@ public class Tabla implements
      *
      * @param valorfila    El índice de la fila donde se encuentra la celda
      * @param valorcolumna El nombre de la columna donde se encuentra la celda
-     * @param valor        El nuevo valor a asignar a la celda
+     * @param valor El nuevo valor a asignar a la celda
      * @throws JandasException Si la etiqueta de fila no se encuentra en la tabla
      * @throws JandasException Si la etiqueta de columna no se encuentra en la tabla
      * @throws JandasException Si el tipo del valor no es compatible con el tipo de dato de la columna
@@ -756,7 +753,7 @@ public class Tabla implements
      * Ordena la tabla por una columna específica en la dirección especificada.
      *
      * @param nombreColumna El nombre de la columna por la cual ordenar
-     * @param direccion     La dirección del ordenamiento (ASCENDENTE o DESCENDENTE)
+     * @param direccion La dirección del ordenamiento (ASCENDENTE o DESCENDENTE)
      * @return Una nueva tabla ordenada según los criterios especificados
      */
     @Override
@@ -814,7 +811,7 @@ public class Tabla implements
      * Obtiene una muestra de la tabla con una cantidad específica de filas.
      *
      * @param cantidadFilas El número exacto de filas a incluir en la muestra
-     * @param exacto        Si true, la muestra tendrá exactamente la cantidad especificada
+     * @param exacto Si true, la muestra tendrá exactamente la cantidad especificada
      * @return Una nueva tabla con la muestra seleccionada
      */
     @Override
@@ -826,7 +823,7 @@ public class Tabla implements
      * Realiza un muestreo estratificado basado en los valores de una columna específica.
      *
      * @param nombreColumna El nombre de la columna a usar para la estratificación
-     * @param porcentaje    El porcentaje de filas a incluir en cada estrato
+     * @param porcentaje El porcentaje de filas a incluir en cada estrato
      * @return Una nueva tabla con la muestra estratificada
      */
     @Override
@@ -892,7 +889,7 @@ public class Tabla implements
     /**
      * Remplaza los valores NA (nulos) en una columna específica con un valor de imputación.
      *
-     * @param <T>             El tipo de dato de la columna
+     * @param <T> El tipo de dato de la columna
      * @param etiquetaColumna La etiqueta de la columna a imputar
      * @param valorImputacion El valor a usar para reemplazar los valores NA
      * @throws JandasException Si el tipo del valor de imputación no es compatible con el tipo de la columna
@@ -946,7 +943,7 @@ public class Tabla implements
      * Agrupa las filas de la tabla por los valores de una columna específica y aplica operaciones estadísticas.
      *
      * @param nombreColumna El nombre de la columna por la cual agrupar
-     * @param operaciones   Mapa que especifica las operaciones estadísticas a aplicar a cada columna
+     * @param operaciones Mapa que especifica las operaciones estadísticas a aplicar a cada columna
      * @return Una nueva tabla con los resultados de las operaciones de agrupamiento
      */
     @Override
@@ -958,7 +955,7 @@ public class Tabla implements
      * Agrupa las filas de la tabla por los valores de múltiples columnas y aplica operaciones estadísticas.
      *
      * @param nombresColumnas Array con los nombres de las columnas por las cuales agrupar
-     * @param operaciones     Mapa que especifica las operaciones estadísticas a aplicar a cada columna
+     * @param operaciones Mapa que especifica las operaciones estadísticas a aplicar a cada columna
      * @return Una nueva tabla con los resultados de las operaciones de agrupamiento
      */
     @Override
@@ -970,7 +967,7 @@ public class Tabla implements
      * Agrupa las filas de la tabla por los valores de una columna específica y aplica una operación estadística.
      *
      * @param nombreColumna El nombre de la columna por la cual agrupar
-     * @param operacion     La operación estadística a aplicar
+     * @param operacion La operación estadística a aplicar
      * @return Una nueva tabla con los resultados de la operación de agrupamiento
      */
     @Override
@@ -1116,7 +1113,7 @@ public class Tabla implements
     /**
      * Crea una copia profunda de una columna específica.
      *
-     * @param <T>             El tipo de dato de la columna
+     * @param <T> El tipo de dato de la columna
      * @param columnaOriginal La columna original a copiar
      * @return Una nueva columna que es una copia profunda de la original
      */
@@ -1137,7 +1134,7 @@ public class Tabla implements
     /**
      * Crea una copia profunda de una celda específica.
      *
-     * @param <T>           El tipo de dato de la celda
+     * @param <T> El tipo de dato de la celda
      * @param celdaOriginal La celda original a copiar
      * @return Una nueva celda que es una copia de la original
      */
@@ -1165,7 +1162,7 @@ public class Tabla implements
     /**
      * Obtiene el índice de una etiqueta específica en una lista de etiquetas.
      *
-     * @param etiqueta  La etiqueta a buscar
+     * @param etiqueta La etiqueta a buscar
      * @param etiquetas La lista de etiquetas donde buscar
      * @return El índice de la etiqueta en la lista
      * @throws JandasException Si la etiqueta no se encuentra en la lista
