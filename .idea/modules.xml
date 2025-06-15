@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../TP-integrador-Grupo-5/TP-integrador-Grupo-5.iml" filepath="$PROJECT_DIR$/../TP-integrador-Grupo-5/TP-integrador-Grupo-5.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tp_final_algo.iml" filepath="$PROJECT_DIR$/Tp_final_algo.iml" />
     </modules>
   </component>
