@@ -7,7 +7,7 @@ import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConsola;
 import jandas.visualizacion.Visualizable;
 
-public class leerCsv {
+public class TestLeerCsv {
 
     public static void main(String[] args) {
 

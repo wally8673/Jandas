@@ -3,18 +3,14 @@ package tests;
 import jandas.base.data.Celda;
 import jandas.base.data.Columna;
 import jandas.base.data.Tabla;
-import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
-import jandas.operaciones.filtros.*;
 import jandas.visualizacion.VConsola;
 
-import jandas.io.LeerArchivo;
-import jandas.visualizacion.VConsola;
 import jandas.visualizacion.Visualizable;
 
 import java.util.Arrays;
 
-public class leerTabla {
+public class TestLeerTabla {
 
     public static void main(String[] args) {
 

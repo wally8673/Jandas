@@ -5,7 +5,6 @@ import jandas.base.data.Tabla;
 import jandas.base.etiquetas.EtiquetaInt;
 import jandas.base.etiquetas.EtiquetaString;
 import jandas.io.LeerArchivo;
-import jandas.io.csv.CsvConfig;
 import jandas.io.csv.LectorCsv;
 import jandas.io.csv.LeerCsv;
 import jandas.visualizacion.VConfig;
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * Demo class showing how to use the visualization package.
  */
-public class VisualizacionDemo {
+public class TestVisualizacion {
     
     public static void main(String[] args) {
 
