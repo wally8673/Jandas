@@ -38,6 +38,10 @@ public class TestDemo {
 
         // ahora si visualizo
 
+        consola.visualizar(df1);
+
+        // tambien puedo visualizar con una configuracion personalizada
+
         consola.visualizar(df1,50,10,30);
 
 
